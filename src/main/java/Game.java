@@ -67,6 +67,14 @@ public class Game {
                         tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
                         tg.putString(8,13, "Player VS Player Mode");
 
+                        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+                        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+                        tg.putString(53,3, "ArrowUp (Go UP)");
+
+                        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+                        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+                        tg.putString(53,5, "ArrowDown (Go Down)");
+
                         screen.refresh();
                         sb = new StringBuilder();
                         break;
