@@ -113,6 +113,118 @@ public class Game {
         }
     }
 
+    public void survival() throws IOException{
+        screen.clear();
+
+        Arena arena = new Arena(80, 24);
+        arena.draw(tg);
+        tg.setBackgroundColor(TextColor.ANSI.BLACK);
+        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+        tg.putString(3, 1, "Survival");
+
+        screen.refresh();
+
+        boolean keepRunning = true;
+
+        while (keepRunning){
+            KeyStroke keyPressed = terminal.readInput();
+            if (keyPressed.getKeyType() == KeyType.Escape) {
+                keepRunning = false;
+                menu();
+            }
+        }
+    }
+
+    public void pvp() throws IOException{
+        screen.clear();
+
+        Arena arena = new Arena(80, 24);
+        arena.draw(tg);
+        tg.setBackgroundColor(TextColor.ANSI.BLACK);
+        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+        tg.putString(3,1,"Player VS Player");
+
+        screen.refresh();
+
+        boolean keepRunning = true;
+
+        while (keepRunning){
+            KeyStroke keyPressed = terminal.readInput();
+            if (keyPressed.getKeyType() == KeyType.Escape) {
+                keepRunning = false;
+                menu();
+            }
+        }
+    }
+
+    public void menu() throws IOException{
+        screen.clear();
+        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+        tg.setBackgroundColor(TextColor.ANSI.BLACK_BRIGHT);
+        tg.putString(8,10, "Survival Mode");
+
+        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+        tg.putString(8,13, "Player VS Player Mode");
+
+        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+        tg.putString(53,3, "ArrowUp (Go UP)");
+
+        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+        tg.putString(53,5, "ArrowDown (Go Down)");
+
+        screen.refresh();
+
+        boolean keepRunning = true;
+        boolean surv = true;
+
+        while (keepRunning){
+            KeyStroke keyPressed = terminal.readInput();
+
+            switch (keyPressed.getKeyType()){
+                case ArrowDown:
+                    tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+                    tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+                    tg.putString(8,10, "Survival Mode");
+
+                    tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+                    tg.setBackgroundColor(TextColor.ANSI.BLACK_BRIGHT);
+                    tg.putString(8,13, "Player VS Player Mode");
+
+                    screen.refresh();
+
+                    surv = false;
+                    break;
+                case ArrowUp:
+                    tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+                    tg.setBackgroundColor(TextColor.ANSI.BLACK_BRIGHT);
+                    tg.putString(8,10, "Survival Mode");
+
+                    tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+                    tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+                    tg.putString(8,13, "Player VS Player Mode");
+
+                    screen.refresh();
+
+                    surv = true;
+                    break;
+                case Enter:
+                    keepRunning = false;
+                    if (surv){
+                        survival();
+                    }
+                    else{
+                        pvp();
+                    }
+                    break;
+                case Escape:
+                    keepRunning = false;
+                    run();
+            }
+        }
+    }
 
     //Ciclo para manter terminal aberto ate receber alguma key que quebre
 
@@ -122,6 +234,7 @@ public class Game {
         StringBuilder sb = new StringBuilder();
 
         screen.clear();
+        screen.setCursorPosition(null);
         tg.setForegroundColor(TextColor.ANSI.DEFAULT);
         tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
         tg.putString(30, 15,"Press ENTER to START");
@@ -142,24 +255,7 @@ public class Game {
                         break;
                     case Enter:
                         System.out.println("Enter");
-                        screen.clear();
-                        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
-                        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
-                        tg.putString(8,10, "Survival Mode");
-
-                        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
-                        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
-                        tg.putString(8,13, "Player VS Player Mode");
-
-                        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
-                        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
-                        tg.putString(53,3, "ArrowUp (Go UP)");
-
-                        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
-                        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
-                        tg.putString(53,5, "ArrowDown (Go Down)");
-
-                        screen.refresh();
+                        menu();
                         sb = new StringBuilder();
                         break;
                     case ArrowDown:
