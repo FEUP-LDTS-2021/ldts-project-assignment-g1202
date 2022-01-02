@@ -1,4 +1,3 @@
-import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -17,7 +16,8 @@ import java.io.IOException;
 
 public class Game {
     //Iniciar variaveis - Terminais e screen
-    Terminal terminal = new DefaultTerminalFactory().createTerminal();
+    TerminalSize terminalSize = new TerminalSize(80, 24);
+    Terminal terminal = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize).createTerminal();
     Screen screen = new TerminalScreen(terminal);
     TextGraphics tg = screen.newTextGraphics();
 
@@ -51,6 +51,9 @@ public class Game {
                 keepRunning = false;
                 menu();
             }
+            else if (keyPressed.getKeyType() == KeyType.EOF){
+                keepRunning = false;
+            }
         }
     }
   // Opção do modo PVP
@@ -73,6 +76,10 @@ public class Game {
                 keepRunning = false;
                 menu();
             }
+            else if (keyPressed.getKeyType() == KeyType.EOF){
+                keepRunning = false;
+            }
+
         }
     }
 
@@ -148,8 +155,10 @@ public class Game {
                 case Escape:
                     keepRunning = false;
                     run();
-
-
+                    break;
+                case EOF:
+                    keepRunning = false;
+                    break;
             }
         }
     }
@@ -166,6 +175,7 @@ public class Game {
         tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
         tg.putString(30, 15,"Press ENTER to START");
 
+
         tg.setForegroundColor(TextColor.ANSI.WHITE);
         tg.setBackgroundColor(TextColor.ANSI.BLACK);
         tg.putString(35, 4,"DUNGEON BOY");
@@ -174,7 +184,7 @@ public class Game {
         screen.refresh();
 
         while (keepRunning) {
-            KeyStroke keyPressed = terminal.pollInput();
+            KeyStroke keyPressed = terminal.readInput();
 
             if (keyPressed != null) {
                 switch (keyPressed.getKeyType()) {
@@ -185,13 +195,13 @@ public class Game {
                     case Enter:
                         menu();
                         break;
+                    case EOF:
+                        keepRunning = false;
+                        break;
                 }
             }
         }
-        screen.stopScreen();
-
     }
-
 
 }
 
