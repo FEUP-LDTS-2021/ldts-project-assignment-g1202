@@ -7,12 +7,14 @@ import com.googlecode.lanterna.input.KeyType;
 
 public class Arena {
     Player player;
+    Player player2;
     private int height;
     private int width;
 
 
     public Arena(int width, int height) {
         player = new Player(10, 10);
+        player2 = new Player(20,20);
         this.height = height;
         this.width = width;
     }
@@ -29,7 +31,11 @@ public class Arena {
         screen2.setBackgroundColor(TextColor.Factory.fromString("#465690"));
         screen2.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width, height), ' ');
         player.draw(screen2);
+        player2.draw(screen2);
     }
+
+
+
 
 
 }
