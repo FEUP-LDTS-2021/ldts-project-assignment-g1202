@@ -42,42 +42,24 @@ public class Game {
 
         while (keepRunning){
         arena.draw(tg);
-        arena.eggman.running();
+        //arena.eggman.running();
         tg.setBackgroundColor(TextColor.ANSI.BLACK); //texto do canto superior esq que indica o modo selecionado
         tg.setForegroundColor(TextColor.ANSI.DEFAULT);
         tg.putString(3, 1, "Survival");
 
-        while (keepRunning){
-            arena.draw(tg);
-            //arena.eggman.running();
-            tg.setBackgroundColor(TextColor.ANSI.BLACK); //texto do canto superior esq que indica o modo selecionado
-            tg.setForegroundColor(TextColor.ANSI.DEFAULT);
-            tg.putString(3, 1, "Survival");
+        tg.setBackgroundColor(TextColor.ANSI.BLACK); //texto do canto superior esq que indica o modo selecionado
+        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
 
         //String HP
         tg.putString(2,22,"HP: " + arena.player.hitpoints.getHp());  // falta concatenar com a variavel que recebe os valores corretos
 
-        tg.putString(0,3,"---------------------------------------------------------------------------------");
-        tg.putString(0,20,"---------------------------------------------------------------------------------");
-            
         //Strings WEAPON
         tg.putString(30,22, "Weapon:  " + arma);
-            tg.setBackgroundColor(TextColor.ANSI.BLACK); //texto do canto superior esq que indica o modo selecionado
-            tg.setForegroundColor(TextColor.ANSI.DEFAULT);
 
-            tg.putString(0,3,"---------------------------------------------------------------------------------");
-            tg.putString(0,20,"---------------------------------------------------------------------------------");
-            //String HP
-            tg.putString(2,22,"HP: " + arena.player.hitpoints.getHp());
+        //Strings com LVL
+        tg.putString(70,22,"Lvl: " + lvl);
 
-
-            //Strings WEAPON
-            tg.putString(30,22, "Weapon:  " + arma);
-
-            //Strings com LVL
-            tg.putString(70,22,"Lvl: " + lvl);
-
-            screen.refresh();
+        screen.refresh();
 
 
             KeyStroke keyPressed = terminal.readInput();
@@ -85,26 +67,33 @@ public class Game {
                 keepRunning = false;
                 menu();
             }
-            else{ // caso nao fechemos o jogo vamos tentar mover
-                arena.player.moving(keyPressed);
-                if((arena.player.position.getX() == arena.eggman.position.getX() ) && arena.player.position.getY() == arena.eggman.position.getY()){
-                    arena.player.changeHp(); // perde-se 10 de vida quando embate no inimigo
-                    if(arena.player.hitpoints.getHp() == 0){
-                        //jogador morreu
-                        keepRunning = false;
-                        menu();
-                        //menu() placeholder vamos ter uma store()
-                    }
+
+            else if(keyPressed.getKeyType() == KeyType.Delete){
+                if(arena.eggman.position.getY() <= arena.player.hitsword()){
+                    arena.eggman.changeHp();
+                    //System.out.println(arena.eggman.hp.getHp());
                 }
-                //desenho da nova posicao
-                arena.draw(tg);
-                screen.refresh();
+            }
+            else { // caso nao fechemos o jogo vamos tentar mover
+                arena.player.moving(keyPressed);
+                //if (arena.canHeroMove()) {
+                    if ((arena.player.position.getX() == arena.eggman.position.getX()) && arena.player.position.getY() == arena.eggman.position.getY()) {
+                        arena.player.changeHp(); // perde-se 10 de vida quando embate no inimigo
+                        if (arena.player.hitpoints.getHp() == 0) {
+                            //jogador morreu
+                            keepRunning = false;
+                            menu();
+                            //menu() placeholder vamos ter uma store()
+                        }
+                    }
+                    //desenho da nova posicao
+                    arena.draw(tg);
+                    screen.refresh();
             }
         }
     }
 
   // Opção do modo PVP
-    // Opção do modo PVP
     public void pvp() throws IOException{
         screen.clear();
 
@@ -120,12 +109,6 @@ public class Game {
         //Strings com HP
         tg.putString(2,21,"P1 HP: " + arena.player.hitpoints.getHp() );  // falta concatenar com a variavel que recebe os valores corretos
         tg.putString(2,22,"P2 HP: " + arena.player2.hitpoints.getHp() );  // falta concatenar com a variavel que recebe os valores corretos
-        
-         tg.putString(0,3,"---------------------------------------------------------------------------------");
-         tg.putString(0,20,"---------------------------------------------------------------------------------");
-
-        tg.putString(0,3,"---------------------------------------------------------------------------------");
-        tg.putString(0,20,"---------------------------------------------------------------------------------");
 
         //Strings WEAPON
         tg.putString(30,21, "P1 Weapon:  " + arma);
@@ -265,19 +248,18 @@ public class Game {
                     case Enter:
                         menu();
                         break;
-                    case EOF:
+                   case EOF:
                         keepRunning = false;
                         break;
                 }
             }
         }
-        screen.stopScreen();
+         screen.stopScreen();
 
     }
 
 
 }
-
 
 
 
