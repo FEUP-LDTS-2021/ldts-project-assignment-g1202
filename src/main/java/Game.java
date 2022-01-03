@@ -41,12 +41,27 @@ public class Game {
         boolean keepRunning = true;
 
         while (keepRunning){
+        arena.draw(tg);
+        arena.eggman.running();
+        tg.setBackgroundColor(TextColor.ANSI.BLACK); //texto do canto superior esq que indica o modo selecionado
+        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+        tg.putString(3, 1, "Survival");
+
+        while (keepRunning){
             arena.draw(tg);
             //arena.eggman.running();
             tg.setBackgroundColor(TextColor.ANSI.BLACK); //texto do canto superior esq que indica o modo selecionado
             tg.setForegroundColor(TextColor.ANSI.DEFAULT);
             tg.putString(3, 1, "Survival");
 
+        //String HP
+        tg.putString(2,22,"HP: " + arena.player.hitpoints.getHp());  // falta concatenar com a variavel que recebe os valores corretos
+
+        tg.putString(0,3,"---------------------------------------------------------------------------------");
+        tg.putString(0,20,"---------------------------------------------------------------------------------");
+            
+        //Strings WEAPON
+        tg.putString(30,22, "Weapon:  " + arma);
             tg.setBackgroundColor(TextColor.ANSI.BLACK); //texto do canto superior esq que indica o modo selecionado
             tg.setForegroundColor(TextColor.ANSI.DEFAULT);
 
@@ -54,6 +69,7 @@ public class Game {
             tg.putString(0,20,"---------------------------------------------------------------------------------");
             //String HP
             tg.putString(2,22,"HP: " + arena.player.hitpoints.getHp());
+
 
             //Strings WEAPON
             tg.putString(30,22, "Weapon:  " + arma);
@@ -87,6 +103,7 @@ public class Game {
         }
     }
 
+  // Opção do modo PVP
     // Opção do modo PVP
     public void pvp() throws IOException{
         screen.clear();
@@ -103,7 +120,9 @@ public class Game {
         //Strings com HP
         tg.putString(2,21,"P1 HP: " + arena.player.hitpoints.getHp() );  // falta concatenar com a variavel que recebe os valores corretos
         tg.putString(2,22,"P2 HP: " + arena.player2.hitpoints.getHp() );  // falta concatenar com a variavel que recebe os valores corretos
-
+        
+         tg.putString(0,3,"---------------------------------------------------------------------------------");
+         tg.putString(0,20,"---------------------------------------------------------------------------------");
 
         tg.putString(0,3,"---------------------------------------------------------------------------------");
         tg.putString(0,20,"---------------------------------------------------------------------------------");
