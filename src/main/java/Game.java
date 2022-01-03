@@ -47,8 +47,12 @@ public class Game {
         tg.setForegroundColor(TextColor.ANSI.DEFAULT);
         tg.putString(3, 1, "Survival");
 
-        tg.setBackgroundColor(TextColor.ANSI.BLACK); //texto do canto superior esq que indica o modo selecionado
-        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+        while (keepRunning){
+            arena.draw(tg);
+            //arena.eggman.running();
+            tg.setBackgroundColor(TextColor.ANSI.BLACK); //texto do canto superior esq que indica o modo selecionado
+            tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+            tg.putString(3, 1, "Survival");
 
         //String HP
         tg.putString(2,22,"HP: " + arena.player.hitpoints.getHp());  // falta concatenar com a variavel que recebe os valores corretos
@@ -58,11 +62,22 @@ public class Game {
             
         //Strings WEAPON
         tg.putString(30,22, "Weapon:  " + arma);
+            tg.setBackgroundColor(TextColor.ANSI.BLACK); //texto do canto superior esq que indica o modo selecionado
+            tg.setForegroundColor(TextColor.ANSI.DEFAULT);
 
-        //Strings com LVL
-        tg.putString(70,22,"Lvl: " + lvl);
+            tg.putString(0,3,"---------------------------------------------------------------------------------");
+            tg.putString(0,20,"---------------------------------------------------------------------------------");
+            //String HP
+            tg.putString(2,22,"HP: " + arena.player.hitpoints.getHp());
 
-        screen.refresh();
+
+            //Strings WEAPON
+            tg.putString(30,22, "Weapon:  " + arma);
+
+            //Strings com LVL
+            tg.putString(70,22,"Lvl: " + lvl);
+
+            screen.refresh();
 
 
             KeyStroke keyPressed = terminal.readInput();
@@ -89,6 +104,7 @@ public class Game {
     }
 
   // Opção do modo PVP
+    // Opção do modo PVP
     public void pvp() throws IOException{
         screen.clear();
 
@@ -107,6 +123,9 @@ public class Game {
         
          tg.putString(0,3,"---------------------------------------------------------------------------------");
          tg.putString(0,20,"---------------------------------------------------------------------------------");
+
+        tg.putString(0,3,"---------------------------------------------------------------------------------");
+        tg.putString(0,20,"---------------------------------------------------------------------------------");
 
         //Strings WEAPON
         tg.putString(30,21, "P1 Weapon:  " + arma);
@@ -246,18 +265,19 @@ public class Game {
                     case Enter:
                         menu();
                         break;
-                   case EOF:
+                    case EOF:
                         keepRunning = false;
                         break;
                 }
             }
         }
-         screen.stopScreen();
+        screen.stopScreen();
 
     }
 
 
 }
+
 
 
 
