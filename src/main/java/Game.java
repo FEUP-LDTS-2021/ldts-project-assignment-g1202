@@ -53,6 +53,9 @@ public class Game {
         //String HP
         tg.putString(2,22,"HP: " + arena.player.hitpoints.getHp());  // falta concatenar com a variavel que recebe os valores corretos
 
+        tg.putString(0,3,"---------------------------------------------------------------------------------");
+        tg.putString(0,20,"---------------------------------------------------------------------------------");
+            
         //Strings WEAPON
         tg.putString(30,22, "Weapon:  " + arma);
 
@@ -101,6 +104,9 @@ public class Game {
         //Strings com HP
         tg.putString(2,21,"P1 HP: " + arena.player.hitpoints.getHp() );  // falta concatenar com a variavel que recebe os valores corretos
         tg.putString(2,22,"P2 HP: " + arena.player2.hitpoints.getHp() );  // falta concatenar com a variavel que recebe os valores corretos
+        
+         tg.putString(0,3,"---------------------------------------------------------------------------------");
+         tg.putString(0,20,"---------------------------------------------------------------------------------");
 
         //Strings WEAPON
         tg.putString(30,21, "P1 Weapon:  " + arma);
