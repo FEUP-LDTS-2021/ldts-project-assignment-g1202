@@ -20,7 +20,7 @@ public class Game {
     Screen screen = new TerminalScreen(terminal);
     TextGraphics tg = screen.newTextGraphics();
     int lvl = 0;
-    int hp = 100;
+    //int hp = 100;
     String arma = "Riffle test";
     int p1kills, p2kills, round = 0;
 
@@ -37,43 +37,62 @@ public class Game {
     // Opção do modo survival
     public void survival() throws IOException{
         screen.clear();
-
         Arena arena = new Arena(80, 24);
-        arena.draw(tg);
-        tg.setBackgroundColor(TextColor.ANSI.BLACK); //texto do canto superior esq que indica o modo selecionado
-        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
-        tg.putString(3, 1, "Survival");
-
-        tg.setBackgroundColor(TextColor.ANSI.BLACK); //texto do canto superior esq que indica o modo selecionado
-        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
-
-        //String HP
-        tg.putString(2,22,"HP: " + hp );  // falta concatenar com a variavel que recebe os valores corretos
-
-        //Strings WEAPON
-        tg.putString(30,22, "Weapon:  " + arma);
-
-        //Strings com LVL
-        tg.putString(70,22,"Lvl: " + lvl);
-
-        screen.refresh();
-
         boolean keepRunning = true;
 
         while (keepRunning){
+            arena.draw(tg);
+            //arena.eggman.running();
+            tg.setBackgroundColor(TextColor.ANSI.BLACK); //texto do canto superior esq que indica o modo selecionado
+            tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+            tg.putString(3, 1, "Survival");
+
+            tg.setBackgroundColor(TextColor.ANSI.BLACK); //texto do canto superior esq que indica o modo selecionado
+            tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+
+            tg.putString(0,3,"---------------------------------------------------------------------------------");
+            tg.putString(0,20,"---------------------------------------------------------------------------------");
+            //String HP
+            tg.putString(2,22,"HP: " + arena.player.hitpoints.getHp());
+
+            //Strings WEAPON
+            tg.putString(30,22, "Weapon:  " + arma);
+
+            //Strings com LVL
+            tg.putString(70,22,"Lvl: " + lvl);
+
+            screen.refresh();
+
+
             KeyStroke keyPressed = terminal.readInput();
             if (keyPressed.getKeyType() == KeyType.Escape) {
                 keepRunning = false;
                 menu();
             }
+            else{ // caso nao fechemos o jogo vamos tentar mover
+                arena.player.moving(keyPressed);
+                if((arena.player.position.getX() == arena.eggman.position.getX() ) && arena.player.position.getY() == arena.eggman.position.getY()){
+                    arena.player.changeHp(); // perde-se 10 de vida quando embate no inimigo
+                    if(arena.player.hitpoints.getHp() == 0){
+                        //jogador morreu
+                        keepRunning = false;
+                        menu();
+                        //menu() placeholder vamos ter uma store()
+                    }
+                }
+                //desenho da nova posicao
+                arena.draw(tg);
+                screen.refresh();
+            }
         }
     }
-  // Opção do modo PVP
+
+    // Opção do modo PVP
     public void pvp() throws IOException{
         screen.clear();
 
         Arena arena = new Arena(80, 24);
-        arena.draw(tg);
+        arena.draw2(tg);
         tg.setBackgroundColor(TextColor.ANSI.BLACK); //texto do canto superior esq que indica o modo selecionado
         tg.setForegroundColor(TextColor.ANSI.DEFAULT);
         tg.putString(3,1,"Player VS Player");
@@ -82,8 +101,12 @@ public class Game {
         tg.putString(37,1, "Round:  " + round);
 
         //Strings com HP
-        tg.putString(2,21,"P1 HP: " + hp );  // falta concatenar com a variavel que recebe os valores corretos
-        tg.putString(2,22,"P2 HP: " + hp );  // falta concatenar com a variavel que recebe os valores corretos
+        tg.putString(2,21,"P1 HP: " + arena.player.hitpoints.getHp() );  // falta concatenar com a variavel que recebe os valores corretos
+        tg.putString(2,22,"P2 HP: " + arena.player2.hitpoints.getHp() );  // falta concatenar com a variavel que recebe os valores corretos
+
+
+        tg.putString(0,3,"---------------------------------------------------------------------------------");
+        tg.putString(0,20,"---------------------------------------------------------------------------------");
 
         //Strings WEAPON
         tg.putString(30,21, "P1 Weapon:  " + arma);
@@ -223,18 +246,19 @@ public class Game {
                     case Enter:
                         menu();
                         break;
-                   case EOF:
+                    case EOF:
                         keepRunning = false;
                         break;
                 }
             }
         }
-         screen.stopScreen();
+        screen.stopScreen();
 
     }
 
 
 }
+
 
 
 
