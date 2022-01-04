@@ -3,7 +3,7 @@
 ### PROJECT DESCRIPTION
 Dungeon Boy is a game in which the player goes through different levels and maps and faces different enemies until reaching the final boss. It has 2 playing modes, the Survival mode in which the player has to survive through some tough fights with enemies, The Player vs Player mode (PVP) consists in a mode where the player can face a player 2, and the winner will be crowned on the best results out of 5 intense rounds!
 
-This project was developed by João Duarte (201707984), Miguel Tavares( ) and Inês Garcia ( ) for LDTS 2021-22.
+This project was developed by João Duarte (201707984), Miguel Tavares(202002811) and Inês Garcia (202004810) for LDTS 2021-22.
 
 
 ### IMPLEMENTED FEATURES
