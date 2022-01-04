@@ -1,4 +1,5 @@
 public class Position {
+    //Player 1
     private int x;
     private int y;
 
@@ -18,6 +19,14 @@ public class Position {
     }
     public void setY(int y){
         this.y = y;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o == null || o.getClass() != this.getClass()) return false;
+
+        return (this == o) ||
+                (this.x == ((Position) o).x && this.y == ((Position) o).y);
     }
 
 }
