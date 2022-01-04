@@ -5,6 +5,26 @@ Dungeon Boy is a game in which the player goes through different levels and maps
 
 This project was developed by João Duarte (201707984), Miguel Tavares(202002811) and Inês Garcia (202004810) for LDTS 2021-22.
 
+**NOTE** : This game is still on development and could suffer some changes!
+
+### GAME SUMMARY
+
+The game starts with a black terminal with the name of the game, and some commands.
+
+![image](https://user-images.githubusercontent.com/52889593/148138582-3bba6e0e-ec13-4da5-8398-d42c02853e32.png)
+
+If we press ENTER, we are carried into the main menu, where we can select which game mode to play 
+
+![image](https://user-images.githubusercontent.com/52889593/148138743-0b59bb66-2572-413a-b573-dadb35796689.png)
+
+Survival Mode: We can now play against 4 different Enemies which will try to kill us!
+
+![image](https://user-images.githubusercontent.com/52889593/148138798-9ade6cc1-4c5d-451a-97b8-3eecf5ab75fa.png)
+
+PvP Mode: Play against your friend, best of 5 rounds win! Good luck!
+
+![image](https://user-images.githubusercontent.com/52889593/148138866-38876123-19e6-4a9c-9567-150c9f001c57.png)
+
 
 ### IMPLEMENTED FEATURES
 
@@ -19,9 +39,9 @@ This project was developed by João Duarte (201707984), Miguel Tavares(202002811
 - **Catching HP Potions** - If the player goes to the position of a potion, this one is going to be collected, adding 10 health points to his total HP.
 - **Lives** - In the beggining of the game, the player is given 3 lives (displayed in health on the screen).
 - **Dying** - A player dies if his health reaches 0, or less.
+- **Inventory** - Inventory to store our items that we bought from the shop.
 
-
-### PLANNED FEATURES
+### PLANNED FEATURES - Still being implemented!
 
 
 - **Player control** - The player may move and attack the enemies with the keyboard control.
@@ -49,6 +69,7 @@ It was clearly used on our creation of the BadGuy (enemys), along with our Arena
 
 - **Implementation.** 
 
+
 Show how the pattern roles, operations and associations were mapped to the concrete design classes. Illustrate it with a UML class diagram, and refer to the corresponding source code with links to the relevant lines (these should be [relative links](https://help.github.com/en/articles/about-readmes#relative-links-and-image-paths-in-readme-files). When doing this, always point to the latest version of the code.
 
 - **Consequences.** 
@@ -63,17 +84,8 @@ But however, the complexity of the code increased since we had to create multipl
 
 #### KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
 
-> This section should describe 3 to 5 different code smells that you have identified in your current implementation, and suggest ways in which the code could be refactored to eliminate them. Each smell and refactoring suggestions should be described in its own subsection.
+To be completed....
 
-**Example of such a subsection**:
-
-
-
-#### DATA CLASS
-
-The `PlatformSegment` class is a **Data Class**, as it contains only fields, and no behavior. This is problematic because […].
-
-A way to improve the code would be to move the `isPlatformSegmentSolid()` method to the `PlatformSegment` class, as this logic is purely concerned with the `PlatformSegment` class.
 
 ### TESTING
 
