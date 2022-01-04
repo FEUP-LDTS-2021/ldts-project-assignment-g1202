@@ -15,7 +15,7 @@ public class Player {
         position = new Position(x,y);
         hitpoints = new Hp(health);
     }
-    
+
     public void draw(TextGraphics screen) {
         screen.setForegroundColor(TextColor.Factory.fromString("#FFFF33"));
         screen.putString(new TerminalPosition(position.getX(), position.getY()),"X");
@@ -29,10 +29,18 @@ public class Player {
     //Movimento
     public void moving(KeyStroke keyPressed){
         switch(keyPressed.getKeyType()){
-            case ArrowUp -> position.setY(position.getY()-1);
-            case ArrowDown -> position.setY(position.getY()+1);
-            case ArrowLeft -> position.setX(position.getX()-1);
-            case ArrowRight ->position.setX(position.getX()+1);
+            case ArrowUp:
+                position.setY(position.getY()-1);
+                break;
+            case ArrowDown:
+                position.setY(position.getY()+1);
+                break;
+            case ArrowLeft:
+                position.setX(position.getX()-1);
+                break;
+            case ArrowRight:
+                position.setX(position.getX()+1);
+                break;
         }
     }
 
@@ -41,5 +49,6 @@ public class Player {
         // se pos de inimigo <= ao que e retornado pela func change hp para ele
         return position.getY() + 5;
     }
+
 
 }

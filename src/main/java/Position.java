@@ -1,4 +1,5 @@
 public class Position {
+    //Player 1
     private int x;
     private int y;
 

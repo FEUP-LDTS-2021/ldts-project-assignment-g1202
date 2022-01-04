@@ -14,6 +14,11 @@ public class BadGuy {
         hp = new Hp(health);
     }
 
+    public void changeHp(){
+        //perder 10 pontos de vida
+        hp.setHp(hp.getHp()-10);
+    }
+
     public void draw(TextGraphics screen) {
         screen.setForegroundColor(TextColor.Factory.fromString("#FF0000")); // vermelho
         screen.putString(new TerminalPosition(position.getX(), position.getY()),"E");
@@ -24,10 +29,10 @@ public class BadGuy {
         double rand = Math.random();
         // tem de morrer quando hp = 0
         //while(hp.getHp() != 0) {
-            if (rand > .75) position.setY(position.getY() - 1);
-            else if (rand > .5) position.setY(position.getY() + 1);
-            else if (rand > .25) position.setX(position.getX() - 1);
-            else position.setX(position.getX() + 1);
+        if (rand > .75) position.setY(position.getY() - 1);
+        else if (rand > .5) position.setY(position.getY() + 1);
+        else if (rand > .25) position.setX(position.getX() - 1);
+        else position.setX(position.getX() + 1);
         //}
     }
 }
