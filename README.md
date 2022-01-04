@@ -30,6 +30,7 @@ This project was developed by João Duarte (201707984), Miguel Tavares(202002811
 - **Shop interaction and money management** - (still need to be implemented)
 - **Catching HP Potions** - If the player goes to the position of a potion, this one is going to be collected, adding 10 health points to his total HP. (still need to be implemented)
 - **Final Boss** - (still need to be implemented)
+- **Inventory** - There will be an inventory to store our items that we bought from the shop.
 
 
 ### DESIGN
