@@ -1,4 +1,3 @@
-import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -9,6 +8,7 @@ public class Player {
 
     Position position;
     Hp hitpoints;
+    private int life;
 
     //construtor
     public Player(int x, int y,int health){
@@ -24,6 +24,18 @@ public class Player {
     public void changeHp(){
         //perder 10 pontos de vida
         hitpoints.setHp(hitpoints.getHp()-10);
+    }
+
+    public int lostlife(){
+        return life--;
+    }
+
+    public int oneup(){
+        return life++;
+    }
+
+    public int getLife(){
+        return life;
     }
 
     //Movimento

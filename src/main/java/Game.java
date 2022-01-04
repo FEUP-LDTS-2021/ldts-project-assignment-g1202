@@ -61,6 +61,9 @@ public class Game {
                 //String HP
                 tg.putString(2, 22, "HP: " + arena.player.hitpoints.getHp());
 
+                //String Live
+                tg.putString(15, 22, "Lives: " + arena.player.getLife());
+
 
                 //Strings WEAPON
                 tg.putString(30, 22, "Weapon:  " + arma);
@@ -77,10 +80,10 @@ public class Game {
                     menu();
                 } else { // caso nao fechemos o jogo vamos tentar mover
                     arena.player.moving(keyPressed);
-                    if ((arena.player.position.getX() == arena.eggman.position.getX() && arena.player.position.getY() == arena.eggman.position.getY() ||
-                            arena.player.position.getX() == arena.eggman2.position.getX() && arena.player.position.getY() == arena.eggman2.position.getY() ||
-                            arena.player.position.getX() == arena.eggman3.position.getX() && arena.player.position.getY() == arena.eggman3.position.getY() ||
-                            arena.player.position.getX() == arena.eggman4.position.getX() && arena.player.position.getY() == arena.eggman4.position.getY())) {
+                    if ((arena.player.position.equals(arena.eggman.position) ||
+                            arena.player.position.equals(arena.eggman2.position)  ||
+                            arena.player.position.equals(arena.eggman3.position) ||
+                            arena.player.position.equals(arena.eggman4.position))) {
 
                         arena.player.changeHp(); // perde-se 10 de vida quando embate no inimigo
                         if (arena.player.hitpoints.getHp() == 0) {
@@ -92,7 +95,7 @@ public class Game {
                     }
                     //desenho da nova posicao
                     arena.draw(tg);
-                    screen.refresh();
+                    //screen.refresh();
                 }
             }
         }
@@ -100,8 +103,10 @@ public class Game {
         // Opção do modo PVP
         public void pvp() throws IOException {
             screen.clear();
-
+            boolean keepRunning = true;
             Arena arena = new Arena(80, 24);
+
+            while(keepRunning){
             arena.draw2(tg);
             tg.setBackgroundColor(TextColor.ANSI.BLACK); //texto do canto superior esq que indica o modo selecionado
             tg.setForegroundColor(TextColor.ANSI.DEFAULT);
@@ -125,17 +130,17 @@ public class Game {
 
             screen.refresh();
 
-            boolean keepRunning = true;
-
-            while (keepRunning) {
-                KeyStroke keyPressed = terminal.readInput();
-                if (keyPressed.getKeyType() == KeyType.Escape) {
-                    keepRunning = false;
-                    menu();
-                } else if (keyPressed.getKeyType() == KeyType.EOF) {
-                    keepRunning = false;
-                }
+            KeyStroke keyPressed = terminal.readInput();
+            if (keyPressed.getKeyType() == KeyType.Escape) {
+                keepRunning = false;
+                menu();
+            } else { // caso nao fechemos o jogo vamos tentar mover
+                arena.player.moving(keyPressed);
+                //desenho da nova posicao
+                arena.draw(tg);
+                //screen.refresh();
             }
+        }
         }
 
         //Layout do menu principal

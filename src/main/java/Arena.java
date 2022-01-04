@@ -23,22 +23,22 @@ public class Arena {
     public Arena(int width, int height) {
         player = new Player(10, 10,100);
         player2 = new Player(10,15,100);
-        eggman = new BadGuy(Math.random() * width,Math.random() * height ,100);
-        eggman2 = new BadGuy(Math.random() * width,Math.random() * height ,100);
-        eggman3 = new BadGuy(Math.random() * width,Math.random() * height ,100);
-        eggman4 = new BadGuy(Math.random() * width,Math.random() * height ,100);
+        eggman = new BadGuy(Math.random() * width ,Math.random() * height  ,100);
+        eggman2 = new BadGuy(Math.random() * width ,Math.random() * height  ,100);
+        eggman3 = new BadGuy(Math.random() * width ,Math.random() * height  ,100);
+        eggman4 = new BadGuy(Math.random() * width ,Math.random() * height ,100);
         this.height = height;
         this.width = width;
         this.walls = createWalls();
     }
 
-    /*public int getWidth(){
+    public int getWidth(){
         return width;
     }
     public int getHeight(){
         return height;
     }
-     */
+
 
     //Ecrã modo Survival
     public void draw(TextGraphics screen) {
@@ -53,9 +53,6 @@ public class Arena {
         //implementação das walls
         for(Wall wall : walls)
             wall.draw(screen); //screen é o nosso textgraphics
-
-
-
     }
 
     // Ecrã para o modo PVP

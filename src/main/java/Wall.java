@@ -14,6 +14,14 @@ public class Wall {
         position = new Position(x,y);
     }
 
+    public int wall_x(){
+        return position.getX();
+    }
+
+    public int wall_y(){
+        return position.getY();
+    }
+
     public void draw(TextGraphics tg) {
         tg.setForegroundColor(TextColor.Factory.fromString("#000000"));
         tg.enableModifiers(SGR.BOLD);
