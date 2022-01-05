@@ -39,10 +39,10 @@ public class Game {
 
             while (keepRunning) {
                 arena.draw(tg);
-                arena.eggman.running();
-                arena.eggman2.running();
-                arena.eggman3.running();
-                arena.eggman4.running();
+                //arena.eggman.running();
+                //arena.eggman2.running();
+                //arena.eggman3.running();
+                //arena.eggman4.running();
                 tg.setBackgroundColor(TextColor.ANSI.BLACK); //texto do canto superior esq que indica o modo selecionado
                 tg.setForegroundColor(TextColor.ANSI.DEFAULT);
                 tg.putString(3, 1, "Survival");
@@ -73,19 +73,54 @@ public class Game {
 
                 screen.refresh();
 
-
                 KeyStroke keyPressed = terminal.readInput();
                 if (keyPressed.getKeyType() == KeyType.Escape) {
                     keepRunning = false;
                     menu();
-                } else { // caso nao fechemos o jogo vamos tentar mover
+                } else if(keyPressed.getKeyType() == KeyType.Character && keyPressed.getCharacter() == (' ')){
+                    //figure something to avoid the use of too many ifs in damaging enemies
+                    if(arena.player.position.getY()+1 == arena.eggman.position.getY() || arena.player.position.getY()-1 == arena.eggman.position.getY()){
+                        arena.eggman.hitpoints.changeHp();
+                        //System.out.println(arena.eggman.hitpoints.getHp());
+                    }
+                    if(arena.player.position.getX()+1 == arena.eggman.position.getX() || arena.player.position.getX()-1 == arena.eggman.position.getX() ){
+                        arena.eggman.hitpoints.changeHp();
+                        //System.out.println(arena.eggman.hitpoints.getHp());
+                    }
+                    if(arena.player.position.getY()+1 == arena.eggman2.position.getY() || arena.player.position.getY()-1 == arena.eggman2.position.getY()){
+                        arena.eggman2.hitpoints.changeHp();
+                        //System.out.println(arena.eggman2.hitpoints.getHp());
+                    }
+                    if(arena.player.position.getX()+1 == arena.eggman2.position.getX() || arena.player.position.getX()-1 == arena.eggman2.position.getX() ){
+                        arena.eggman2.hitpoints.changeHp();
+                        //System.out.println(arena.eggman2.hitpoints.getHp());
+                    }
+                    if(arena.player.position.getY()+1 == arena.eggman3.position.getY() || arena.player.position.getY()-1 == arena.eggman3.position.getY()){
+                        arena.eggman3.hitpoints.changeHp();
+                        //System.out.println(arena.eggman3.hitpoints.getHp());
+                    }
+                    if(arena.player.position.getX()+1 == arena.eggman3.position.getX() || arena.player.position.getX()-1 == arena.eggman3.position.getX() ){
+                        arena.eggman3.hitpoints.changeHp();
+                        //System.out.println(arena.eggman3.hitpoints.getHp());
+                    }
+                    if(arena.player.position.getY()+1 == arena.eggman4.position.getY() || arena.player.position.getY()-1 == arena.eggman4.position.getY()){
+                        arena.eggman4.hitpoints.changeHp();
+                        //System.out.println(arena.eggman4.hitpoints.getHp());
+                    }
+                    if(arena.player.position.getX()+1 == arena.eggman4.position.getX() || arena.player.position.getX()-1 == arena.eggman4.position.getX() ){
+                        arena.eggman4.hitpoints.changeHp();
+                        //System.out.println(arena.eggman4.hitpoints.getHp());
+                    }
+                    //
+                }
+                else { // caso nao fechemos o jogo vamos tentar mover
                     arena.player.moving(keyPressed);
                     if ((arena.player.position.equals(arena.eggman.position) ||
                             arena.player.position.equals(arena.eggman2.position)  ||
                             arena.player.position.equals(arena.eggman3.position) ||
                             arena.player.position.equals(arena.eggman4.position))) {
 
-                        arena.player.changeHp(); // perde-se 10 de vida quando embate no inimigo
+                        arena.player.hitpoints.changeHp(); // perde-se 10 de vida quando embate no inimigo
                         if (arena.player.hitpoints.getHp() == 0) {
                             //jogador morreu
                             keepRunning = false;

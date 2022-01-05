@@ -4,19 +4,14 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 
 public class BadGuy {
     Position position;
-    Hp hp;
+    Hp hitpoints;
 
     public BadGuy(double x, double y,int health){
         //arredondar x e y porque usamos Math.random() que é double para gerar coordenadas mas position é em int
         int xi = (int)Math.round(x);
         int ye = (int)Math.round(y);
         position = new Position(xi,ye);
-        hp = new Hp(health);
-    }
-
-    public void changeHp(){
-        //perder 10 pontos de vida
-        hp.setHp(hp.getHp()-10);
+        hitpoints = new Hp(health);
     }
 
     public void draw(TextGraphics screen) {
