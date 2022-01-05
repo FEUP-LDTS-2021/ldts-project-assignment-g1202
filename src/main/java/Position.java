@@ -38,6 +38,27 @@ public class Position {
         this.setX(this.getX()+1);
     }
 
+    public boolean canMoveLeft(){
+        if(this.getX()-1 == 0) return false;
+        //if(player.position.getY()+1 == wall_height || player.position.getY()-1 == 2 ) return false;
+        return true;
+    }
+
+    public boolean canMoveRight(Arena arena){
+        if(this.getX()+1 == arena.wall_width) return false;
+        return true;
+    }
+
+    public boolean canMoveUp(){
+        if(this.getY()-1 == 2) return false;
+        return true;
+    }
+
+    public boolean canMoveDown(Arena arena){
+        if(this.getY()+1 == arena.wall_height) return false;
+        return true;
+    }
+
     @Override
     public boolean equals(Object o) {
         if(o == null || o.getClass() != this.getClass()) return false;

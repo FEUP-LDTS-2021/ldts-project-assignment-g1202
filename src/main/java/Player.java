@@ -35,33 +35,49 @@ public class Player {
     }
 
     //Movimento
-    public void moving(KeyStroke keyPressed){
+    public void moving(KeyStroke keyPressed,Arena arena){
         switch(keyPressed.getKeyType()){
             case ArrowUp:
-                this.position.moveUp();
+                if(this.position.canMoveUp()) {
+                    this.position.moveUp();
+                }
                 break;
             case ArrowDown:
-                this.position.moveDown();
+                if(this.position.canMoveDown(arena)) {
+                    this.position.moveDown();
+                }
                 break;
             case ArrowLeft:
-                this.position.moveLeft();
+                if(this.position.canMoveLeft()) {
+                    this.position.moveLeft();
+                }
                 break;
             case ArrowRight:
-                this.position.moveRight();
+                if(this.position.canMoveRight(arena)) {
+                    this.position.moveRight();
+                }
                 break;
         }
     }
 
-    public void movingp2(KeyStroke keyPressed){
+    public void movingp2(KeyStroke keyPressed,Arena arena){
 
         if (keyPressed.getKeyType() == KeyType.Character  && keyPressed.getCharacter() == ('w')) {
-            this.position.moveUp();
+            if(this.position.canMoveUp()) {
+                this.position.moveUp();
+            }
         } else if (keyPressed.getKeyType() == KeyType.Character  && keyPressed.getCharacter() == ('s')) {
-            this.position.moveDown();
+            if(this.position.canMoveDown(arena)) {
+                this.position.moveDown();
+            }
         } else if (keyPressed.getKeyType() == KeyType.Character  && keyPressed.getCharacter() == ('a')) {
-            this.position.moveLeft();
+            if(this.position.canMoveLeft()) {
+                this.position.moveLeft();
+            }
         } else if (keyPressed.getKeyType() == KeyType.Character  && keyPressed.getCharacter() == ('d')) {
-            this.position.moveRight();
+            if(this.position.canMoveRight(arena)) {
+                this.position.moveRight();
+            }
         }
     }
 

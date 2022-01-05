@@ -122,26 +122,26 @@ public class Game {
                     //
                 }
                 else { // caso nao fechemos o jogo vamos tentar mover
-                    arena.player.moving(keyPressed);
-                    if ((arena.player.position.equals(arena.eggman.position) ||
-                            arena.player.position.equals(arena.eggman2.position)  ||
-                            arena.player.position.equals(arena.eggman3.position) ||
-                            arena.player.position.equals(arena.eggman4.position))) {
+                        arena.player.moving(keyPressed,arena);
+                        if ((arena.player.position.equals(arena.eggman.position) ||
+                                arena.player.position.equals(arena.eggman2.position) ||
+                                arena.player.position.equals(arena.eggman3.position) ||
+                                arena.player.position.equals(arena.eggman4.position))) {
 
-                        arena.player.hitpoints.changeHp(); // perde-se 10 de vida quando embate no inimigo
-                        if (arena.player.hitpoints.getHp() == 0) {
-                            //jogador morreu
-                            keepRunning = false;
-                            menu();
-                            //menu() placeholder vamos ter uma store()
+                            arena.player.hitpoints.changeHp(); // perde-se 10 de vida quando embate no inimigo
+                            if (arena.player.hitpoints.getHp() == 0) {
+                                //jogador morreu
+                                keepRunning = false;
+                                menu();
+                                //menu() placeholder vamos ter uma store()
+                            }
                         }
+                        //desenho da nova posicao
+                        arena.draw(tg);
+                        //screen.refresh();
                     }
-                    //desenho da nova posicao
-                    arena.draw(tg);
-                    //screen.refresh();
                 }
             }
-        }
 
         // Opção do modo PVP
         public void pvp() throws IOException {
@@ -178,8 +178,8 @@ public class Game {
                 keepRunning = false;
                 menu();
             } else { // caso nao fechemos o jogo vamos tentar mover
-                arena.player.moving(keyPressed);
-                arena.player2.movingp2(keyPressed);
+                arena.player.moving(keyPressed,arena);
+                arena.player2.movingp2(keyPressed,arena);
                 //desenho da nova posicao
                 arena.draw(tg);
                 //screen.refresh();
