@@ -36,13 +36,20 @@ public class Game {
         screen.clear();
         Arena arena = new Arena(80, 24);
         boolean keepRunning = true;
-
+            arena.eggman.running();
             while (keepRunning) {
                 arena.draw(tg);
+
                 //arena.eggman.running();
                 //arena.eggman2.running();
                 //arena.eggman3.running();
                 //arena.eggman4.running();
+
+                //arena.eggman.damagePlayer(arena.player);
+                //arena.eggman2.damagePlayer(arena.player);
+                //arena.eggman3.damagePlayer(arena.player);
+                //arena.eggman4.damagePlayer(arena.player);
+
                 tg.setBackgroundColor(TextColor.ANSI.BLACK); //texto do canto superior esq que indica o modo selecionado
                 tg.setForegroundColor(TextColor.ANSI.DEFAULT);
                 tg.putString(3, 1, "Survival");
@@ -79,6 +86,7 @@ public class Game {
                     menu();
                 } else if(keyPressed.getKeyType() == KeyType.Character && keyPressed.getCharacter() == (' ')){
                     //figure something to avoid the use of too many ifs in damaging enemies
+
                     if(arena.player.position.getY()+1 == arena.eggman.position.getY() || arena.player.position.getY()-1 == arena.eggman.position.getY()){
                         arena.eggman.hitpoints.changeHp();
                         //System.out.println(arena.eggman.hitpoints.getHp());
@@ -171,6 +179,7 @@ public class Game {
                 menu();
             } else { // caso nao fechemos o jogo vamos tentar mover
                 arena.player.moving(keyPressed);
+                arena.player2.movingp2(keyPressed);
                 //desenho da nova posicao
                 arena.draw(tg);
                 //screen.refresh();

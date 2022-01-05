@@ -30,4 +30,25 @@ public class BadGuy {
         else position.setX(position.getX() + 1);
         //}
     }
+
+    public void spinning(){
+
+        int i = 3;
+
+        while(i > 0) {
+            position.moveRight();
+            position.moveDown();
+            position.moveDown();
+            i--;
+        }
+    }
+
+    public void damagePlayer(Player player){
+        if(player.position.getY()+1 == this.position.getY() || player.position.getY()-1 == this.position.getY()){
+            player.hitpoints.changeHp();
+        }
+        if(player.position.getX()+1 == this.position.getX() || player.position.getX()-1 == this.position.getX()){
+            player.hitpoints.changeHp();
+        }
+    }
 }

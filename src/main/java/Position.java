@@ -21,6 +21,23 @@ public class Position {
         this.y = y;
     }
 
+    //movement functions
+    public void moveUp(){
+        this.setY(this.getY() - 1);
+    }
+
+    public void moveDown(){
+        this.setY(this.getY() + 1);
+    }
+
+    public void moveLeft(){
+        this.setX(this.getX()-1);
+    }
+
+    public void moveRight(){
+        this.setX(this.getX()+1);
+    }
+
     @Override
     public boolean equals(Object o) {
         if(o == null || o.getClass() != this.getClass()) return false;

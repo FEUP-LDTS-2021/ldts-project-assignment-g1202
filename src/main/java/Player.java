@@ -2,6 +2,7 @@ import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
+import com.googlecode.lanterna.input.KeyType;
 
 public class Player {
 
@@ -37,17 +38,30 @@ public class Player {
     public void moving(KeyStroke keyPressed){
         switch(keyPressed.getKeyType()){
             case ArrowUp:
-                position.setY(position.getY()-1);
+                this.position.moveUp();
                 break;
             case ArrowDown:
-                position.setY(position.getY()+1);
+                this.position.moveDown();
                 break;
             case ArrowLeft:
-                position.setX(position.getX()-1);
+                this.position.moveLeft();
                 break;
             case ArrowRight:
-                position.setX(position.getX()+1);
+                this.position.moveRight();
                 break;
+        }
+    }
+
+    public void movingp2(KeyStroke keyPressed){
+
+        if (keyPressed.getKeyType() == KeyType.Character  && keyPressed.getCharacter() == ('w')) {
+            this.position.moveUp();
+        } else if (keyPressed.getKeyType() == KeyType.Character  && keyPressed.getCharacter() == ('s')) {
+            this.position.moveDown();
+        } else if (keyPressed.getKeyType() == KeyType.Character  && keyPressed.getCharacter() == ('a')) {
+            this.position.moveLeft();
+        } else if (keyPressed.getKeyType() == KeyType.Character  && keyPressed.getCharacter() == ('d')) {
+            this.position.moveRight();
         }
     }
 
