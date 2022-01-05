@@ -6,7 +6,27 @@
 The Dungeon Boy is a Dungeon-Crawler like based game in which the player goes through different levels and maps and faces different enemies until reaching the final boss. It has 2 playing modes, the Survival mode in which the player has to survive through some tough fights with enemies, and try not to die along the way (at least not too many times).
 The Player vs Player mode (PVP) consists in a mode where the player can face a player 2, and the winner will be crowned on the best results out of 5 intense rounds.
 
-This project was developed by João Duarte (201707984), Miguel Tavares(202002811)   and Inês Garcia (       ) for LDTS 2021-22.
+This project was developed by João Duarte (201707984), Miguel Tavares(202002811)   and Inês Garcia ( 202004810) for LDTS 2021-22.
+
+**NOTE** : This game is still on development and could suffer some changes!
+
+### GAME SUMMARY
+
+The game starts with a black terminal with the name of the game, and some commands.
+
+![image](https://user-images.githubusercontent.com/52889593/148138582-3bba6e0e-ec13-4da5-8398-d42c02853e32.png)
+
+If we press ENTER, we are carried into the main menu, where we can select which game mode to play 
+
+![image](https://user-images.githubusercontent.com/52889593/148138743-0b59bb66-2572-413a-b573-dadb35796689.png)
+
+Survival Mode: We can now play against 4 different Enemies which will try to kill us!
+
+![image](https://user-images.githubusercontent.com/52889593/148138798-9ade6cc1-4c5d-451a-97b8-3eecf5ab75fa.png)
+
+PvP Mode: Play against your friend, best of 5 rounds win! Good luck!
+
+![image](https://user-images.githubusercontent.com/52889593/148138866-38876123-19e6-4a9c-9567-150c9f001c57.png)
 
 
 ## Implemented Features
@@ -22,22 +42,34 @@ This project was developed by João Duarte (201707984), Miguel Tavares(202002811
 - **Catching HP Potions** - If the player goes to the position of a potion, this one is going to be collected, adding 10 health points to his total HP.
 
 
-## Planned Features
+### PLANNED FEATURES - Still being implemented!
 
-All the planned features were successfully implemented.
+
+- **Player control** - The player may move and attack the enemies with the keyboard control.
+- **Collisions detection** - Collisions (still need to be implemented)
+- **Diferent enemies** - The player will face different enemies throughout the game.  (still need to be implemented)
+- **Shop interaction and money management** - (still need to be implemented)
+- **Catching HP Potions** - If the player goes to the position of a potion, this one is going to be collected, adding 10 health points to his total HP. (still need to be implemented)
+- **Final Boss** - (still need to be implemented)
+- **Inventory** - There will be an inventory to store our items that we bought from the shop.
+- **Arena Transition** - Player can pass to another new Arena
 
 ## Design
 
-### General Structure
-#### Problem in Context:
-The first concern of our project was how the structure would look like. Since our game is dealling with a GUI and is divided by different gameStates some specific patterns came to mind in order to fullfil our needs the best way possible.
 
-The first concern of our project was how the structure would look like. Since our game shouldnt be dealling with a GUI and is divided by different gameStates. 
+- **Problem in Context.** 
 
-#### The Pattern:
-Two main patterns were applied to the project, the **_Architectural Pattern_**, more specifically the Model-View-Controller style which is commonly used in a GUI and the **_State Pattern_** which is a behavioral design pattern that lets an object alter its behavior when its internal state changes.  
+This game uses many classes, and we tried to connect many of them to the Game class, such as Arena, HP, BadGuy, Player and Wall.
+We mainly tried to create this classes objects on Game/Arena.
 
-#### Implementation:
+
+- **The Pattern.** 
+
+We adopted the Builder creational design pattern to construct complex objects step by step.
+It was clearly used on our creation of the BadGuy (enemys), along with our Arena class which used the Builder on creating the players, and enemys(eggman's)
+
+- **Implementation:**
+
 Regarding the implementation, we now have classes which main purpose is to store data (model), classes that control the logic of the game (controllers) and classes that are responsible for the visual effects on the screen (viewers), these types of classes associate with each other in the following manner:
 
 <p align="center" justify="center">
@@ -50,10 +82,13 @@ Regarding the implementation, we now have classes which main purpose is to store
 As for the different states, they are divided with the same methodology as the mvc style, and permite the game to alter its behavior in a simple and efficient way.
 
 #### Consequences:
-The use of these patterns in the current design allow the following benefits:
-- The several states that represent the different menus become explicit in the code, instead of relying on a series of flags.
-- A well organized code acknowledging the Single Responsibility Principle.
-- Easy to add new features throughout the development stage.
+
+The main pros of using this design pattern are: 
+ - We could construct objects step-by-step, defer construction steps or run steps recursively.
+ - We could reuse the same construction code when building various representations of products.
+ - We could isolate complex construction code from the business logic of the product, Single Responsibility Principle. 
+
+But however, the complexity of the code increased since we had to create multiple new classes.
 
 
 ### Observers and listeners
@@ -200,8 +235,6 @@ Also, in order to access a certain model's parameter it is mandatory to start by
 
 ## Self-evaluation
 
-The work was divided in a mutual way and we all contributed with our best. It helped us to enrich our java and principle/pattern knwoledge, as well as our team work.
-
-- Donal Knuth: 33.3%
-- Timothy J. Berners-Lee: 33.3%
-- Vinton G. Cerf: 33.3%
+- João Duarte - %
+- Miguel Tavares - %
+- Inês Garcia - %
