@@ -44,7 +44,6 @@ PvP Mode: Play against your friend, best of 5 rounds win! Good luck!
 ### PLANNED FEATURES - Still being implemented!
 
 
-- **Player control** - The player may move and attack the enemies with the keyboard control.
 - **Collisions detection** - Collisions (still need to be implemented)
 - **Diferent enemies** - The player will face different enemies throughout the game.  (still need to be implemented)
 - **Shop interaction and money management** - (still need to be implemented)
