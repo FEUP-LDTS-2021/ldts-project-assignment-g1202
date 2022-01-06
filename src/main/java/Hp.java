@@ -12,4 +12,9 @@ public class Hp {
     public void setHp(int Hp){
         this.Hp = Hp;
     }
+
+    public void changeHp(){
+        //perder 10 pontos de vida
+        setHp(getHp()-10);
+    }
 }
