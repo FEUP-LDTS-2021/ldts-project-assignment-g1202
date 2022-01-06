@@ -21,8 +21,8 @@ public class Arena {
 
 
     public Arena(int width, int height) {
-        player = new Player(10, 10,100);
-        player2 = new Player(10,15,100);
+        player = new Player(10, 10,100, 3);
+        player2 = new Player(10,15,100, 3);
         eggman = new BadGuy(Math.random() * width ,Math.random() * height  ,100);
         eggman2 = new BadGuy(Math.random() * width ,Math.random() * height  ,100);
         eggman3 = new BadGuy(Math.random() * width ,Math.random() * height  ,100);

@@ -17,6 +17,8 @@ public class Game {
     Terminal terminal = new DefaultTerminalFactory().createTerminal();
     Screen screen = new TerminalScreen(terminal);
     TextGraphics tg = screen.newTextGraphics();
+    Arena survArena = new Arena(80, 24);
+    Shop shop;
     int lvl = 0;
     String arma = "Riffle test";
     int p1kills, p2kills, round = 0;
@@ -24,6 +26,7 @@ public class Game {
 
     public Game() throws IOException { // construtor de Game
         try {
+            shop = new Shop();
             screen.startScreen(); // Iniciar o terminal
 
         } catch (IOException e) {
@@ -34,15 +37,15 @@ public class Game {
     // Opção do modo survival
     public void survival() throws IOException {
         screen.clear();
-        Arena arena = new Arena(80, 24);
+        //Arena arena = new Arena(80, 24);
         boolean keepRunning = true;
 
             while (keepRunning) {
-                arena.draw(tg);
-                arena.eggman.running();
-                arena.eggman2.running();
-                arena.eggman3.running();
-                arena.eggman4.running();
+                survArena.draw(tg);
+                //survArena.eggman.running();
+                //survArena.eggman2.running();
+                survArena.eggman3.running();
+                survArena.eggman4.running();
                 tg.setBackgroundColor(TextColor.ANSI.BLACK); //texto do canto superior esq que indica o modo selecionado
                 tg.setForegroundColor(TextColor.ANSI.DEFAULT);
                 tg.putString(3, 1, "Survival");
@@ -51,7 +54,7 @@ public class Game {
                 tg.putString(65, 1, "Inventory (U)");
 
                 //String HP
-                tg.putString(2, 22, "HP: " + arena.player.hitpoints.getHp());  // falta concatenar com a variavel que recebe os valores corretos
+                tg.putString(2, 22, "HP: " + survArena.player.hitpoints.getHp());  // falta concatenar com a variavel que recebe os valores corretos
 
                 //Strings WEAPON
                 tg.putString(30, 22, "Weapon:  " + arma);
@@ -59,10 +62,10 @@ public class Game {
                 tg.setForegroundColor(TextColor.ANSI.DEFAULT);
 
                 //String HP
-                tg.putString(2, 22, "HP: " + arena.player.hitpoints.getHp());
+                tg.putString(2, 22, "HP: " + survArena.player.hitpoints.getHp());
 
                 //String Live
-                tg.putString(15, 22, "Lives: " + arena.player.getLife());
+                tg.putString(15, 22, "Lives: " + survArena.player.getLife());
 
 
                 //Strings WEAPON
@@ -79,22 +82,31 @@ public class Game {
                     keepRunning = false;
                     menu();
                 } else { // caso nao fechemos o jogo vamos tentar mover
-                    arena.player.moving(keyPressed);
-                    if ((arena.player.position.equals(arena.eggman.position) ||
-                            arena.player.position.equals(arena.eggman2.position)  ||
-                            arena.player.position.equals(arena.eggman3.position) ||
-                            arena.player.position.equals(arena.eggman4.position))) {
+                    survArena.player.moving(keyPressed);
+                    if ((survArena.player.position.equals(survArena.eggman.position) ||
+                            survArena.player.position.equals(survArena.eggman2.position)  ||
+                            survArena.player.position.equals(survArena.eggman3.position) ||
+                            survArena.player.position.equals(survArena.eggman4.position))) {
 
-                        arena.player.changeHp(); // perde-se 10 de vida quando embate no inimigo
-                        if (arena.player.hitpoints.getHp() == 0) {
+                        survArena.player.changeHp(); // perde-se 10 de vida quando embate no inimigo
+                        if (survArena.player.hitpoints.getHp() == 0) {
                             //jogador morreu
+                            survArena.player.lostlife();
                             keepRunning = false;
-                            menu();
-                            //menu() placeholder vamos ter uma store()
+                            if (survArena.player.getLife() > 0){// abre a shop se ainda tiver vidas
+                                survArena.player.setHitpoints(new Hp(100)); // restaura hp
+                                survArena.player.position.setX(10);   // restaura posicao inicial
+                                survArena.player.position.setY(10);
+                                shop.show(screen, terminal, survArena.player);
+                                survival();  // quando fecha a shop volta ao jogo
+                            }
+                            else{
+                                menu();  // se não tiver mais vidas vai direto ao menu
+                            }
                         }
                     }
                     //desenho da nova posicao
-                    arena.draw(tg);
+                    survArena.draw(tg);
                     //screen.refresh();
                 }
             }

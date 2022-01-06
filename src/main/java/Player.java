@@ -11,9 +11,18 @@ public class Player {
     private int life;
 
     //construtor
-    public Player(int x, int y,int health){
+    public Player(int x, int y,int health, int life){
         position = new Position(x,y);
         hitpoints = new Hp(health);
+        this.life = life;
+    }
+
+    public void setHitpoints(Hp hitpoints) {
+        this.hitpoints = hitpoints;
+    }
+
+    public Hp getHitpoints() {
+        return hitpoints;
     }
 
     public void draw(TextGraphics screen) {
