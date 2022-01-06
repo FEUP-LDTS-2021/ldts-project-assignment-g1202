@@ -22,14 +22,19 @@ If we press ENTER, we are carried into the main menu, where we can select which 
 
 Survival Mode: We can now play against 4 different Enemies which will try to kill us!
 
-![image](https://user-images.githubusercontent.com/52889593/148138798-9ade6cc1-4c5d-451a-97b8-3eecf5ab75fa.png)
+![image](https://user-images.githubusercontent.com/52889593/148377444-c903cf90-61a6-4f22-985e-bb82b08d00ab.png)
+
+If we die, we go straight to the shop, where we can gear up with Weapons and Health Potions and try our luck again!
+
+![image](https://user-images.githubusercontent.com/52889593/148377558-fc3af7d6-02b2-4b05-8afd-a58bebee20d7.png)
 
 PvP Mode: Play against your friend, best of 5 rounds win! Good luck!
 
 ![image](https://user-images.githubusercontent.com/52889593/148138866-38876123-19e6-4a9c-9567-150c9f001c57.png)
 
 
-## Implemented Features
+
+### IMPLEMENTED FEATURES
 
 - **Connected Menus** - The user has the capability of browsing through the different menus including in game ones. (Ex: Intro Menu, Main Menu with mode selection screens, Instructions,  Shop(when dead) and ESC.
 - **Keyboard control** - The keyboard inputs are received and interpreted according to the current game state.
@@ -38,21 +43,21 @@ PvP Mode: Play against your friend, best of 5 rounds win! Good luck!
 - **Hit Points** - If the player collides or is attacked by an enemie, loses hit points. 
 - **Diferent enemies** - The player will face different enemies throughout the game.
 - **Different modes** - The player can choose between the Survival Mode and the Player vs Player mode.
-- **Shop interaction and money management** - The player may buy new items in the in game shop, which consist of new weapons and potions.
-- **Catching HP Potions** - If the player goes to the position of a potion, this one is going to be collected, adding 10 health points to his total HP.
+- **Shop interaction and money management** - The player may buy new items in the in game shop, which consist of new weapons and potions, shop is only available after dying on Survival mode.
+- **Catching Coins** - If the player goes to the position of a coin, this one is going to be collected, adding some money to our inventory which can be used in the Shop.
+- **Lives** - In the beggining of the game, the player is given 3 lives (displayed in health on the screen).
+- **Dying** - A player dies if his health reaches 0, or less.
+- **Inventory** - Inventory to store our items that we bought from the shop.
 
 
 ### PLANNED FEATURES - Still being implemented!
 
-
-- **Player control** - The player may move and attack the enemies with the keyboard control.
 - **Collisions detection** - Collisions (still need to be implemented)
 - **Diferent enemies** - The player will face different enemies throughout the game.  (still need to be implemented)
-- **Shop interaction and money management** - (still need to be implemented)
-- **Catching HP Potions** - If the player goes to the position of a potion, this one is going to be collected, adding 10 health points to his total HP. (still need to be implemented)
 - **Final Boss** - (still need to be implemented)
 - **Inventory** - There will be an inventory to store our items that we bought from the shop.
 - **Arena Transition** - Player can pass to another new Arena
+
 
 ## Design
 
