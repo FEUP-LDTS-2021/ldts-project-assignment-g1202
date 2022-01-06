@@ -52,6 +52,7 @@ PvP Mode: Play against your friend, best of 5 rounds win! Good luck!
 - **Diferent enemies** - The player will face different enemies throughout the game.  (still need to be implemented)
 - **Final Boss** - (still need to be implemented)
 - **Inventory** - There will be an inventory to store our items that we bought from the shop.
+- **Arena Transition** - Player can pass to another new Arena
 
 
 ### DESIGN
