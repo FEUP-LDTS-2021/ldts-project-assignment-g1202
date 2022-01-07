@@ -44,11 +44,13 @@ PvP Mode: Play against your friend, best of 5 rounds win! Good luck!
 - **Lives** - In the beggining of the game, the player is given 3 lives (displayed in health on the screen).
 - **Dying** - A player dies if his health reaches 0, or less.
 - **Inventory** - Inventory to store our items that we bought from the shop.
+- - **Collisions detection** - Players colisions with walls working
 
 ### PLANNED FEATURES - Still being implemented!
 
 
-- **Collisions detection** - Collisions (still need to be implemented)
+- **Collisions detection** - Enemies colisions with walls still being implemented
+- **Coin Catching / Draw** - Still not fully implemented
 - **Diferent enemies** - The player will face different enemies throughout the game.  (still need to be implemented)
 - **Final Boss** - (still need to be implemented)
 - **Inventory** - There will be an inventory to store our items that we bought from the shop.
