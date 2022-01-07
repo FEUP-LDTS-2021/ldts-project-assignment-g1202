@@ -24,7 +24,7 @@ public class Arena<global> {
     int wall_height;
     int wall_width;
 
-    // TESTE
+    
     int credit = 0; // coins = 0
 
     public int getCredit(){
@@ -39,9 +39,6 @@ public class Arena<global> {
         //Aumentar 1 coin cada vez que apanha uma
         setCredit(getCredit()+1); // coins ++
     }
-
-// TESTE
-
 
 
     public Arena(int width, int height) {
@@ -106,7 +103,7 @@ public class Arena<global> {
 
         //implementação das walls
         for (Wall wall : walls)
-            wall.draw(screen2); //screen é o nosso textgraphics
+            wall.draw(screen2);
 
     }
 
