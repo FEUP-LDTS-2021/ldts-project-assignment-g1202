@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Arena<global> {
+public class Arena{
     Player player;
     Player player2;
     BadGuy eggman;
