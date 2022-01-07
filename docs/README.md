@@ -28,7 +28,7 @@ If we die, we go straight to the shop, where we can gear up with Weapons and Hea
 
 ![image](https://user-images.githubusercontent.com/52889593/148377558-fc3af7d6-02b2-4b05-8afd-a58bebee20d7.png)
 
-PvP Mode: Play against your friend, best of 5 rounds win! Good luck!
+PvP Mode: Play against your friend, best of 5 rounds wins! Good luck!
 
 ![image](https://user-images.githubusercontent.com/52889593/148138866-38876123-19e6-4a9c-9567-150c9f001c57.png)
 
@@ -52,19 +52,20 @@ PvP Mode: Play against your friend, best of 5 rounds win! Good luck!
 
 ### PLANNED FEATURES - Still being implemented!
 
-- **Collisions detection** - Collisions (still need to be implemented)
+
+- **Collisions detection** - Enemies colisions with walls still being implemented
+- **Coin Catching / Draw** - Still not fully implemented
 - **Diferent enemies** - The player will face different enemies throughout the game.  (still need to be implemented)
 - **Final Boss** - (still need to be implemented)
 - **Inventory** - There will be an inventory to store our items that we bought from the shop.
 - **Arena Transition** - Player can pass to another new Arena
-
 
 ## Design
 
 
 - **Problem in Context.** 
 
-This game uses many classes, and we tried to connect many of them to the Game class, such as Arena, HP, BadGuy, Player and Wall.
+This game uses many classes, and we tried to connect many of them to the Game class, such as Arena, HP, BadGuy, Player, Walls, Coins, and Shop
 We mainly tried to create this classes objects on Game/Arena.
 
 
@@ -75,16 +76,6 @@ It was clearly used on our creation of the BadGuy (enemys), along with our Arena
 
 - **Implementation:**
 
-Regarding the implementation, we now have classes which main purpose is to store data (model), classes that control the logic of the game (controllers) and classes that are responsible for the visual effects on the screen (viewers), these types of classes associate with each other in the following manner:
-
-<p align="center" justify="center">
-  <img src="images/UML/MVC.png"/>
-</p>
-<p align="center">
-  <b><i>Fig 1. Model, Controller and Viewer pattern design</i></b>
-</p>
-
-As for the different states, they are divided with the same methodology as the mvc style, and permite the game to alter its behavior in a simple and efficient way.
 
 #### Consequences:
 
@@ -98,57 +89,17 @@ But however, the complexity of the code increased since we had to create multipl
 
 ### Observers and listeners
 #### Problem in Context:  
-Our game is controlled both by the mouse and the keyboard, many are the ways to receive input from these devices, for example: a thread that is running and every time it catches a signal it sends to the game itself (polling), the game being responsible for asking for input when needed, which is costly for our program since we may not send any signal to the program and unnecessary calls are made or the way we decided to implement which consists of using observers also known as listeners that are responsible for receiving the said input and redistributing it in a nicer and more usefull way to us. This takes some "weight" of the program as it will no longer need to be polling for input, as it will be properly warned when received.
+Our game is controlled by the keyboard, many are the ways to receive input from the keyboard, in this game we used the KeyStroke, and KeyType functions from lanterna, which after defining the key we wanted to use, if a condition was verified it would receive an input from a specific key and use it to a defined action.
+We used it to respond to terminal messages such as "Press Enter to start the game", and after pressing the desired key it would take us for another menu.
+After that we would setup the arrow keys to navigate through the menu, and also the actual gameplay too.
 
 #### The Pattern:
-We have applied the **_Observer pattern_** which is a behavioral design pattern that lets you define a subscription mechanism to notify multiple objects about any events that happen to the object they’re observing. With this in mind the pattern allowed to solve the identified problems and apply a sustainable mechanism to receive any program input.
+
 
 #### Implementation:
-Implementation wise we store the observers in the main class (game class) and change its state according to the respective input processed by the available listener.
-Though, it wasn't easy right from the start as our first attemp to implement this feature didn't act as expected. All listeners were always active, since when creating a Menu Button the listener would be activated by the newly created state, and it was far from being a structured and easy-to-read code.
 
-<p align="center" justify="center">
-  <img src="images/UML/ObsListener.png"/>
-</p>
-<p align="center">
-  <b><i>Fig 2. Observers and Listeners screenshot</i></b>
-</p>
 
 #### Consequences:
-Some consequences of using the stated pattern:
-- Promotes the single responsibility principle.
-- Clean code.
-- Only the current game state is warned when an input is given.
-
-### Battlefield builder
-#### Problem in Context:
-A battlefield consists in an aglomeration of elements such as walls, bombs, portals, a player, etc. 
-Having different battlefields in the various levels, instead of having a builder to each level, a battlefield loader that reads from a file and inserts into its super class (battlefield builder) the needed elements, was the most appealing option. This implementation makes it possible to only create specific elements and also generate battlefields in different ways.
-
-#### The Pattern:
-The **_Factory Method_** and **_Builder_** are two creational design patterns, the first one provides an interface for creating objects in a superclass, but allows subclasses to alter the type of objects that will be created. The second, allows you to construct complex objects step by step making a simpler code.
-
-#### Implementation:
-A factory is resposible for constructing the whole but the workers are the ones that actually execute the job. Analogously, our BattlefieldBuilder is a factory and its subclasses represent the workers.
-As for the implmentation, the BattlefieldBuilder is an abstract class which knows how to construct a battlefield, however only its subclasses supply the necessary components of the battlefield. The BattlefieldLoader is one of referred subclasses that consists in a worker capable of reading different levels from different files. Another possible implementation would be a random loader that generates random components for the battlefield.
-The builder pattern is implemented in all of the above classes by dividing the constructing in smaller steps.
-
-<p align="center" justify="center">
-  <img src="images/UML/BuilderLoader.png"/>
-</p>
-<p align="center">
-  <b><i>Fig 3. Battlefield builder and loader</i></b>
-</p>
-
-These classes can be found in the following files:
-- [BattlefieldBuilder](../src/main/java/com/g57/model/battlefield/BattlefieldBuilder.java)
-- [BattlefieldLoader](../src/main/java/com/g57/model/battlefield/BattlefieldLoader.java)
-
-#### Consequences:
-Benefits of applying the above pattern:
-- You avoid tight coupling between the creator and the concrete products.
-- Open/Closed Principle. You can introduce new types of products into the program without breaking existing client code.
-- You can construct objects step-by-step, defer construction steps or run steps recursively.
 
 
 ### Different types of commands
@@ -168,9 +119,6 @@ Regarding the implemetation process, all the Button classes were deleted and tra
   <b><i>Fig 4. Buttons and commands</i></b>
 </p>
 
-These classes can be found in the following files:
-- [Button](../src/main/java/com/g57/model/element/button/Button.java)
-- [Command](../src/main/java/com/g57/model/item/command/Command.java)
 
 #### Consequences:
 The Command Pattern allows the following consequences:
@@ -182,29 +130,12 @@ The Command Pattern allows the following consequences:
 
 ### GUI
 #### Problem in Context:
-Aiming for a structured and unstable (easy to change) code, we tried to make it as general as possible. The lanterna library contains various functions that aren't useful to our program, Interface Segregation Principle violation, and lacks some other functions that our interface needs. Also, if using the raw library, our game (high level module) would be directly depending on a low level module. This is a violation of the Dependency Inversion Principle (DIP). A need to implement an interface that solves these problems was born. 
-
-#### The Pattern: 
-We have applied the **_Facade_** pattern. A facade provides a simple interface to a complex subsystem which contains lots of moving parts, allowing us to only include the features that really matter.
-
-#### Implementation:
-<p align="center" justify="center">
-  <img src="images/UML/GUI.png"/>
-</p>
-<p align="center">
-  <b><i>Fig 5. Observers and Listeners screenshot</i></b>
-</p>
-
-These classes can be found in the following files:
-- [Game](../src/main/java/com/g57/Game.java)
-- [GUI](../src/main/java/com/g57/gui/GUI.java)
-- [LanternaGUI](../src/main/java/com/g57/gui/LanternaGUI.java)
+Initially we were thinking in using java GUI in order to make the game more pleasant, however after discussing with the teachers, even though it would be better visually, it was not the main concern on making this project, and not the main concern on evaluation for the game. 
+This game was developed and more focused on the code itself and how we would manage to get out of some tricky situations with some clever implementations.
+Being said, we used only lanterna capabilitys on this game, which are reduced and with lower graphics designs.
 
 #### Consequences: 
-The use of the Facade Pattern in the current design allows the following benefits:
-- Isolate code from the complexity of a subsystem.
-- Promotes testability and replaceability.
-- Expand lanterna functionalities as well as respecting the Interface Segregation Principle.
+- Not Visually appealing
 
 
 ## Known Code Smells And Refactoring Suggestions
