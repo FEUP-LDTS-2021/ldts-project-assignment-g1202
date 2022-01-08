@@ -91,14 +91,14 @@ But however, the complexity of the code increased since we had to create multipl
 
 For the State pattern:
 
-PROS:
+### PROS:
 - We get the Open/Closed principle and Single responsability principle 
 
-CONS:
+### CONS:
 - We could have a hard time trying to implement it. (CON)
 
 For the Factory method pattern:
-PROS:
+### PROS:
 - We get the Open/Closed principle and Single responsability principle 
 
 
@@ -109,15 +109,15 @@ So far, we found some code smells which after detection we tried to eliminate th
 However since the game its still not completed we cannot make sure there aren't more of them since we didnt focus on finding them (yet)
 We found the following code smells: 
 
--** Bloaters - Large Class ** - After starting developing the game we found out that we were using too many code inside the Game class, so we divided the game into more classes such as arena, walls, coins etc... 
+**Bloaters - Large Class** - After starting developing the game we found out that we were using too many code inside the Game class, so we divided the game into more classes such as arena, walls, coins etc... 
 
-- ** Object-Orientation Abusers - If Statements ** - We came to the conclusion that we were using too many if/else if/else conditions in order to get the game terminal running and then getting the menu running as well, so we corrected what we could and replaced them with switch-cases, but tried to reduce the number of times we used them too so we would have a improved code organization.
+**Object-Orientation Abusers - If Statements** - We came to the conclusion that we were using too many if/else if/else conditions in order to get the game terminal running and then getting the menu running as well, so we corrected what we could and replaced them with switch-cases, but tried to reduce the number of times we used them too so we would have a improved code organization.
 
--** Dispensables - Comments ** - Yes, of course, comments! We used a lot of comments on the 1st stage of the game so everyone in the project could understand what was going on, and prevent some headaches on the colleagues, we still have some of them at the code, which we will delete later on, but we indeed have deleted already some of them.
+**Dispensables - Comments** - Yes, of course, comments! We used a lot of comments on the 1st stage of the game so everyone in the project could understand what was going on, and prevent some headaches on the colleagues, we still have some of them at the code, which we will delete later on, but we indeed have deleted already some of them.
 
-- ** Dispensables -  Duplicate Code ** - It happened a few times on some implementations, but after a few checks we manage to fix it.
+**Dispensables -  Duplicate Code** - It happened a few times on some implementations, but after a few checks we manage to fix it.
 
-- ** Dispensables -  Dead Code ** - We came across with some dead code along the way, variables that were never used, functions.. 
+**Dispensables -  Dead Code** - We came across with some dead code along the way, variables that were never used, functions.. 
 
 
 ### TESTING
