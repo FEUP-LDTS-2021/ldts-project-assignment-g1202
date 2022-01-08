@@ -55,7 +55,6 @@ PvP Mode: Play against your friend, best of 5 rounds wins! Good luck!
 
 
 - **Collisions detection** - Enemies colisions with walls still being implemented
-- **Coin Catching / Draw** - Still not fully implemented
 - **Diferent enemies** - The player will face different enemies throughout the game.  (still need to be implemented)
 - **Final Boss** - (still need to be implemented)
 - **Inventory** - There will be an inventory to store our items that we bought from the shop.
