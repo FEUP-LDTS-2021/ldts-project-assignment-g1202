@@ -44,7 +44,7 @@ PvP Mode: Play against your friend, best of 5 rounds win! Good luck!
 - **Lives** - In the beggining of the game, the player is given 3 lives (displayed in health on the screen).
 - **Dying** - A player dies if his health reaches 0, or less.
 - **Inventory** - Inventory to store our items that we bought from the shop.
-- - **Collisions detection** - Players colisions with walls working
+
 
 ### PLANNED FEATURES - Still being implemented!
 
@@ -70,25 +70,54 @@ We mainly tried to create this classes objects on Game/Arena.
 We adopted the Builder creational design pattern to construct complex objects step by step.
 It was clearly used on our creation of the BadGuy (enemys), along with our Arena class which used the Builder on creating the players, and enemys(eggman's)
 
+There are still other patterns that we are willing to use on the further development of the game such as: 
+- State Pattern  - Will be used to define the moving states of our enemies constantly without having to wait for our player to move so they move as well, they just enter a state where they keep moving around, same as the final boss too, and also when we enter new maps/arena on the next level.
+ 
+- Factory method - Creating an interface that receives information from the other subclasses, such as game, arena, walls etc..
+
 
 - **Implementation.** 
 
-
-Show how the pattern roles, operations and associations were mapped to the concrete design classes. Illustrate it with a UML class diagram, and refer to the corresponding source code with links to the relevant lines (these should be [relative links](https://help.github.com/en/articles/about-readmes#relative-links-and-image-paths-in-readme-files). When doing this, always point to the latest version of the code.
+We stil have not implemented fully the patterns, and still are designing the UML diagrams in order to improve the overall game quality.
 
 - **Consequences.** 
 
-The main pros of using this design pattern are: 
+The main pros of using the Builder design pattern are: 
  - We could construct objects step-by-step, defer construction steps or run steps recursively.
  - We could reuse the same construction code when building various representations of products.
  - We could isolate complex construction code from the business logic of the product, Single Responsibility Principle. 
 
 But however, the complexity of the code increased since we had to create multiple new classes.
 
+For the State pattern:
+
+PROS:
+- We get the Open/Closed principle and Single responsability principle 
+
+CONS:
+- We could have a hard time trying to implement it. (CON)
+
+For the Factory method pattern:
+PROS:
+- We get the Open/Closed principle and Single responsability principle 
+
+
 
 #### KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
 
-To be completed....
+So far, we found some code smells which after detection we tried to eliminate them.
+However since the game its still not completed we cannot make sure there aren't more of them since we didnt focus on finding them (yet)
+We found the following code smells: 
+
+-** Bloaters - Large Class ** - After starting developing the game we found out that we were using too many code inside the Game class, so we divided the game into more classes such as arena, walls, coins etc... 
+
+- ** Object-Orientation Abusers - If Statements ** - We came to the conclusion that we were using too many if/else if/else conditions in order to get the game terminal running and then getting the menu running as well, so we corrected what we could and replaced them with switch-cases, but tried to reduce the number of times we used them too so we would have a improved code organization.
+
+-** Dispensables - Comments ** - Yes, of course, comments! We used a lot of comments on the 1st stage of the game so everyone in the project could understand what was going on, and prevent some headaches on the colleagues, we still have some of them at the code, which we will delete later on, but we indeed have deleted already some of them.
+
+- ** Dispensables -  Duplicate Code ** - It happened a few times on some implementations, but after a few checks we manage to fix it.
+
+- ** Dispensables -  Dead Code ** - We came across with some dead code along the way, variables that were never used, functions.. 
 
 
 ### TESTING
