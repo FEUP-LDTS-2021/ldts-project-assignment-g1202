@@ -59,7 +59,7 @@ public class Player {
     public void moving(KeyStroke keyPressed, Arena arena){
         switch(keyPressed.getKeyType()){
             case ArrowUp:
-                if(this.position.canMoveUp())
+                if(this.position.canMoveUp(arena))
                 position.setY(position.getY()-1);
 
                 break;
@@ -84,7 +84,7 @@ public class Player {
     public void movingp2(KeyStroke keyPressed,Arena arena){
 
         if (keyPressed.getKeyType() == KeyType.Character  && keyPressed.getCharacter() == ('w')) {
-            if(this.position.canMoveUp()) {
+            if(this.position.canMoveUp(arena)) {
                 this.position.moveUp();
 
             }
