@@ -46,8 +46,8 @@ public class Game {
 
         while (keepRunning) {
             survArena.draw(tg);
-            //survArena.eggman.running();
-            //survArena.eggman2.running();
+            survArena.eggman.running();
+            survArena.eggman2.running();
             survArena.eggman3.running();
             survArena.eggman4.running();
             tg.setBackgroundColor(TextColor.ANSI.BLACK); //texto do canto superior esq que indica o modo selecionado
