@@ -133,10 +133,7 @@ public class Arena{
         retrieveCoins();
     }
 
-    private boolean canPlayerMove(Position pos){
-        return (pos.getX() >= 0 && pos.getX() < wall_width) && (pos.getY() >= 0 && pos.getY() < wall_height) && !walls.contains(new Wall(pos.getX(), pos.getY()));
-    }
-
+    
     //Se passar por cima duma moeda, ela desaparece - Still not working fully
     public void retrieveCoins(){
         for(Coins coin : coins){
@@ -151,9 +148,7 @@ public class Arena{
 
     //Creating coins on terminal -  They are still being drawn out of wall bounds
     private List<Coins> createCoins() {
-        wall_height = 3 + height - 3;
-        wall_width = 1 + width - 2;
-
+       
         Random random = new Random();
         ArrayList<Coins> coins = new ArrayList<>();
         for (int i = 0; i < 2; i++) { //max 2 moedas no ecrã
