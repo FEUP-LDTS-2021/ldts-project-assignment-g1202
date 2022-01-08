@@ -27,15 +27,15 @@ public class Shop {
         bools = new ArrayList<>();
 
         //diferentes armas disponiveis
-        weapons.add(new Weapon(10, 5, "Sword"));
-        weapons.add(new Weapon(20, 10, "Bow"));
+        weapons.add(new Weapon(2, 5, "Sword"));
+        weapons.add(new Weapon(5, 10, "Bow"));
 
         //diferentes poções disponiveis
-        potions.add(new Potion(5, new Hp(10), "10 HP"));
-        potions.add(new Potion(10, new Hp(20), "20 HP"));
-        potions.add(new Potion(15, new Hp(40), "40 HP"));
-        potions.add(new Potion(15, 1, "1 Life"));
-        potions.add(new Potion(25, 2, "2 Life"));
+        potions.add(new Potion(3, new Hp(10), "10 HP"));
+        potions.add(new Potion(5, new Hp(20), "20 HP"));
+        potions.add(new Potion(8, new Hp(40), "40 HP"));
+        potions.add(new Potion(10, 1, "1 Life"));
+        potions.add(new Potion(15, 2, "2 Life"));
 
         //criar booleans para ser mais fácil a seleção na loja
         boolean w1 = false;
@@ -120,54 +120,86 @@ public class Shop {
         }
     }
 
-    public boolean canBuy(int i){
+    public boolean canBuy(int i, Player player){
         if (i < 2){
-            //if (coins >= weapons.get(i).getCost()){  // verificar se há coins suficientes
-            return true;
-            //}
-            //return false;
+            if (player.getCredit() >= weapons.get(i).getCost()){  // verificar se há coins suficientes
+                return true;
+            }
+            return false;
         }
         else{
-            //if (coins >= potions.get(i-2).getCost()){
-            return true;
-            //}
-            //return false;
+            if (player.getCredit() >= potions.get(i-2).getCost()){
+                return true;
+            }
+            return false;
         }
     }
 
-    public void select(int i, TextGraphics tg, Player player){
-        if (i < 2){
-            //if (canBuy(i)){  // falta implementar coins
-            // falta atribuir arma ao player
+    public void select(int i, TextGraphics tg, Player player) {
+        if (i < 2) {
+            if (canBuy(i, player)) {
+                // falta atribuir arma ao player
 
-            tg.setBackgroundColor(TextColor.ANSI.BLACK);
-            tg.putString(9, 4, "                  ");  // maneira que eu arranjei para não haver sobreposição de texto
-            tg.putString(9, 4, "Adquired: " + weapons.get(i).getType());
-            //}
-
-        }
-        else{
-            //if (canBuy(i)){
-            if (i < 5){
-                Hp hp = new Hp(player.getHitpoints().getHp() + potions.get(i-2).getHp().getHp());
-                player.setHitpoints(hp);
                 tg.setBackgroundColor(TextColor.ANSI.BLACK);
-                tg.putString(9, 4, "                  ");
-                tg.putString(9, 4, "Adquired: " + potions.get(i-2).getName());
+                tg.putString(9, 4, "                      ");  // maneira que eu arranjei para não haver sobreposição de texto
+                tg.putString(9, 4, "Adquired: " + weapons.get(i).getType());
+
+                player.setCredit(player.getCredit() - weapons.get(i).getCost());
+                tg.putString(65, 4, "Coins: " + String.valueOf(player.getCredit()));
             }
             else{
-                for (int j = 0; j < potions.get(i-2).getLife(); j++){
-                    player.oneup();
-                }
                 tg.setBackgroundColor(TextColor.ANSI.BLACK);
-                tg.putString(9, 4, "                  ");
-                tg.putString(9, 4, "Adquired: " + potions.get(i-2).getName());
+                tg.putString(9, 4, "                      ");
+                tg.putString(9, 4, "Not enough coins!");
             }
-            //}
+
+        } else {
+            if (canBuy(i, player)){
+                if (i < 5) {
+                    Hp hp = new Hp(player.getHitpoints().getHp() + potions.get(i - 2).getHp().getHp());
+                    if (hp.getHp() < 100){
+                        player.setHitpoints(hp);
+                        tg.setBackgroundColor(TextColor.ANSI.BLACK);
+                        tg.putString(9, 4, "                      ");
+                        tg.putString(9, 4, "Adquired: " + potions.get(i - 2).getName());
+
+                        player.setCredit(player.getCredit() - potions.get(i - 2).getCost());
+                        tg.putString(65, 4, "Coins: " + String.valueOf(player.getCredit()));
+                    }
+                    else{
+                        tg.setBackgroundColor(TextColor.ANSI.BLACK);
+                        tg.putString(9, 4, "                      ");
+                        tg.putString(9, 4, "Too much HP! (max:100)");
+                    }
+                }
+                else {
+                    if (potions.get(i - 2).getLife() + player.getLife() < 3){
+                        for (int j = 0; j < potions.get(i - 2).getLife(); j++) {
+                            player.oneup();
+                        }
+                        tg.setBackgroundColor(TextColor.ANSI.BLACK);
+                        tg.putString(9, 4, "                      ");
+                        tg.putString(9, 4, "Adquired: " + potions.get(i - 2).getName());
+
+                        player.setCredit(player.getCredit() - potions.get(i - 2).getCost());
+                        tg.putString(65, 4, "Coins: " + String.valueOf(player.getCredit()));
+                    }
+                    else{
+                        tg.setBackgroundColor(TextColor.ANSI.BLACK);
+                        tg.putString(9, 4, "                      ");
+                        tg.putString(9, 4, "Too many Lifes! (max:3");
+                    }
+                }
+            }
+            else{
+                tg.setBackgroundColor(TextColor.ANSI.BLACK);
+                tg.putString(9, 4, "                      ");
+                tg.putString(9, 4, "Not enough coins!");
+            }
         }
     }
 
-    public void show(Screen screen, Terminal terminal, Player player) throws IOException{
+    public void show (Screen screen, Terminal terminal, Player player) throws IOException {
         TextGraphics tg = screen.newTextGraphics();
         screen.clear();
 
@@ -177,14 +209,14 @@ public class Shop {
 
         tg.setBackgroundColor(TextColor.ANSI.BLACK);
         tg.setForegroundColor(TextColor.ANSI.GREEN);
-        tg.putString(65, 4, "Coins: ");  // Concatenar com a variavel que guarda as coins do player
+        tg.putString(65, 4, "Coins: " + String.valueOf(player.getCredit()));
 
         tg.setBackgroundColor(TextColor.ANSI.BLACK);
         tg.setForegroundColor(TextColor.ANSI.RED);
         tg.putString(9, 8, "Weapons(Range)");
 
         int row = 11;
-        for (Weapon weapon : weapons){
+        for (Weapon weapon : weapons) {
             tg.setBackgroundColor(TextColor.ANSI.BLACK);
             tg.setForegroundColor(TextColor.ANSI.DEFAULT);
             tg.putString(9, row, weapon.getType() + "(" + String.valueOf(weapon.getRange()) + ")");
@@ -197,7 +229,7 @@ public class Shop {
         tg.putString(45, 8, "Potions");
 
         row = 11;
-        for (Potion potion : potions){
+        for (Potion potion : potions) {
             tg.setBackgroundColor(TextColor.ANSI.BLACK);
             tg.setForegroundColor(TextColor.ANSI.DEFAULT);
             tg.putString(45, row, potion.getName());
@@ -215,14 +247,14 @@ public class Shop {
 
         screen.refresh();
 
-        while(true){
+        while (true) {
             KeyStroke keyPressed = terminal.readInput();
-            switch (keyPressed.getKeyType()){
+            switch (keyPressed.getKeyType()) {
                 case Escape:
                     return;
                 case ArrowDown:
-                    for (int i = 0; i < bools.size() - 1; i++ ){
-                        if (bools.get(i)){
+                    for (int i = 0; i < bools.size() - 1; i++) {
+                        if (bools.get(i)) {
                             bools.set(i, false);
                             bools.set(i + 1, true);
                             goDown(i + 1, tg);
@@ -232,8 +264,8 @@ public class Shop {
                     }
                     break;
                 case ArrowUp:
-                    for (int i = 1; i < bools.size(); i++){
-                        if (bools.get(i)){
+                    for (int i = 1; i < bools.size(); i++) {
+                        if (bools.get(i)) {
                             bools.set(i, false);
                             bools.set(i - 1, true);
                             goUp(i - 1, tg);
@@ -243,8 +275,8 @@ public class Shop {
                     }
                     break;
                 case Enter:
-                    for (Boolean bool : bools){
-                        if (bool){
+                    for (Boolean bool : bools) {
+                        if (bool) {
                             select(bools.indexOf(bool), tg, player);
                             screen.refresh();
                             break;
@@ -257,5 +289,4 @@ public class Shop {
 
         }
     }
-
 }
