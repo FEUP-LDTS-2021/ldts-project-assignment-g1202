@@ -63,29 +63,41 @@ PvP Mode: Play against your friend, best of 5 rounds wins! Good luck!
 
 ## Design
 
-
-- **Problem in Context.** 
-
-This game uses many classes, and we tried to connect many of them to the Game class, such as Arena, HP, BadGuy, Player, Walls, Coins, and Shop
-We mainly tried to create this classes objects on Game/Arena.
-
-
-- **The Pattern.** 
+### The Pattern.
 
 We adopted the Builder creational design pattern to construct complex objects step by step.
 It was clearly used on our creation of the BadGuy (enemys), along with our Arena class which used the Builder on creating the players, and enemys(eggman's)
 
-- **Implementation:**
+There are still other patterns that we are willing to use on the further development of the game such as: 
+- State Pattern  - Will be used to define the moving states of our enemies constantly without having to wait for our player to move so they move as well, they just enter a state where they keep moving around, same as the final boss too, and also when we enter new maps/arena on the next level.
+ 
+- Factory method - Creating an interface that receives information from the other subclasses, such as game, arena, walls etc..
 
 
-#### Consequences:
+- **Implementation.** 
 
-The main pros of using this design pattern are: 
+We stil have not implemented fully the patterns, and still are designing the UML diagrams in order to improve the overall game quality.
+
+- **Consequences.** 
+
+The main pros of using the Builder design pattern are: 
  - We could construct objects step-by-step, defer construction steps or run steps recursively.
  - We could reuse the same construction code when building various representations of products.
  - We could isolate complex construction code from the business logic of the product, Single Responsibility Principle. 
 
 But however, the complexity of the code increased since we had to create multiple new classes.
+
+For the State pattern:
+
+### PROS:
+- We get the Open/Closed principle and Single responsability principle 
+
+### CONS:
+- We could have a hard time trying to implement it. (CON)
+
+For the Factory method pattern:
+### PROS:
+- We get the Open/Closed principle and Single responsability principle 
 
 
 ### Observers and listeners
@@ -96,38 +108,19 @@ After that we would setup the arrow keys to navigate through the menu, and also 
 
 #### The Pattern:
 
-
 #### Implementation:
 
-
 #### Consequences:
+
 
 
 ### Different types of commands
-#### **Problem in Context:** 
-In an initial and more simplified version of the current game, the diversity in between buttons was not significant. However, in the course of the development of the project, the number of buttons increased exponentially and the need to generalise the button element became more evident. That said and knowing that good software design is often based on the principle of separation of concerns, a major refactor had to be done. 
 
 #### The Pattern:
-We have applied the **_Command_** also know as Action pattern. This pattern turns a request into a stand-alone object that contains all information about the request.
 
 #### Implementation:
-Regarding the implemetation process, all the Button classes were deleted and transformed into a single **Button** with a command attribute. These **commands**  implement the same interface having an execution method that takes no parameters. This interface lets you use various commands with the same request sender, without coupling it to concrete classes of commands. As a bonus, now you can switch command objects linked to the sender, effectively changing the sender’s behavior at runtime.
-
-<p align="center" justify="center">
-  <img src="images/UML/ButtonCommand.png"/>
-</p>
-<p align="center">
-  <b><i>Fig 4. Buttons and commands</i></b>
-</p>
-
 
 #### Consequences:
-The Command Pattern allows the following consequences:
-- You can decouple classes that invoke operations from classes that perform these operations (SRP).
-- You can implement undo/redo.
-- You can assemble a set of simple commands into a complex one.
-- The code may become more complicated since you’re introducing a whole new layer between senders and receivers.
-
 
 ### GUI
 #### Problem in Context:
@@ -140,35 +133,28 @@ Being said, we used only lanterna capabilitys on this game, which are reduced an
 
 
 ## Known Code Smells And Refactoring Suggestions
-#### **Large Class**
-Some classes (e.g. Game, Battlefield, Player) contain many fields and others (e.g. GUI interface) contain many methods. In both cases, we find it justifiable as the classes require these fields, in one hand the Game class is the main class of the program and it needs to store a considerable amount of data, on the other hand various methods are needed for the interface and it wouldn't make sense to split it into two separate ones (extract method).
 
-#### **Data Class**
-All model classes are Data Classes, as they contain only fields, and no behavior (dumb classes). This is caused by the **MVC** (Model-View-Controller) architectural pattern which holds the responsibility to the controller to implement the logic functionalities of each model.
-This is not a bad code smell because it only exits due to the chosen design pattern.
+So far, we found some code smells which after detection we tried to eliminate them.
+However since the game its still not completed we cannot make sure there aren't more of them since we didnt focus on finding them (yet)
+We found the following code smells: 
 
-#### **Alternative classes with different interfaces and Lazy Classes**
-When we conceived the project ideas, we aspired various enemy types with different behaviours. However, with the project development, we decided to generalize our **Enemy Class** and differenciate, the divergent characteristics, from contrasting enemies based on their fields. As this classes only differ in the values passed to the **Enemy Class** constructor and have no other significant functions they are an example of **Alternative Classes with different interfaces and Lazy Classes**.
+**Bloaters - Large Class** - After starting developing the game we found out that we were using too many code inside the Game class, so we divided the game into more classes such as arena, walls, coins etc... 
 
-#### **Refused bequest**
-In an attempt to generalize and simplify our code, various abstract classes and interfaces were created. Nevertheless this resulted in the rising of the **Refused bequest** smell. As a result, some subclasses inherited methods from its parent classes which are neither defined nor used. For example, the [**SwapCommand Class**](../src/main/java/com/g57/model/item/command/SwapCommand.java#L31).
+**Object-Orientation Abusers - If Statements** - We came to the conclusion that we were using too many if/else if/else conditions in order to get the game terminal running and then getting the menu running as well, so we corrected what we could and replaced them with switch-cases, but tried to reduce the number of times we used them too so we would have a improved code organization.
 
-#### **Feature envy and message chains**
-As the result of the **MVC** (Model-View-Controller) pattern some of the controllers use is narrowed to its model method calls. Our controller envies its model.
-Also, in order to access a certain model's parameter it is mandatory to start by making a request to its controller.
+**Dispensables - Comments** - Yes, of course, comments! We used a lot of comments on the 1st stage of the game so everyone in the project could understand what was going on, and prevent some headaches on the colleagues, we still have some of them at the code, which we will delete later on, but we indeed have deleted already some of them.
+
+**Dispensables -  Duplicate Code** - It happened a few times on some implementations, but after a few checks we manage to fix it.
+
+**Dispensables -  Dead Code** - We came across with some dead code along the way, variables that were never used, functions.. 
 
 ## Testing
 
 ### Screenshot of coverage report
-<p align="center" justify="center">
-  <img src="images/screenshots/codeCoverage"/>
-</p>
-<p align="center">
-  <b><i>Fig 6. Code coverage screenshot</i></b>
-</p>
+To be completed..
 
 ### Link to mutation testing report
-[Mutation tests](../build/reports/pitest/202105302045/index.html)
+To be completed..
 
 ## Self-evaluation
 
