@@ -50,6 +50,7 @@ public class Game {
             survArena.eggman2.running();
             survArena.eggman3.running();
             survArena.eggman4.running();
+            survArena.retrieveCoins();
             tg.setBackgroundColor(TextColor.ANSI.BLACK); //texto do canto superior esq que indica o modo selecionado
             tg.setForegroundColor(TextColor.ANSI.DEFAULT);
             tg.putString(3, 1, "Survival");
@@ -76,7 +77,7 @@ public class Game {
             tg.putString(30, 22, "Weapon:  " + arma);
 
             //String com numero coins:
-            tg.putString(53, 22, "Coins: " + survArena.getCredit());
+            tg.putString(53, 22, "Coins: " + survArena.player.getCredit());
 
             //Strings com LVL
             tg.putString(70, 22, "Lvl: " + lvl);

@@ -7,16 +7,11 @@ public class Coins {
 
 
     private int x, y;
-    private Position position;
+    Position position;
 
 
     public Coins(int x, int y) {
         position = new Position(x,y);
-    }
-
-    //getters
-    public Position getPosition() {
-        return position;
     }
 
     // setters

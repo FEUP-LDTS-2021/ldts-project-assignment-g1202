@@ -24,22 +24,9 @@ public class Arena{
     int wall_height;
     int wall_width;
 
-    
-    int credit = 0; // coins = 0
-
-    public int getCredit(){
-        return credit;
+    private int generator(int min,int max){
+        return min + (int) (Math.random() * ((max-min)) + 1);
     }
-
-    public void setCredit(int credit){
-        this.credit = credit;
-    }
-
-    public void changeCredit(){
-        //Aumentar 1 coin cada vez que apanha uma
-        setCredit(getCredit()+1); // coins ++
-    }
-
 
     public Arena(int width, int height) {
         player = new Player(10, 10, 100, 3);
@@ -48,12 +35,11 @@ public class Arena{
         this.width = width;
         this.walls = createWalls();
         coins = createCoins();
-        eggman = new BadGuy(Math.random() * wall_width, Math.random() * wall_height , 100);
-        eggman2 = new BadGuy(Math.random() * wall_width, Math.random() * wall_height , 100);
-        eggman3 = new BadGuy(Math.random() * wall_width, Math.random() * wall_height, 100);
-        eggman4 = new BadGuy(Math.random() * wall_width, Math.random() * wall_height, 100);
+        eggman = new BadGuy(Math.random() * generator(1,wall_width-1), Math.random() * generator(wall_height - (wall_height - 2) + 1, wall_height-1) , 100);
+        eggman2 = new BadGuy(Math.random() * generator(1,wall_width-1), Math.random() * generator(wall_height - (wall_height - 2) + 1, wall_height-1) , 100);
+        eggman3 = new BadGuy(Math.random() * generator(1,wall_width-1), Math.random() * generator(wall_height - (wall_height - 2) + 1, wall_height-1), 100);
+        eggman4 = new BadGuy(Math.random() * generator(1,wall_width-1), Math.random() * generator(wall_height - (wall_height - 2) + 1, wall_height-1), 100);
         //finalBoss = new BadGuy( wall_width - 1, wall_height, 400);
-
 
     }
 
@@ -126,33 +112,24 @@ public class Arena{
     }
 
 
-    public void movePlayer(Position position){
-        if(canPlayerMove(position))
-            player.setPosition(position);
-
-        retrieveCoins();
-    }
-
-    
     //Se passar por cima duma moeda, ela desaparece - Still not working fully
     public void retrieveCoins(){
         for(Coins coin : coins){
-            if(player.getPosition() == (coin.getPosition())) {
+            if(player.position.getX() == (coin.position.getX()) && player.position.getY() == coin.position.getY()) {
                 coins.remove(coin);
-                changeCredit();
+                player.changeCredit();
                 break;
             }
         }
     }
 
-
     //Creating coins on terminal -  They are still being drawn out of wall bounds
     private List<Coins> createCoins() {
-       
+
         Random random = new Random();
         ArrayList<Coins> coins = new ArrayList<>();
         for (int i = 0; i < 2; i++) { //max 2 moedas no ecrã
-            Coins newcoin = new Coins(random.nextInt(getWall_width()) , random.nextInt(getWall_height()));
+            Coins newcoin = new Coins(generator(1,wall_width-1) , generator(wall_height - (wall_height - 2) + 1, wall_height-1));
                     coins.add(newcoin);
             }
         return coins;

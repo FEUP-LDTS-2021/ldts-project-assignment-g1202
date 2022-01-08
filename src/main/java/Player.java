@@ -10,6 +10,20 @@ public class Player {
     Position position;
     Hp hitpoints;
     private int life;
+    int credit = 0; // coins = 0
+
+    public int getCredit(){
+        return credit;
+    }
+
+    public void setCredit(int credit){
+        this.credit = credit;
+    }
+
+    public void changeCredit(){
+        //Aumentar 1 coin cada vez que apanha uma
+       setCredit(credit+1); // coins ++
+    }
 
     //construtor
     public Player(int x, int y,int health, int life){
