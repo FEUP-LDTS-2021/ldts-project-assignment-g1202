@@ -46,10 +46,10 @@ public class Game {
 
         while (keepRunning) {
             survArena.draw(tg);
-            survArena.eggman.running();
-            survArena.eggman2.running();
-            survArena.eggman3.running();
-            survArena.eggman4.running();
+            //survArena.eggman.running();
+            //survArena.eggman2.running();
+            //survArena.eggman3.running();
+            //survArena.eggman4.running();
             tg.setBackgroundColor(TextColor.ANSI.BLACK); //texto do canto superior esq que indica o modo selecionado
             tg.setForegroundColor(TextColor.ANSI.DEFAULT);
             tg.putString(3, 1, "Survival");
@@ -91,10 +91,7 @@ public class Game {
             } else { // caso nao fechemos o jogo vamos tentar mover
                 survArena.player.moving(keyPressed,arena);
                 survArena.retrieveCoins();
-                if ((survArena.player.position.equals(survArena.eggman.position) ||
-                        survArena.player.position.equals(survArena.eggman2.position)  ||
-                        survArena.player.position.equals(survArena.eggman3.position) ||
-                        survArena.player.position.equals(survArena.eggman4.position))) {
+                if (survArena.damagePos()) {
 
                     survArena.player.changeHp(); // perde-se 10 de vida quando embate no inimigo
                     if (survArena.player.hitpoints.getHp() == 0) {
