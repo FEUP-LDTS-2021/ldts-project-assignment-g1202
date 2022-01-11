@@ -8,8 +8,12 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
-import java.io.IOException;
 
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 
 public class Game {
@@ -37,15 +41,15 @@ public class Game {
     // Opção do modo survival
     public void survival() throws IOException {
         screen.clear();
-        //Arena arena = new Arena(80, 24);
+        Arena arena = new Arena(80, 24);
         boolean keepRunning = true;
 
         while (keepRunning) {
             survArena.draw(tg);
             //survArena.eggman.running();
             //survArena.eggman2.running();
-            survArena.eggman3.running();
-            survArena.eggman4.running();
+            //survArena.eggman3.running();
+            //survArena.eggman4.running();
             tg.setBackgroundColor(TextColor.ANSI.BLACK); //texto do canto superior esq que indica o modo selecionado
             tg.setForegroundColor(TextColor.ANSI.DEFAULT);
             tg.putString(3, 1, "Survival");
@@ -57,7 +61,7 @@ public class Game {
             tg.putString(2, 22, "HP: " + survArena.player.hitpoints.getHp());  // falta concatenar com a variavel que recebe os valores corretos
 
             //Strings WEAPON
-            tg.putString(30, 22, "Weapon:  " + arma);
+           tg.putString(30, 22, "Weapon:  " + arma);
             tg.setBackgroundColor(TextColor.ANSI.BLACK); //texto do canto superior esq que indica o modo selecionado
             tg.setForegroundColor(TextColor.ANSI.DEFAULT);
 
@@ -71,6 +75,9 @@ public class Game {
             //Strings WEAPON
             tg.putString(30, 22, "Weapon:  " + arma);
 
+            //String com numero coins:
+            tg.putString(53, 22, "Coins: " + survArena.player.getCredit());
+
             //Strings com LVL
             tg.putString(70, 22, "Lvl: " + lvl);
 
@@ -82,19 +89,27 @@ public class Game {
                 keepRunning = false;
                 menu();
             } else { // caso nao fechemos o jogo vamos tentar mover
-                survArena.player.moving(keyPressed);
-                if ((survArena.player.position.equals(survArena.eggman.position) ||
-                        survArena.player.position.equals(survArena.eggman2.position)  ||
-                        survArena.player.position.equals(survArena.eggman3.position) ||
-                        survArena.player.position.equals(survArena.eggman4.position))) {
+                survArena.player.moving(keyPressed,arena);
+                survArena.retrieveCoins();
+                if (survArena.damagePos()) {
 
                     survArena.player.changeHp(); // perde-se 10 de vida quando embate no inimigo
                     if (survArena.player.hitpoints.getHp() == 0) {
                         //jogador morreu
-                        survArena.player.lostlife();
                         keepRunning = false;
-                        if (survArena.player.getLife() > 0){// abre a shop se ainda tiver vidas
-                            survArena.player.setHitpoints(new Hp(100)); // restaura hp
+                        if (survArena.player.getLife() > 0){ // abre a shop se ainda tiver vidas
+                            switch (survArena.player.getLife()){  //restaura o hp conforme o nr de vidas
+                                case 3:
+                                    survArena.player.setHitpoints(new Hp(90));
+                                    break;
+                                case 2:
+                                    survArena.player.setHitpoints(new Hp(75));
+                                    break;
+                                case 1:
+                                    survArena.player.setHitpoints(new Hp(50));
+                                    break;
+                            }
+                            survArena.player.lostlife();
                             survArena.player.position.setX(10);   // restaura posicao inicial
                             survArena.player.position.setY(10);
                             shop.show(screen, terminal, survArena.player);
@@ -147,7 +162,8 @@ public class Game {
                 keepRunning = false;
                 menu();
             } else { // caso nao fechemos o jogo vamos tentar mover
-                arena.player.moving(keyPressed);
+                arena.player.moving(keyPressed,arena);
+                arena.player2.movingp2(keyPressed,arena);
                 //desenho da nova posicao
                 arena.draw(tg);
                 //screen.refresh();
@@ -244,6 +260,7 @@ public class Game {
         tg.setForegroundColor(TextColor.ANSI.RED);
         tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
         tg.putString(30, 20, "Press ENTER to START");
+
 
         tg.setForegroundColor(TextColor.ANSI.WHITE);
         tg.setBackgroundColor(TextColor.ANSI.BLACK);

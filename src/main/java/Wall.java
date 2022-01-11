@@ -20,15 +20,15 @@ public class Wall {
         this.w = width;
     }
 
-    public void wallSet_height(int heigth){
-        this.h = heigth;
+    public void wallSet_height(int height){
+        this.h = height;
     }
     //getters
     public int wall_width(){
         return w;
     }
 
-    public int wall_heigth(){
+    public int wall_height(){
         return h;
     }
 

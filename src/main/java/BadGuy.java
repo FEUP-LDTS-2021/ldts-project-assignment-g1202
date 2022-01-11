@@ -37,10 +37,9 @@ public class BadGuy {
         //}
     }
 
+
     public void spinning(){
-
         int i = 3;
-
         while(i > 0) {
             position.moveRight();
             position.moveDown();

@@ -49,8 +49,8 @@ public class Position {
         return true;
     }
 
-    public boolean canMoveUp(){
-        if(this.getY()-1 == 2) return false;
+    public boolean canMoveUp(Arena arena){
+        if(this.getY()-1 == arena.wall_height - (arena.wall_height - 2)) return false;
         return true;
     }
 
