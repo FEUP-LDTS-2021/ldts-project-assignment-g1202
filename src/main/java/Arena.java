@@ -61,7 +61,7 @@ public class Arena{
         for (BadGuy bad : baddies) {
             if (player.position.getX() <= bad.position.getX()+5 && player.position.getY() == bad.position.getY()) {
                 bad.hitpoints.setHp(bad.hitpoints.getHp() - 5);
-                System.out.println(bad.hitpoints.getHp());
+                //System.out.println(bad.hitpoints.getHp());
                 if(bad.hitpoints.getHp() == 0) baddies.remove(bad);
                 break;
             }
