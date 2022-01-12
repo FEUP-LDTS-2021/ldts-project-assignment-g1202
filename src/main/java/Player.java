@@ -122,11 +122,5 @@ public class Player {
     }
 
 
-    public int hitsword(){
-        // dar um hit vai ter um range de 5
-        // se pos de inimigo <= ao que e retornado pela func change hp para ele
-        return position.getY() + 5;
-    }
-
 
 }

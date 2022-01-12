@@ -46,10 +46,6 @@ public class Game {
 
         while (keepRunning) {
             survArena.draw(tg);
-            //survArena.eggman.running();
-            //survArena.eggman2.running();
-            //survArena.eggman3.running();
-            //survArena.eggman4.running();
             tg.setBackgroundColor(TextColor.ANSI.BLACK); //texto do canto superior esq que indica o modo selecionado
             tg.setForegroundColor(TextColor.ANSI.DEFAULT);
             tg.putString(3, 1, "Survival");
@@ -61,7 +57,7 @@ public class Game {
             tg.putString(2, 22, "HP: " + survArena.player.hitpoints.getHp());  // falta concatenar com a variavel que recebe os valores corretos
 
             //Strings WEAPON
-           tg.putString(30, 22, "Weapon:  " + arma);
+            tg.putString(30, 22, "Weapon:  " + arma);
             tg.setBackgroundColor(TextColor.ANSI.BLACK); //texto do canto superior esq que indica o modo selecionado
             tg.setForegroundColor(TextColor.ANSI.DEFAULT);
 
@@ -88,7 +84,10 @@ public class Game {
             if (keyPressed.getKeyType() == KeyType.Escape) {
                 keepRunning = false;
                 menu();
-            } else { // caso nao fechemos o jogo vamos tentar mover
+            }if (keyPressed.getKeyType() == KeyType.Character  && keyPressed.getCharacter() == (' ')){
+                survArena.damageEnemy();
+            }
+            else { // caso nao fechemos o jogo vamos tentar mover
                 survArena.player.moving(keyPressed,arena);
                 survArena.retrieveCoins();
                 if (survArena.damagePos()) {

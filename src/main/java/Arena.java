@@ -41,7 +41,7 @@ public class Arena{
 
     }
 
-    /*public int getWidth() {
+    public int getWidth() {
         return width;
     }
 
@@ -56,8 +56,17 @@ public class Arena{
     public int getWall_width() {
         return wall_width;
     }
-     */
 
+    public void damageEnemy() { // ataca de lado
+        for (BadGuy bad : baddies) {
+            if (player.position.getX() <= bad.position.getX()+5 && player.position.getY() == bad.position.getY()) {
+                bad.hitpoints.setHp(bad.hitpoints.getHp() - 5);
+                System.out.println(bad.hitpoints.getHp());
+                if(bad.hitpoints.getHp() == 0) baddies.remove(bad);
+                break;
+            }
+        }
+    }
 
     //Ecrã modo Survival
     public void draw(TextGraphics screen) {
@@ -99,11 +108,11 @@ public class Arena{
        wall_width = width - 1;
 
         List<Wall> walls = new ArrayList<>();
-        for (int c = 0; c < wall_width + 1; c++) {
+        for (int c = 0; c <= wall_width; c++) {
             walls.add(new Wall(c, 2));         // coloca walls abaixo da informação de Survival + Inventory
             walls.add(new Wall(c, wall_height)); // coloca walls acima da informação de HP etc
         }
-        for (int r = 2; r < wall_height; r++) {
+        for (int r = 2; r <= wall_height; r++) {
             walls.add(new Wall(0, r));
             walls.add(new Wall(wall_width, r));
         }
@@ -111,7 +120,7 @@ public class Arena{
     }
 
 
-    //Se passar por cima duma moeda, ela desaparece - Still not working fully
+    //Se passar por cima duma moeda, ela desaparece
     public void retrieveCoins(){
         for(Coins coin : coins){
             if(player.position.equals(coin.position)) {
@@ -131,7 +140,7 @@ public class Arena{
         return false;
     }
 
-    //Creating coins on terminal -  They are still being drawn out of wall bounds
+    //Creating coins on terminal
     private List<Coins> createCoins() {
 
         ArrayList<Coins> coins = new ArrayList<>();
