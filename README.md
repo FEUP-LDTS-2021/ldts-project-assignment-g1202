@@ -94,6 +94,11 @@ To be completed....
 ### TESTING
 
 - Screenshot of coverage report.
+
+![image](https://user-images.githubusercontent.com/52889593/149194237-f1b05237-8934-4675-9325-50dad847b381.png)
+
+
+
 - Link to mutation testing report.
 
 ### SELF-EVALUATION
