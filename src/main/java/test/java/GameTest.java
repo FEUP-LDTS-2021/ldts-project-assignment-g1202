@@ -6,6 +6,7 @@ class GameTest {
 
     @Test
     void survival() {
+
     }
 
     @Test

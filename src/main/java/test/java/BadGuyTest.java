@@ -7,16 +7,5 @@ class BadGuyTest {
     @Test
     void draw() {
     }
-
-    @Test
-    void running() {
-    }
-
-    @Test
-    void spinning() {
-    }
-
-    @Test
-    void damagePlayer() {
-    }
+    
 }
