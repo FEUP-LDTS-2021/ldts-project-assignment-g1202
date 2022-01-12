@@ -160,7 +160,7 @@ Also, in order to access a certain model's parameter it is mandatory to start by
 
 ### Screenshot of coverage report
 <p align="center" justify="center">
-  <img src="images/screenshots/codeCoverage"/>
+  <img src="https://user-images.githubusercontent.com/52889593/149194398-49919177-f682-4027-8301-2f2534ca2bed.png"/>
 </p>
 <p align="center">
   <b><i>Fig 6. Code coverage screenshot</i></b>
