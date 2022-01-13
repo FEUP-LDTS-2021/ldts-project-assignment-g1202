@@ -7,6 +7,7 @@ public class Wall {
 
     private Position position;
     int x,y;
+    private int w,h;
 
     //construtor
 
@@ -14,12 +15,21 @@ public class Wall {
         position = new Position(x,y);
     }
 
-    public int wall_x(){
-        return position.getX();
+    //setters
+    public void wallSet_width(int width){
+        this.w = width;
     }
 
-    public int wall_y(){
-        return position.getY();
+    public void wallSet_height(int height){
+        this.h = height;
+    }
+    //getters
+    public int wall_width(){
+        return w;
+    }
+
+    public int wall_height(){
+        return h;
     }
 
     public void draw(TextGraphics tg) {
