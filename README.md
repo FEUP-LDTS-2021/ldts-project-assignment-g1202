@@ -100,20 +100,20 @@ PvP Mode: Play against your friend, best of 5 rounds win! Good luck!
 
 - **Problem in Context.** 
 
-This game uses many classes, and we tried to connect many of them to the Game class, such as Arena, HP, BadGuy, Player and Wall.
-We mainly tried to create this classes objects on Game/Arena.
-
+In order to represent the different states which the enemys could be, it was necessary to use a state pattern, so we could implement a pattern that meets our requirements
 
 #### THE ENEMIES ACTIONS SHOULD BEHAVE DIFFERENTLY DEPENDING ON ITS STATE
 
 - **The Pattern.** 
 
-- Descrever state pattern usado
-
+So we used the state pattern to satisfy the conditions above.
+This pattern allowed us to switch between multiple states from runtime of the different subclasses from an abstract one. With this method we were able to simplify the understanding of each enemy and mainly simplify the transitions between each state. When we didnt have any of this implementations there was a function that retrieved all the data and determined randomly each enemy's movement, but only when our character moved too.
 
 - **Implementation.** 
 
-Show how the pattern roles, operations and associations were mapped to the concrete design classes. Illustrate it with a UML class diagram, and refer to the corresponding source code with links to the relevant lines (these should be [relative links](https://help.github.com/en/articles/about-readmes#relative-links-and-image-paths-in-readme-files). When doing this, always point to the latest version of the code.
+The idea was on having an abstract class which has the objective of drawing the state received by the BadGuyController, which updates the new enemy's state, calculates if its inside the defined bounds (inside the walls) and draws a new position on the terminal.
+
+![image](https://user-images.githubusercontent.com/52889593/149636099-da4eef6e-edf8-452c-a59d-f432d05ad7c4.png)
 
 - **Consequences.** 
 
@@ -127,7 +127,20 @@ But however, the complexity of the code increased since we had to create multipl
 
 #### KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
 
-To be completed....
+So far, we found some code smells which after detection we tried to eliminate them.
+However since the game its still not completed we cannot make sure there aren't more of them since we didnt focus on finding them (yet)
+We found the following code smells: 
+
+**Bloaters - Large Class** - After starting developing the game we found out that we were using too many code inside the Game class, so we divided the game into more classes such as arena, walls, coins etc... 
+
+**Object-Orientation Abusers - If Statements** - We came to the conclusion that we were using too many if/else if/else conditions in order to get the game terminal running and then getting the menu running as well, so we corrected what we could and replaced them with switch-cases, but tried to reduce the number of times we used them too so we would have a improved code organization.
+
+**Dispensables - Comments** - Yes, of course, comments! We used a lot of comments on the 1st stage of the game so everyone in the project could understand what was going on, and prevent some headaches on the colleagues, we still have some of them at the code, which we will delete later on, but we indeed have deleted already some of them.
+
+**Dispensables -  Duplicate Code** - It happened a few times on some implementations, but after a few checks we manage to fix it.
+
+**Dispensables -  Dead Code** - We came across with some dead code along the way, variables that were never used, functions.. 
+
 
 
 ### TESTING
