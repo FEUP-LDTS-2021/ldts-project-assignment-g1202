@@ -7,5 +7,5 @@ class BadGuyTest {
     @Test
     void draw() {
     }
-    
+
 }
