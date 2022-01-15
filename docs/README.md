@@ -61,21 +61,27 @@ PvP Mode: Play against your friend, best of 5 rounds wins! Good luck!
 - **Arena Transition** - Player can pass to another new Arena
 
 ## Design
+### General Structure
 
-
-- **Problem in Context.** 
+#### Problem in Context:
 
 This game uses many classes, and we tried to connect many of them to the Game class, such as Arena, HP, BadGuy, Player, Walls, Coins, and Shop
 We mainly tried to create this classes objects on Game/Arena.
 
 
-- **The Pattern.** 
+#### The Pattern:
 
 We adopted the Builder creational design pattern to construct complex objects step by step.
 It was clearly used on our creation of the BadGuy (enemys), along with our Arena class which used the Builder on creating the players, and enemys(eggman's)
 
-- **Implementation:**
+#### Implementation:
 
+p align="center" justify="center">
+  <img src="images/UML/MVC.png"/>
+</p>
+<p align="center">
+  <b><i>Fig 1. Model, Controller and Viewer pattern design</i></b>
+</p>
 
 #### Consequences:
 
