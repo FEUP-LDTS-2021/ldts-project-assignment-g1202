@@ -11,23 +11,64 @@ This project was developed by João Duarte (201707984), Miguel Tavares(202002811
 
 The game starts with a black terminal with the name of the game, and some commands.
 
-![image](https://user-images.githubusercontent.com/52889593/148138582-3bba6e0e-ec13-4da5-8398-d42c02853e32.png)
+<p align="center" justify="center">
+  <img src="https://user-images.githubusercontent.com/52889593/148138582-3bba6e0e-ec13-4da5-8398-d42c02853e32.png"/>
+</p>
+<p align="center">
+  <b><i>Img 1. Sneak peak into DungeonBoy game</i></b>
+</p>
+<br>
+<br />
+
 
 If we press ENTER, we are carried into the main menu, where we can select which game mode to play 
 
-![image](https://user-images.githubusercontent.com/52889593/148138743-0b59bb66-2572-413a-b573-dadb35796689.png)
+<p align="center" justify="center">
+  <img src="https://user-images.githubusercontent.com/52889593/148138743-0b59bb66-2572-413a-b573-dadb35796689.png"/>
+</p>
+<p align="center">
+  <b><i>Img 2. Main Menu!</i></b>
+</p>
+<br>
+<br />
+
 
 Survival Mode: We can now play against 4 different Enemies which will try to kill us!
 
-![image](https://user-images.githubusercontent.com/52889593/148377444-c903cf90-61a6-4f22-985e-bb82b08d00ab.png)
+
+<p align="center" justify="center">
+  <img src="https://user-images.githubusercontent.com/52889593/148377444-c903cf90-61a6-4f22-985e-bb82b08d00ab.png"/>
+</p>
+<p align="center">
+  <b><i>Img 3. Survival Mode!</i></b>
+</p>
+<br>
+<br />
+
 
 If we die, we go straight to the shop, where we can gear up with Weapons and Health Potions and try our luck again!
 
-![image](https://user-images.githubusercontent.com/52889593/148377558-fc3af7d6-02b2-4b05-8afd-a58bebee20d7.png)
+<p align="center" justify="center">
+  <img src="https://user-images.githubusercontent.com/52889593/148377558-fc3af7d6-02b2-4b05-8afd-a58bebee20d7.png"/>
+</p>
+<p align="center">
+  <b><i>Img 4. Shop</i></b>
+</p>
+<br>
+<br />
+
 
 PvP Mode: Play against your friend, best of 5 rounds win! Good luck!
 
-![image](https://user-images.githubusercontent.com/52889593/148138866-38876123-19e6-4a9c-9567-150c9f001c57.png)
+<p align="center" justify="center">
+  <img src="https://user-images.githubusercontent.com/52889593/148138866-38876123-19e6-4a9c-9567-150c9f001c57.png"/>
+</p>
+<p align="center">
+  <b><i>Img 5. PvP Mode </i></b>
+</p>
+<br>
+<br />
+
 
 
 ### IMPLEMENTED FEATURES
@@ -44,13 +85,11 @@ PvP Mode: Play against your friend, best of 5 rounds win! Good luck!
 - **Lives** - In the beggining of the game, the player is given 3 lives (displayed in health on the screen).
 - **Dying** - A player dies if his health reaches 0, or less.
 - **Inventory** - Inventory to store our items that we bought from the shop.
-- - **Collisions detection** - Players colisions with walls working
+
 
 ### PLANNED FEATURES - Still being implemented!
 
 
-- **Collisions detection** - Enemies colisions with walls still being implemented
-- **Coin Catching / Draw** - Still not fully implemented
 - **Diferent enemies** - The player will face different enemies throughout the game.  (still need to be implemented)
 - **Final Boss** - (still need to be implemented)
 - **Inventory** - There will be an inventory to store our items that we bought from the shop.
@@ -65,14 +104,14 @@ This game uses many classes, and we tried to connect many of them to the Game cl
 We mainly tried to create this classes objects on Game/Arena.
 
 
+#### THE ENEMIES ACTIONS SHOULD BEHAVE DIFFERENTLY DEPENDING ON ITS STATE
+
 - **The Pattern.** 
 
-We adopted the Builder creational design pattern to construct complex objects step by step.
-It was clearly used on our creation of the BadGuy (enemys), along with our Arena class which used the Builder on creating the players, and enemys(eggman's)
+- Descrever state pattern usado
 
 
 - **Implementation.** 
-
 
 Show how the pattern roles, operations and associations were mapped to the concrete design classes. Illustrate it with a UML class diagram, and refer to the corresponding source code with links to the relevant lines (these should be [relative links](https://help.github.com/en/articles/about-readmes#relative-links-and-image-paths-in-readme-files). When doing this, always point to the latest version of the code.
 
@@ -95,7 +134,12 @@ To be completed....
 
 - Screenshot of coverage report.
 
-![image](https://user-images.githubusercontent.com/52889593/149194237-f1b05237-8934-4675-9325-50dad847b381.png)
+<p align="center" justify="center">
+  <img src="https://user-images.githubusercontent.com/52889593/149623054-ae7a533d-f889-4acb-80d4-5e75796fb830.png"/>
+</p>
+<p align="center">
+  <b><i>Img 6. Code coverage report (so far!)</i></b>
+</p>
 
 
 
