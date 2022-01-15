@@ -11,26 +11,65 @@ This project was developed by João Duarte (201707984), Miguel Tavares(202002811
 **NOTE** : This game is still on development and could suffer some changes!
 
 ### GAME SUMMARY
-
 The game starts with a black terminal with the name of the game, and some commands.
 
-![image](https://user-images.githubusercontent.com/52889593/148138582-3bba6e0e-ec13-4da5-8398-d42c02853e32.png)
+<p align="center" justify="center">
+  <img src="https://user-images.githubusercontent.com/52889593/148138582-3bba6e0e-ec13-4da5-8398-d42c02853e32.png"/>
+</p>
+<p align="center">
+  <b><i>Img 1. Sneak peak into DungeonBoy game</i></b>
+</p>
+<br>
+<br />
+
 
 If we press ENTER, we are carried into the main menu, where we can select which game mode to play 
 
-![image](https://user-images.githubusercontent.com/52889593/148138743-0b59bb66-2572-413a-b573-dadb35796689.png)
+<p align="center" justify="center">
+  <img src="https://user-images.githubusercontent.com/52889593/148138743-0b59bb66-2572-413a-b573-dadb35796689.png"/>
+</p>
+<p align="center">
+  <b><i>Img 2. Main Menu!</i></b>
+</p>
+<br>
+<br />
+
 
 Survival Mode: We can now play against 4 different Enemies which will try to kill us!
 
-![image](https://user-images.githubusercontent.com/52889593/148377444-c903cf90-61a6-4f22-985e-bb82b08d00ab.png)
+
+<p align="center" justify="center">
+  <img src="https://user-images.githubusercontent.com/52889593/148377444-c903cf90-61a6-4f22-985e-bb82b08d00ab.png"/>
+</p>
+<p align="center">
+  <b><i>Img 3. Survival Mode!</i></b>
+</p>
+<br>
+<br />
+
 
 If we die, we go straight to the shop, where we can gear up with Weapons and Health Potions and try our luck again!
 
-![image](https://user-images.githubusercontent.com/52889593/148377558-fc3af7d6-02b2-4b05-8afd-a58bebee20d7.png)
+<p align="center" justify="center">
+  <img src="https://user-images.githubusercontent.com/52889593/148377558-fc3af7d6-02b2-4b05-8afd-a58bebee20d7.png"/>
+</p>
+<p align="center">
+  <b><i>Img 4. Shop</i></b>
+</p>
+<br>
+<br />
 
-PvP Mode: Play against your friend, best of 5 rounds wins! Good luck!
 
-![image](https://user-images.githubusercontent.com/52889593/148138866-38876123-19e6-4a9c-9567-150c9f001c57.png)
+PvP Mode: Play against your friend, best of 5 rounds win! Good luck!
+
+<p align="center" justify="center">
+  <img src="https://user-images.githubusercontent.com/52889593/148138866-38876123-19e6-4a9c-9567-150c9f001c57.png"/>
+</p>
+<p align="center">
+  <b><i>Img 5. PvP Mode </i></b>
+</p>
+<br>
+<br />
 
 
 
@@ -52,36 +91,29 @@ PvP Mode: Play against your friend, best of 5 rounds wins! Good luck!
 
 ### PLANNED FEATURES - Still being implemented!
 
-
-- **Collisions detection** - Enemies colisions with walls still being implemented
-- **Coin Catching / Draw** - Still not fully implemented
 - **Diferent enemies** - The player will face different enemies throughout the game.  (still need to be implemented)
 - **Final Boss** - (still need to be implemented)
 - **Inventory** - There will be an inventory to store our items that we bought from the shop.
 - **Arena Transition** - Player can pass to another new Arena
 
-## Design
-### General Structure
+### DESIGN
 
-#### Problem in Context:
+- **Problem in Context.** 
 
-This game uses many classes, and we tried to connect many of them to the Game class, such as Arena, HP, BadGuy, Player, Walls, Coins, and Shop
-We mainly tried to create this classes objects on Game/Arena.
+In order to represent the different states which the enemys could be, it was necessary to use a state pattern, so we could implement a pattern that meets our requirements
 
+#### THE ENEMIES ACTIONS SHOULD BEHAVE DIFFERENTLY DEPENDING ON ITS STATE
 
-#### The Pattern:
+- **The Pattern.** 
 
-We adopted the Builder creational design pattern to construct complex objects step by step.
-It was clearly used on our creation of the BadGuy (enemys), along with our Arena class which used the Builder on creating the players, and enemys(eggman's)
+So we used the state pattern to satisfy the conditions above.
+This pattern allowed us to switch between multiple states from runtime of the different subclasses from an abstract one. With this method we were able to simplify the understanding of each enemy and mainly simplify the transitions between each state. When we didnt have any of this implementations there was a function that retrieved all the data and determined randomly each enemy's movement, but only when our character moved too.
 
-#### Implementation:
+- **Implementation.** 
 
-p align="center" justify="center">
-  <img src="images/UML/MVC.png"/>
-</p>
-<p align="center">
-  <b><i>Fig 1. Model, Controller and Viewer pattern design</i></b>
-</p>
+The idea was on having an abstract class which has the objective of drawing the state received by the BadGuyController, which updates the new enemy's state, calculates if its inside the defined bounds (inside the walls) and draws a new position on the terminal.
+
+![image](https://user-images.githubusercontent.com/52889593/149636099-da4eef6e-edf8-452c-a59d-f432d05ad7c4.png)
 
 #### Consequences:
 
