@@ -30,7 +30,7 @@ public class Game {
 
     public Game() throws IOException { // construtor de Game
         try {
-            shop = new Shop();
+            shop = new Shop(screen, terminal);
             screen.startScreen(); // Iniciar o terminal
 
         } catch (IOException e) {
@@ -112,7 +112,7 @@ public class Game {
                             survArena.player.lostlife();
                             survArena.player.position.setX(10);   // restaura posicao inicial
                             survArena.player.position.setY(10);
-                            shop.show(screen, terminal, survArena.player);
+                            shop.show(survArena.player);
                             survival();  // quando fecha a shop volta ao jogo
                         }
                         else{

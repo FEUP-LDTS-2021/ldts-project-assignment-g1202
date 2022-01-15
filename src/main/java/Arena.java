@@ -41,7 +41,7 @@ public class Arena{
 
     }
 
-    /*public int getWidth() {
+    public int getWidth() {
         return width;
     }
 
@@ -56,8 +56,6 @@ public class Arena{
     public int getWall_width() {
         return wall_width;
     }
-     */
-
 
     //Ecrã modo Survival
     public void draw(TextGraphics screen) {

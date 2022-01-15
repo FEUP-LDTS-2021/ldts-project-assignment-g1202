@@ -5,10 +5,7 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 
 public class Coins {
 
-
-    private int x, y;
     Position position;
-
 
     public Coins(int x, int y) {
         position = new Position(x,y);

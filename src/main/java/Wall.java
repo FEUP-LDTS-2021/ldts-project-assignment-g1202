@@ -5,31 +5,12 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 
 public class Wall {
 
-    private Position position;
-    int x,y;
-    private int w,h;
+    Position position;
 
     //construtor
 
     public Wall(int x, int y){
         position = new Position(x,y);
-    }
-
-    //setters
-    public void wallSet_width(int width){
-        this.w = width;
-    }
-
-    public void wallSet_height(int height){
-        this.h = height;
-    }
-    //getters
-    public int wall_width(){
-        return w;
-    }
-
-    public int wall_height(){
-        return h;
     }
 
     public void draw(TextGraphics tg) {
