@@ -143,24 +143,22 @@ Being said, we used only lanterna capabilitys on this game, which are reduced an
 #### Consequences: 
 - Not Visually appealing
 
-
 ## Known Code Smells And Refactoring Suggestions
-#### **Large Class**
-Some classes (e.g. Game, Battlefield, Player) contain many fields and others (e.g. GUI interface) contain many methods. In both cases, we find it justifiable as the classes require these fields, in one hand the Game class is the main class of the program and it needs to store a considerable amount of data, on the other hand various methods are needed for the interface and it wouldn't make sense to split it into two separate ones (extract method).
 
-#### **Data Class**
-All model classes are Data Classes, as they contain only fields, and no behavior (dumb classes). This is caused by the **MVC** (Model-View-Controller) architectural pattern which holds the responsibility to the controller to implement the logic functionalities of each model.
-This is not a bad code smell because it only exits due to the chosen design pattern.
+So far, we found some code smells which after detection we tried to eliminate them.
+However since the game its still not completed we cannot make sure there aren't more of them since we didnt focus on finding them (yet)
+We found the following code smells: 
 
-#### **Alternative classes with different interfaces and Lazy Classes**
-When we conceived the project ideas, we aspired various enemy types with different behaviours. However, with the project development, we decided to generalize our **Enemy Class** and differenciate, the divergent characteristics, from contrasting enemies based on their fields. As this classes only differ in the values passed to the **Enemy Class** constructor and have no other significant functions they are an example of **Alternative Classes with different interfaces and Lazy Classes**.
+**Bloaters - Large Class** - After starting developing the game we found out that we were using too many code inside the Game class, so we divided the game into more classes such as arena, walls, coins etc... 
 
-#### **Refused bequest**
-In an attempt to generalize and simplify our code, various abstract classes and interfaces were created. Nevertheless this resulted in the rising of the **Refused bequest** smell. As a result, some subclasses inherited methods from its parent classes which are neither defined nor used. For example, the [**SwapCommand Class**](../src/main/java/com/g57/model/item/command/SwapCommand.java#L31).
+**Object-Orientation Abusers - If Statements** - We came to the conclusion that we were using too many if/else if/else conditions in order to get the game terminal running and then getting the menu running as well, so we corrected what we could and replaced them with switch-cases, but tried to reduce the number of times we used them too so we would have a improved code organization.
 
-#### **Feature envy and message chains**
-As the result of the **MVC** (Model-View-Controller) pattern some of the controllers use is narrowed to its model method calls. Our controller envies its model.
-Also, in order to access a certain model's parameter it is mandatory to start by making a request to its controller.
+**Dispensables - Comments** - Yes, of course, comments! We used a lot of comments on the 1st stage of the game so everyone in the project could understand what was going on, and prevent some headaches on the colleagues, we still have some of them at the code, which we will delete later on, but we indeed have deleted already some of them.
+
+**Dispensables -  Duplicate Code** - It happened a few times on some implementations, but after a few checks we manage to fix it.
+
+**Dispensables -  Dead Code** - We came across with some dead code along the way, variables that were never used, functions.. 
+
 
 ## Testing
 
