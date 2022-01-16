@@ -8,37 +8,22 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class GameTest {
+public class MainTest {
 
+    Game test = new Game();
     Terminal terminal = new DefaultTerminalFactory().createTerminal();
-    Screen screen = new TerminalScreen(terminal);
-    TextGraphics tg = screen.newTextGraphics();
-    Arena survArena = new Arena(80, 24);
+    Screen testeScreen = new TerminalScreen(terminal);
 
-    GameTest() throws IOException {
+    public MainTest() throws IOException {
     }
 
     @BeforeEach
-
     @Test
-    void survival() {
-
-    }
-
-    @Test
-    void pvp() {
-
-    }
-
-    @Test
-    void menu() {
-
-    }
-
-    @Test
-    void run() {
-
+    void run() throws IOException {
+        assertTrue(test.run());
+        testeScreen.stopScreen();
     }
 }

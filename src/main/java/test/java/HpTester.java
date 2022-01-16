@@ -1,4 +1,3 @@
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -14,7 +13,7 @@ public class HpTester {
     @Test
     void setHp() {
         Player test = new Player(20,20, 30,3 );
-        test.setHitpoints(new Hp (70));
+        test.setHitpoints(new Hp(70));
         assertEquals(70, test.getHitpoints().getHp());
     }
 
