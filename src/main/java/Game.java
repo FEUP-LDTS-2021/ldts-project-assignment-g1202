@@ -84,6 +84,8 @@ public class Game {
             if (keyPressed.getKeyType() == KeyType.Escape) {
                 keepRunning = false;
                 menu();
+            }if (keyPressed.getKeyType() == KeyType.Character  && keyPressed.getCharacter() == (' ')){
+                survArena.damageEnemy();
             }
             else { // caso nao fechemos o jogo vamos tentar mover
                 survArena.player.moving(keyPressed,arena);

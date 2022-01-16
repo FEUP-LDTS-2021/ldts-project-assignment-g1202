@@ -17,13 +17,12 @@ import java.util.List;
 
 public class Shop {
 
-    Terminal terminal;
-    Screen screen;
-    TextGraphics tg;
-
     List<Weapon> weapons;
     List<Potion> potions;
     List<Boolean> bools;
+    Screen screen;
+    Terminal terminal;
+    TextGraphics tg;
 
     public Shop(Screen screen, Terminal terminal) throws IOException {
         this.screen = screen;
@@ -208,6 +207,7 @@ public class Shop {
     }
 
     public void show (Player player) throws IOException {
+        TextGraphics tg = screen.newTextGraphics();
         screen.clear();
 
         tg.setBackgroundColor(TextColor.ANSI.BLACK);
