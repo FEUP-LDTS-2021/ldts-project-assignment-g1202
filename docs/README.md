@@ -196,7 +196,7 @@ We found the following code smells:
 
 ### Screenshot of coverage report
 <p align="center" justify="center">
-  <img src="https://user-images.githubusercontent.com/52889593/149194398-49919177-f682-4027-8301-2f2534ca2bed.png"/>
+  <img src="https://user-images.githubusercontent.com/52889593/149664087-408efd72-c6fa-491e-b808-87a050f6a395.png"/>
 </p>
 <p align="center">
   <b><i>Fig 6. Code coverage screenshot</i></b>
