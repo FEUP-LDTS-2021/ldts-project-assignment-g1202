@@ -117,12 +117,10 @@ The idea was on having an abstract class which has the objective of drawing the 
 
 #### Consequences:
 
-The main pros of using this design pattern are: 
- - We could construct objects step-by-step, defer construction steps or run steps recursively.
- - We could reuse the same construction code when building various representations of products.
- - We could isolate complex construction code from the business logic of the product, Single Responsibility Principle. 
-
-But however, the complexity of the code increased since we had to create multiple new classes.
+The State pattern has the following consequences:
+ - It localizes state-specific behavior and partitions behavior for different states. The State pattern puts all behavior associated with a particular state into one object. 
+ - It makes state transitions explicit - Introducing separate objects for different states makes the transitions more explicit
+ - State objects can be shared. If State objects have no instance variables—that is, the state they represent is encoded entirely in their type—then contexts can share a State object.
 
 
 ### Observers and listeners
@@ -196,7 +194,7 @@ We found the following code smells:
 
 ### Screenshot of coverage report
 <p align="center" justify="center">
-  <img src="https://user-images.githubusercontent.com/52889593/149664087-408efd72-c6fa-491e-b808-87a050f6a395.png"/>
+  <img src="https://user-images.githubusercontent.com/52889593/149919998-fe23c526-51fb-4647-8f11-8e5801f407c1.png"/>
 </p>
 <p align="center">
   <b><i>Fig 6. Code coverage screenshot</i></b>
