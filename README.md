@@ -148,7 +148,7 @@ We found the following code smells:
 - Screenshot of coverage report.
 
 <p align="center" justify="center">
-  <img src="https://user-images.githubusercontent.com/52889593/149664087-408efd72-c6fa-491e-b808-87a050f6a395.png"/>
+  <img src="https://user-images.githubusercontent.com/52889593/149919998-fe23c526-51fb-4647-8f11-8e5801f407c1.png"/>
 </p>
 <p align="center">
   <b><i>Img 6. Code coverage report (so far!)</i></b>
