@@ -1,11 +1,20 @@
+import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.input.KeyStroke;
+import com.googlecode.lanterna.input.KeyType;
+import com.googlecode.lanterna.screen.Screen;
+import com.googlecode.lanterna.screen.TerminalScreen;
+import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
+import com.googlecode.lanterna.terminal.Terminal;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerTest {
 
-    Player test = new Player(15,40, 100, 3);
+    Player test = new Player(15,20, 100, 3);
     Position testePos = new Position(10,50);
     Hp testHitPoints  = new Hp(50);
 
@@ -41,9 +50,15 @@ class PlayerTest {
     }
 
     @Test
-    void draw() {
-    }
+    void draw() throws IOException {
+        Terminal terminal = new DefaultTerminalFactory().createTerminal();
+        Screen screen = new TerminalScreen(terminal);
+        TextGraphics tg = screen.newTextGraphics();
 
+        test.draw(tg);
+
+        assertEquals("X", tg.getCharacter(15, 20).getCharacterString());
+    }
     @Test
     void changeHp() {
         testHitPoints.setHp(testHitPoints.getHp()-10);
@@ -85,7 +100,7 @@ class PlayerTest {
 
     @Test
     void moving() {
-        //ArrowUp
+        /* //ArrowUp
         testePos.setY(testePos.getY() -1);
         assertEquals(49, testePos.getY());
 
@@ -101,11 +116,68 @@ class PlayerTest {
         testePos.setX(testePos.getX() +1);
         assertEquals(10, testePos.getX());
 
+        */
+        Arena arena = new Arena(20,20);
+
+        //ArrowUp
+        KeyStroke up = new KeyStroke(KeyType.ArrowUp);
+
+        test.moving(up, arena);
+        assertEquals(19, test.getPosition().getY());
+
+        //ArrowDown
+        KeyStroke down = new KeyStroke(KeyType.ArrowDown);
+
+        test.moving(down, arena);
+        assertEquals(20, test.getPosition().getY());
+
+        //ArrowRight
+        KeyStroke right = new KeyStroke(KeyType.ArrowRight);
+
+        test.moving(right, arena);
+        assertEquals(16, test.getPosition().getX());
+
+        //ArrowLeft
+        KeyStroke left = new KeyStroke(KeyType.ArrowLeft);
+
+        test.moving(left, arena);
+        assertEquals(15, test.getPosition().getX());
+
+
+
     }
 
     @Test
     void movingp2() {
+        Arena arena = new Arena(20,20);
 
+        //W
+        Character w = 'w';
+        KeyStroke wKey = new KeyStroke(w, false, false);
+
+        test.movingp2(wKey, arena);
+        assertEquals(19, test.getPosition().getY());
+
+        //S
+        Character s = 's';
+        KeyStroke sKey = new KeyStroke(s, false, false);
+
+        test.movingp2(sKey, arena);
+        assertEquals(20, test.getPosition().getY());
+
+        //D
+        Character d = 'd';
+        KeyStroke dKey = new KeyStroke(d, false, false);
+
+        test.movingp2(dKey, arena);
+        assertEquals(16, test.getPosition().getX());
+
+        //A
+        Character a = 'a';
+        KeyStroke akey = new KeyStroke(a, false, false);
+
+        test.movingp2(akey, arena);
+        assertEquals(15, test.getPosition().getX());
     }
 
     @Test
