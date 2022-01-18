@@ -1,3 +1,7 @@
+package com.dungeonboy;
+
+import com.dungeonboy.Hp;
+import com.dungeonboy.Player;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -13,7 +17,7 @@ public class HpTester {
     @Test
     void setHp() {
         Player test = new Player(20,20, 30,3 );
-        test.setHitpoints(new Hp (70));
+        test.setHitpoints(new Hp(70));
         assertEquals(70, test.getHitpoints().getHp());
     }
 

@@ -1,3 +1,9 @@
+package com.dungeonboy;
+
+import com.dungeonboy.Arena;
+import com.dungeonboy.Hp;
+import com.dungeonboy.Player;
+import com.dungeonboy.Position;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
@@ -5,10 +11,8 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.CharArrayReader;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;

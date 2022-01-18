@@ -1,3 +1,6 @@
+package com.dungeonboy;
+
+import com.dungeonboy.Weapon;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

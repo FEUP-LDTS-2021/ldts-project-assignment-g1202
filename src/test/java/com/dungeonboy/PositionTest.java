@@ -1,3 +1,7 @@
+package com.dungeonboy;
+
+import com.dungeonboy.Arena;
+import com.dungeonboy.Position;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

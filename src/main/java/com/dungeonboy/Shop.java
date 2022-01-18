@@ -1,28 +1,25 @@
-import com.googlecode.lanterna.TerminalSize;
+package com.dungeonboy;
+
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
-import com.googlecode.lanterna.screen.TerminalScreen;
-import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class Shop {
 
+    Terminal terminal;
+    Screen screen;
+    TextGraphics tg;
+
     List<Weapon> weapons;
     List<Potion> potions;
     List<Boolean> bools;
-    Screen screen;
-    Terminal terminal;
-    TextGraphics tg;
 
     public Shop(Screen screen, Terminal terminal) throws IOException {
         this.screen = screen;
@@ -59,6 +56,14 @@ public class Shop {
         bools.add(p3);
         bools.add(p4);
         bools.add(p5);
+    }
+
+    public List<Weapon> getWeapons(){
+        return weapons;
+    }
+
+    public List<Potion> getPotions(){
+        return potions;
     }
 
     public void goDown(int i, TextGraphics tg){  // assinala o item da loja imediatamente depois do atualmente assinalado
@@ -144,19 +149,32 @@ public class Shop {
 
     public void select(int i, TextGraphics tg, Player player) {
         if (i < 2) {
+            for (Weapon weapon : player.getWeapons()){
+                if (weapon.getType() == weapons.get(i).getType()){
+                    tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+                    tg.putString(9, 4, "                       ");
+                    tg.putString(9, 4, "Already adquired " + weapons.get(i).getType() + "!");
+                    return;
+                }
+            }
             if (canBuy(i, player)) {
-                // falta atribuir arma ao player
+
+                List<Weapon> pWeapons = player.getWeapons();
+                pWeapons.add(weapons.get(i));
+                player.setWeapons(pWeapons);  //Junta a nova arma às outras já adquiridas pelo player
+                player.setWeapon(weapons.get(i)); //Atribui nova arma ao player
 
                 tg.setBackgroundColor(TextColor.ANSI.BLACK);
-                tg.putString(9, 4, "                      ");  // maneira que eu arranjei para não haver sobreposição de texto
+                tg.putString(9, 4, "                       ");  // maneira que eu arranjei para não haver sobreposição de texto
                 tg.putString(9, 4, "Adquired: " + weapons.get(i).getType());
 
                 player.setCredit(player.getCredit() - weapons.get(i).getCost());
+                tg.setForegroundColor(TextColor.ANSI.GREEN);
                 tg.putString(65, 4, "Coins: " + String.valueOf(player.getCredit()));
             }
             else{
                 tg.setBackgroundColor(TextColor.ANSI.BLACK);
-                tg.putString(9, 4, "                      ");
+                tg.putString(9, 4, "                       ");
                 tg.putString(9, 4, "Not enough coins!");
             }
 
@@ -164,18 +182,19 @@ public class Shop {
             if (canBuy(i, player)){
                 if (i < 5) {
                     Hp hp = new Hp(player.getHitpoints().getHp() + potions.get(i - 2).getHp().getHp());
-                    if (hp.getHp() < 100){
+                    if (hp.getHp() <= 100){
                         player.setHitpoints(hp);
                         tg.setBackgroundColor(TextColor.ANSI.BLACK);
-                        tg.putString(9, 4, "                      ");
+                        tg.putString(9, 4, "                       ");
                         tg.putString(9, 4, "Adquired: " + potions.get(i - 2).getName());
 
                         player.setCredit(player.getCredit() - potions.get(i - 2).getCost());
+                        tg.setForegroundColor(TextColor.ANSI.GREEN);
                         tg.putString(65, 4, "Coins: " + String.valueOf(player.getCredit()));
                     }
                     else{
                         tg.setBackgroundColor(TextColor.ANSI.BLACK);
-                        tg.putString(9, 4, "                      ");
+                        tg.putString(9, 4, "                       ");
                         tg.putString(9, 4, "Too much HP! (max:100)");
                     }
                 }
@@ -185,70 +204,29 @@ public class Shop {
                             player.oneup();
                         }
                         tg.setBackgroundColor(TextColor.ANSI.BLACK);
-                        tg.putString(9, 4, "                      ");
+                        tg.putString(9, 4, "                       ");
                         tg.putString(9, 4, "Adquired: " + potions.get(i - 2).getName());
 
                         player.setCredit(player.getCredit() - potions.get(i - 2).getCost());
+                        tg.setForegroundColor(TextColor.ANSI.GREEN);
                         tg.putString(65, 4, "Coins: " + String.valueOf(player.getCredit()));
                     }
                     else{
                         tg.setBackgroundColor(TextColor.ANSI.BLACK);
-                        tg.putString(9, 4, "                      ");
+                        tg.putString(9, 4, "                       ");
                         tg.putString(9, 4, "Too many Lifes! (max:3");
                     }
                 }
             }
             else{
                 tg.setBackgroundColor(TextColor.ANSI.BLACK);
-                tg.putString(9, 4, "                      ");
+                tg.putString(9, 4, "                       ");
                 tg.putString(9, 4, "Not enough coins!");
             }
         }
     }
 
     public void show (Player player) throws IOException {
-        TextGraphics tg = screen.newTextGraphics();
-        screen.clear();
-
-        tg.setBackgroundColor(TextColor.ANSI.BLACK);
-        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
-        tg.putString(35, 2, "SHOP");
-
-        tg.setBackgroundColor(TextColor.ANSI.BLACK);
-        tg.setForegroundColor(TextColor.ANSI.GREEN);
-        tg.putString(65, 4, "Coins: " + String.valueOf(player.getCredit()));
-
-        tg.setBackgroundColor(TextColor.ANSI.BLACK);
-        tg.setForegroundColor(TextColor.ANSI.RED);
-        tg.putString(9, 8, "Weapons(Range)");
-
-        int row = 11;
-        for (Weapon weapon : weapons) {
-            tg.setBackgroundColor(TextColor.ANSI.BLACK);
-            tg.setForegroundColor(TextColor.ANSI.DEFAULT);
-            tg.putString(9, row, weapon.getType() + "(" + String.valueOf(weapon.getRange()) + ")");
-            tg.putString(19, row, String.valueOf(weapon.getCost()) + " coins");
-            row += 2;
-        }
-
-        tg.setBackgroundColor(TextColor.ANSI.BLACK);
-        tg.setForegroundColor(TextColor.ANSI.RED);
-        tg.putString(45, 8, "Potions");
-
-        row = 11;
-        for (Potion potion : potions) {
-            tg.setBackgroundColor(TextColor.ANSI.BLACK);
-            tg.setForegroundColor(TextColor.ANSI.DEFAULT);
-            tg.putString(45, row, potion.getName());
-            tg.putString(52, row, String.valueOf(potion.getCost()) + " coins");
-            row += 2;
-        }
-
-        tg.setBackgroundColor(TextColor.ANSI.BLACK);
-        tg.setForegroundColor(TextColor.ANSI.GREEN);
-        tg.putString(5, 20, "Buy (Enter)");
-        tg.putString(5, 21, "Back to Game (ESC)");
-
         goDown(0, tg);
         bools.set(0, true);
 

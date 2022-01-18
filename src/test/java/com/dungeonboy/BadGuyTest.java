@@ -1,3 +1,7 @@
+package com.dungeonboy;
+
+import com.dungeonboy.BadGuy;
+import com.dungeonboy.Player;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;

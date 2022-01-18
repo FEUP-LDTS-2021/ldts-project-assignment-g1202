@@ -1,3 +1,6 @@
+package com.dungeonboy;
+
+import com.dungeonboy.Wall;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;

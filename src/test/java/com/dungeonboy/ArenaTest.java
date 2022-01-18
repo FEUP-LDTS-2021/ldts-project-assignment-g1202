@@ -1,3 +1,9 @@
+package com.dungeonboy;
+
+import com.dungeonboy.Arena;
+import com.dungeonboy.BadGuy;
+import com.dungeonboy.Coins;
+import com.dungeonboy.Player;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;

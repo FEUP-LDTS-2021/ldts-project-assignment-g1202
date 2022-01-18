@@ -1,3 +1,6 @@
+package com.dungeonboy;
+
+import com.dungeonboy.*;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
@@ -8,11 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 
-import javax.swing.*;
 import java.io.IOException;
-import java.security.spec.KeySpec;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -1,10 +1,10 @@
 # LDTS_T12_G02 - Dungeon Boy
 
-## Game Description
+## com.dungeonboy.Game Description
 
 
 The Dungeon Boy is a Dungeon-Crawler like based game in which the player goes through different levels and maps and faces different enemies until reaching the final boss. It has 2 playing modes, the Survival mode in which the player has to survive through some tough fights with enemies, and try not to die along the way (at least not too many times).
-The Player vs Player mode (PVP) consists in a mode where the player can face a player 2, and the winner will be crowned on the best results out of 5 intense rounds.
+The com.dungeonboy.Player vs com.dungeonboy.Player mode (PVP) consists in a mode where the player can face a player 2, and the winner will be crowned on the best results out of 5 intense rounds.
 
 This project was developed by João Duarte (201707984), Miguel Tavares(202002811)   and Inês Garcia ( 202004810) for LDTS 2021-22.
 
@@ -31,42 +31,42 @@ PvP Mode: Play against your friend, best of 5 rounds win! Good luck!
 
 ## Implemented Features
 
-- **Connected Menus** - The user has the capability of browsing through the different menus including in game ones. (Ex: Intro Menu, Main Menu with mode selection screens, Instructions,  Shop(when dead) and ESC.
+- **Connected Menus** - The user has the capability of browsing through the different menus including in game ones. (Ex: Intro Menu, com.dungeonboy.Main Menu with mode selection screens, Instructions,  com.dungeonboy.Shop(when dead) and ESC.
 - **Keyboard control** - The keyboard inputs are received and interpreted according to the current game state.
-- **Player control** - The player may move and attack the enemies with the keyboard control.
+- **com.dungeonboy.Player control** - The player may move and attack the enemies with the keyboard control.
 - **Collisions detection** - Collisions between the player and the enemies are verified.
 - **Hit Points** - If the player collides or is attacked by an enemie, loses hit points. 
 - **Diferent enemies** - The player will face different enemies throughout the game.
-- **Different modes** - The player can choose between the Survival Mode and the Player vs Player mode.
-- **Shop interaction and money management** - The player may buy new items in the in game shop, which consist of new weapons and potions.
+- **Different modes** - The player can choose between the Survival Mode and the com.dungeonboy.Player vs com.dungeonboy.Player mode.
+- **com.dungeonboy.Shop interaction and money management** - The player may buy new items in the in game shop, which consist of new weapons and potions.
 - **Catching HP Potions** - If the player goes to the position of a potion, this one is going to be collected, adding 10 health points to his total HP.
 
 
 ### PLANNED FEATURES - Still being implemented!
 
 
-- **Player control** - The player may move and attack the enemies with the keyboard control.
+- **com.dungeonboy.Player control** - The player may move and attack the enemies with the keyboard control.
 - **Collisions detection** - Collisions (still need to be implemented)
 - **Diferent enemies** - The player will face different enemies throughout the game.  (still need to be implemented)
-- **Shop interaction and money management** - (still need to be implemented)
+- **com.dungeonboy.Shop interaction and money management** - (still need to be implemented)
 - **Catching HP Potions** - If the player goes to the position of a potion, this one is going to be collected, adding 10 health points to his total HP. (still need to be implemented)
 - **Final Boss** - (still need to be implemented)
 - **Inventory** - There will be an inventory to store our items that we bought from the shop.
-- **Arena Transition** - Player can pass to another new Arena
+- **com.dungeonboy.Arena Transition** - com.dungeonboy.Player can pass to another new com.dungeonboy.Arena
 
 ## Design
 
 
 - **Problem in Context.** 
 
-This game uses many classes, and we tried to connect many of them to the Game class, such as Arena, HP, BadGuy, Player and Wall.
-We mainly tried to create this classes objects on Game/Arena.
+This game uses many classes, and we tried to connect many of them to the com.dungeonboy.Game class, such as com.dungeonboy.Arena, HP, com.dungeonboy.BadGuy, com.dungeonboy.Player and com.dungeonboy.Wall.
+We mainly tried to create this classes objects on com.dungeonboy.Game/com.dungeonboy.Arena.
 
 
 - **The Pattern.** 
 
 We adopted the Builder creational design pattern to construct complex objects step by step.
-It was clearly used on our creation of the BadGuy (enemys), along with our Arena class which used the Builder on creating the players, and enemys(eggman's)
+It was clearly used on our creation of the com.dungeonboy.BadGuy (enemys), along with our com.dungeonboy.Arena class which used the Builder on creating the players, and enemys(eggman's)
 
 - **Implementation:**
 
@@ -191,7 +191,7 @@ We have applied the **_Facade_** pattern. A facade provides a simple interface t
 </p>
 
 These classes can be found in the following files:
-- [Game](../src/main/java/com/g57/Game.java)
+- [com.dungeonboy.Game](../src/main/java/com/g57/com.dungeonboy.Game.java)
 - [GUI](../src/main/java/com/g57/gui/GUI.java)
 - [LanternaGUI](../src/main/java/com/g57/gui/LanternaGUI.java)
 
@@ -204,7 +204,7 @@ The use of the Facade Pattern in the current design allows the following benefit
 
 ## Known Code Smells And Refactoring Suggestions
 #### **Large Class**
-Some classes (e.g. Game, Battlefield, Player) contain many fields and others (e.g. GUI interface) contain many methods. In both cases, we find it justifiable as the classes require these fields, in one hand the Game class is the main class of the program and it needs to store a considerable amount of data, on the other hand various methods are needed for the interface and it wouldn't make sense to split it into two separate ones (extract method).
+Some classes (e.g. com.dungeonboy.Game, Battlefield, com.dungeonboy.Player) contain many fields and others (e.g. GUI interface) contain many methods. In both cases, we find it justifiable as the classes require these fields, in one hand the com.dungeonboy.Game class is the main class of the program and it needs to store a considerable amount of data, on the other hand various methods are needed for the interface and it wouldn't make sense to split it into two separate ones (extract method).
 
 #### **Data Class**
 All model classes are Data Classes, as they contain only fields, and no behavior (dumb classes). This is caused by the **MVC** (Model-View-Controller) architectural pattern which holds the responsibility to the controller to implement the logic functionalities of each model.

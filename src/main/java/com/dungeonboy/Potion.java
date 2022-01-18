@@ -1,3 +1,5 @@
+package com.dungeonboy;
+
 public class Potion {
 
     int cost;
