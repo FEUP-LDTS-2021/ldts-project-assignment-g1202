@@ -82,14 +82,20 @@ public class Arena{
     public void damageEnemy() { // ataca de lado
         for (BadGuy bad : baddies) {
             if (player.position.getX() + 3 >= bad.position.getX() && player.position.getX() < bad.position.getX() && player.position.getY() == bad.position.getY()) {
-                player.closeAttack(bad);
+                player.noneAttack(bad);
                 System.out.println(bad.hitpoints.getHp());
+                if(bad.hitpoints.getHp() == 0) baddies.remove(bad);
+                break;
+            }
+            else if(player.position.getX() + 5 >= bad.position.getX() && player.position.getX() < bad.position.getX()
+                    && player.position.getY() == bad.position.getY()){
+                player.swordAttack(bad);
                 if(bad.hitpoints.getHp() == 0) baddies.remove(bad);
                 break;
             }
             else if (player.position.getX() + 10 >= bad.position.getX() && player.position.getX() < bad.position.getX()
                     && player.position.getY() == bad.position.getY()){
-                player.farAttack(bad);
+                player.arrowAttack(bad);
                 if(bad.hitpoints.getHp() == 0) baddies.remove(bad);
                 break;
             }

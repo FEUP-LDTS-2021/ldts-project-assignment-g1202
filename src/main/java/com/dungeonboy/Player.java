@@ -150,16 +150,19 @@ public class Player {
 
     }
 
-    public void closeAttack(BadGuy badGuy){
+    public void noneAttack(BadGuy badGuy){
         if (weapon.getType() == "None"){
             badGuy.changeHp(10);
         }
-        else if (weapon.getType() == "Sword"){
+    }
+
+    public void swordAttack(BadGuy badGuy){
+        if (weapon.getType() == "Sword"){
             badGuy.changeHp(20);
         }
     }
 
-    public void farAttack(BadGuy badGuy){
+    public void arrowAttack(BadGuy badGuy){
         if (weapon.getType() == "Arrow"){
             badGuy.changeHp(20);
         }
