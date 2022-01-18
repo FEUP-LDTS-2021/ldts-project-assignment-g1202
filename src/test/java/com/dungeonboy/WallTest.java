@@ -22,25 +22,25 @@ class WallTest {
 
     @Test
     void wall_width() {
-        assertEquals(20, teste.position.getX());
+        assertEquals(20, teste.getPosition().getX());
     }
 
     @Test
     void wall_height() {
-        assertEquals(23, teste.position.getY());
+        assertEquals(23, teste.getPosition().getY());
 
     }
 
     @Test
     void wallSet_width() {
-        teste.position.setX(50);
-        assertEquals(50, teste.position.getX());
+        teste.getPosition().setX(50);
+        assertEquals(50, teste.getPosition().getX());
     }
 
     @Test
     void wallSet_height() {
-        teste.position.setY(50);
-        assertEquals(50, teste.position.getY());
+        teste.getPosition().setY(50);
+        assertEquals(50, teste.getPosition().getY());
     }
 
     @Test
@@ -54,6 +54,5 @@ class WallTest {
         assertTrue(tg.getCharacter(20, 23).isBold());
         assertEquals(TextColor.Factory.fromString("#000000"), tg.getForegroundColor());
         assertEquals("@", tg.getCharacter(20,23).getCharacterString());
-
     }
 }
