@@ -24,14 +24,13 @@ public class BadGuy {
         screen.setForegroundColor(TextColor.Factory.fromString("#FF0000")); // vermelho
         screen.putString(new TerminalPosition(position.getX(), position.getY()),"E");
     }
-    /*
+
         public void drawBoss(TextGraphics screen) {
             screen.setForegroundColor(TextColor.Factory.fromString("#FF0000")); // vermelho
-            screen.putString(new TerminalPosition(position.getX(), position.getY()),"OOO" + "000");
-
+            screen.putString(new TerminalPosition(position.getX(), position.getY()),"O");
         }
-    */
-    //movimento do mauzao
+
+        //movimento do mauzao
     public void running() {
         double rand = Math.random();
         // tem de morrer quando hp = 0

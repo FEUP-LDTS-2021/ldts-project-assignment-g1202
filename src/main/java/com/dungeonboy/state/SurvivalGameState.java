@@ -2,6 +2,8 @@ package com.dungeonboy.state;
 
 import com.dungeonboy.*;
 import com.googlecode.lanterna.SGR;
+import com.googlecode.lanterna.TerminalPosition;
+import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
@@ -22,7 +24,7 @@ public class SurvivalGameState implements GameState{
 
     public void display() throws IOException {
         screen.clear();
-        game.getSurvArena().draw(tg);
+        game.getSurvArena().draw(tg, game.getLvl());
         tg.setBackgroundColor(TextColor.ANSI.BLACK); //texto do canto superior esq que indica o modo selecionado
         tg.setForegroundColor(TextColor.ANSI.DEFAULT);
         tg.putString(3, 1, "Survival");
@@ -92,10 +94,10 @@ public class SurvivalGameState implements GameState{
     }
 
     public void win() throws IOException{
-        if (game.getLvl() < 2){
+        if (game.getLvl() < 3){
             levelUp();
         }
-        else if (game.getLvl() == 2){
+        else if (game.getLvl() == 3){
             finalLevel();
         }
     }
@@ -125,5 +127,22 @@ public class SurvivalGameState implements GameState{
         game.survival();
     }
 
-    public void finalLevel(){}
+    public void finalLevel() throws IOException{
+        game.setLvl(game.getLvl() + 1);
+
+        screen.clear();
+        tg.setForegroundColor(TextColor.ANSI.GREEN);
+        tg.enableModifiers(SGR.BOLD);
+        tg.putString(37,12, "LEVEL " + game.getLvl());
+        screen.refresh();
+
+        try{
+            Thread.sleep(2000);
+        }catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        display();
+        game.survival();
+    }
 }

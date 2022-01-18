@@ -26,6 +26,7 @@ public class Arena{
     private List<BadGuy> baddies;
     int wall_height;
     int wall_width;
+    BadGuy finalBoss;
 
     private int generator(int min,int max){
         return min + (int) (Math.random() * ((max-min)) + 1);
@@ -39,7 +40,7 @@ public class Arena{
         this.walls = createWalls();
         this.baddies = createBaddies();
         coins = createCoins();
-        //finalBoss = new BadGuy( wall_width - 1, wall_height, 400);
+        finalBoss = new BadGuy( wall_width - 1, wall_height, 400);
 
     }
 
@@ -103,23 +104,44 @@ public class Arena{
     }
 
     //Ecrã modo Survival
-    public void draw(TextGraphics screen) {
-        screen.setBackgroundColor(TextColor.Factory.fromString("#906846"));
-        screen.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width, height), ' ');
+    public void draw(TextGraphics screen, int level) {
+        if (level == 1){
+            screen.setBackgroundColor(TextColor.Factory.fromString("#906846"));
+            screen.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width, height), ' ');
+
+            //Draw das coins
+            for (Coins coin : coins)
+                coin.draw(screen);
+            //Draw inimigos
+            for(BadGuy bad : baddies){
+                bad.draw(screen);
+            }
+        }
+        else if (level == 2){
+            screen.setBackgroundColor(TextColor.Factory.fromString("#6495ED"));
+            screen.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width, height), ' ');
+
+            //Draw das coins
+            for (Coins coin : coins)
+                coin.draw(screen);
+            //Draw inimigos
+            for(BadGuy bad : baddies){
+                bad.draw(screen);
+            }
+        }
+        else if (level == 3){
+            screen.setBackgroundColor(TextColor.Factory.fromString("#FF7F50"));
+            screen.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width, height), ' ');
+
+            finalBoss.drawBoss(screen);
+        }
+
         player.draw(screen);
         //finalBoss.drawBoss(screen);
 
         //implementação das walls
         for (Wall wall : walls)
             wall.draw(screen); //screen é o nosso textgraphics
-
-        //Draw das coins
-        for (Coins coin : coins)
-            coin.draw(screen);
-        //Draw inimigos
-        for(BadGuy bad : baddies){
-            bad.draw(screen);
-        }
     }
 
     // Ecrã para o modo PVP

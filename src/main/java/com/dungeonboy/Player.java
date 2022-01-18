@@ -150,19 +150,19 @@ public class Player {
 
     }
 
-    public void noneAttack(BadGuy badGuy){
+    public void noneAttack(BadGuy badGuy){  //Ataque quando o player não tem arma nenhuma
         if (weapon.getType() == "None"){
             badGuy.changeHp(10);
         }
     }
 
-    public void swordAttack(BadGuy badGuy){
+    public void swordAttack(BadGuy badGuy){  //Ataque quando o player tem uma sword
         if (weapon.getType() == "Sword"){
             badGuy.changeHp(20);
         }
     }
 
-    public void arrowAttack(BadGuy badGuy){
+    public void arrowAttack(BadGuy badGuy){ //Ataque quando o player tem um arrow
         if (weapon.getType() == "Arrow"){
             badGuy.changeHp(20);
         }

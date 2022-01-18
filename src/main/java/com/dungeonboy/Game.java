@@ -85,7 +85,7 @@ public class Game {
             if (keyPressed.getKeyType() == KeyType.Escape) {
                 keepRunning = false;
                 gameState.goBack(); // Volta ao menu
-            }else if (keyPressed.getKeyType() == KeyType.Enter){
+            }else if (keyPressed.getKeyType() == KeyType.Character && keyPressed.getCharacter() == ' '){
                 survArena.damageEnemy();
 
                 if (survArena.getBaddies().size() == 0){
@@ -132,7 +132,7 @@ public class Game {
                 pvpArena.player.moving(keyPressed,pvpArena);
                 pvpArena.player2.movingp2(keyPressed,pvpArena);
                 //desenho da nova posicao
-                pvpArena.draw(tg);
+                pvpArena.draw2(tg);
                 //screen.refresh();
             }
         }
