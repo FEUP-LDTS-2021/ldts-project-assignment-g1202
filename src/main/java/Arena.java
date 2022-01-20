@@ -1,3 +1,5 @@
+package com.dungeonboy;
+
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
@@ -24,6 +26,7 @@ public class Arena{
     private List<BadGuy> baddies;
     int wall_height;
     int wall_width;
+    BadGuy finalBoss;
 
     private int generator(int min,int max){
         return min + (int) (Math.random() * ((max-min)) + 1);
@@ -37,8 +40,20 @@ public class Arena{
         this.walls = createWalls();
         this.baddies = createBaddies();
         coins = createCoins();
-        //finalBoss = new BadGuy( wall_width - 1, wall_height, 400);
+        finalBoss = new BadGuy( wall_width - 1, wall_height, 400);
 
+    }
+
+    public void setCoins(List<Coins> coins){
+        this.coins = coins;
+    }
+
+    public void setBaddies(List<BadGuy> baddies){
+        this.baddies = baddies;
+    }
+
+    public List<BadGuy> getBaddies(){
+        return baddies;
     }
 
     public int getWidth() {
@@ -57,24 +72,83 @@ public class Arena{
         return wall_width;
     }
 
+    public Player getPlayer(){
+        return player;
+    }
+
+    public Player getPlayer2(){
+        return player2;
+    }
+
+    public void damageEnemy() { // ataca de lado
+        for (BadGuy bad : baddies) {
+            if     (player.position.getX() + 3 >= bad.position.getX() && player.position.getX() < bad.position.getX() && player.position.getY() == bad.position.getY() ||
+                    player.position.getX() - 3 <= bad.position.getX() && player.position.getX() > bad.position.getX() && player.position.getY() == bad.position.getY() ||
+                    player.position.getY() +  3 >= bad.position.getY() && player.position.getY() < bad.position.getY() && player.position.getX() == bad.position.getX() ||
+                    player.position.getY() -  3 <= bad.position.getY() && player.position.getY() > bad.position.getY() && player.position.getX() == bad.position.getX()){
+                player.noneAttack(bad);
+                System.out.println(bad.hitpoints.getHp());
+                if(bad.hitpoints.getHp() == 0) baddies.remove(bad);
+                break;
+            }
+            else if(player.position.getX() + 5 >= bad.position.getX() && player.position.getX() < bad.position.getX() && player.position.getY() == bad.position.getY() ||
+                    player.position.getX() - 5 <= bad.position.getX() && player.position.getX() > bad.position.getX() && player.position.getY() == bad.position.getY() ||
+                    player.position.getX() + 5 >= bad.position.getY() && player.position.getY() < bad.position.getY() && player.position.getX() == bad.position.getX() ||
+                    player.position.getX() - 5 <= bad.position.getY() && player.position.getY() > bad.position.getY() && player.position.getX() == bad.position.getX()){
+                player.swordAttack(bad);
+                if(bad.hitpoints.getHp() == 0) baddies.remove(bad);
+                break;
+            }
+            else if(player.position.getX() + 10 >= bad.position.getX() && player.position.getX() < bad.position.getX() && player.position.getY() == bad.position.getY()||
+                    player.position.getX() - 10 <= bad.position.getX() && player.position.getX() > bad.position.getX() && player.position.getY() == bad.position.getY() ||
+                    player.position.getY() + 10 >= bad.position.getY() && player.position.getY() < bad.position.getY() && player.position.getX() == bad.position.getX() ||
+                    player.position.getY() - 10 <= bad.position.getY() && player.position.getY() > bad.position.getY() && player.position.getX() == bad.position.getX()){
+                player.arrowAttack(bad);
+                if(bad.hitpoints.getHp() == 0) baddies.remove(bad);
+                break;
+            }
+        }
+    }
+
     //Ecrã modo Survival
-    public void draw(TextGraphics screen) {
-        screen.setBackgroundColor(TextColor.Factory.fromString("#906846"));
-        screen.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width, height), ' ');
+    public void draw(TextGraphics screen, int level) {
+        if (level == 1){
+            screen.setBackgroundColor(TextColor.Factory.fromString("#906846"));
+            screen.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width, height), ' ');
+
+            //Draw das coins
+            for (Coins coin : coins)
+                coin.draw(screen);
+            //Draw inimigos
+            for(BadGuy bad : baddies){
+                bad.draw(screen);
+            }
+        }
+        else if (level == 2){
+            screen.setBackgroundColor(TextColor.Factory.fromString("#6495ED"));
+            screen.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width, height), ' ');
+
+            //Draw das coins
+            for (Coins coin : coins)
+                coin.draw(screen);
+            //Draw inimigos
+            for(BadGuy bad : baddies){
+                bad.draw(screen);
+            }
+        }
+        else if (level == 3){
+            screen.setBackgroundColor(TextColor.Factory.fromString("#FF7F50"));
+            screen.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width, height), ' ');
+
+            finalBoss.drawBoss(screen);
+        }
+
         player.draw(screen);
         //finalBoss.drawBoss(screen);
 
         //implementação das walls
         for (Wall wall : walls)
             wall.draw(screen); //screen é o nosso textgraphics
-
-        //Draw das coins
-        for (Coins coin : coins)
-            coin.draw(screen);
-        //Draw inimigos
-        for(BadGuy bad : baddies){
-            bad.draw(screen);
-        }
     }
 
     // Ecrã para o modo PVP
@@ -93,15 +167,15 @@ public class Arena{
 
     private List<Wall> createWalls() {
 
-       wall_height = height - 3;
-       wall_width = width - 1;
+        wall_height = height - 3;
+        wall_width = width - 1;
 
         List<Wall> walls = new ArrayList<>();
-        for (int c = 0; c < wall_width + 1; c++) {
+        for (int c = 0; c <= wall_width; c++) {
             walls.add(new Wall(c, 2));         // coloca walls abaixo da informação de Survival + Inventory
             walls.add(new Wall(c, wall_height)); // coloca walls acima da informação de HP etc
         }
-        for (int r = 2; r < wall_height; r++) {
+        for (int r = 2; r <= wall_height; r++) {
             walls.add(new Wall(0, r));
             walls.add(new Wall(wall_width, r));
         }
@@ -130,17 +204,17 @@ public class Arena{
     }
 
     //Creating coins on terminal
-    private List<Coins> createCoins() {
+    public List<Coins> createCoins() {
 
         ArrayList<Coins> coins = new ArrayList<>();
         for (int i = 0; i < 2; i++) { //max 2 moedas no ecrã
             Coins newcoin = new Coins(generator(1,wall_width-1) , generator(wall_height - (wall_height - 2) + 1, wall_height-1));
-                    coins.add(newcoin);
-            }
+            coins.add(newcoin);
+        }
         return coins;
     }
 
-    private List<BadGuy> createBaddies() {
+    public List<BadGuy> createBaddies() {
 
         ArrayList<BadGuy> baddies = new ArrayList<>();
         for (int i = 0; i < 4; i++) { //max 2 moedas no ecrã
@@ -151,3 +225,5 @@ public class Arena{
     }
 
 }
+
+

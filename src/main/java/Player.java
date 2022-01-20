@@ -1,8 +1,13 @@
+package com.dungeonboy;
+
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Player {
 
@@ -11,6 +16,8 @@ public class Player {
     Hp hitpoints;
     private int life;
     int credit = 0; // coins = 0
+    List<Weapon> weapons; //Todas as weapons do player
+    Weapon weapon; //A weapon que o player está a usar no momento
 
     public int getCredit(){
         return credit;
@@ -22,7 +29,7 @@ public class Player {
 
     public void changeCredit(){
         //Aumentar 1 coin cada vez que apanha uma
-       setCredit(credit+1); // coins ++
+        setCredit(credit+1); // coins ++
     }
 
     //construtor
@@ -30,6 +37,12 @@ public class Player {
         position = new Position(x,y);
         hitpoints = new Hp(health);
         this.life = life;
+
+        List<Weapon> weapons = new ArrayList<>();
+        Weapon weapon = new Weapon();
+        weapons.add(weapon);
+        this.weapons = weapons;
+        this.weapon = weapon;
     }
 
     public void setHitpoints(Hp hitpoints) {
@@ -38,6 +51,22 @@ public class Player {
 
     public Hp getHitpoints() {
         return hitpoints;
+    }
+
+    public void setWeapon(Weapon weapon){
+        this.weapon = weapon;
+    }
+
+    public String getWeapon(){
+        return weapon.getType();
+    }
+
+    public void setWeapons(List<Weapon> weapons){
+        this.weapons = weapons;
+    }
+
+    public List<Weapon> getWeapons(){
+        return weapons;
     }
 
     public void draw(TextGraphics screen) {
@@ -66,7 +95,7 @@ public class Player {
         return position;
     }
     public void setPosition(Position position){
-        this.position = this.position;
+        this.position = position;
     }
 
     //Movimento
@@ -74,22 +103,22 @@ public class Player {
         switch(keyPressed.getKeyType()){
             case ArrowUp:
                 if(this.position.canMoveUp(arena))
-                position.setY(position.getY()-1);
+                    position.setY(position.getY()-1);
 
                 break;
             case ArrowDown:
                 if(this.position.canMoveDown(arena))
-                position.setY(position.getY()+1);
+                    position.setY(position.getY()+1);
 
                 break;
             case ArrowLeft:
                 if(this.position.canMoveLeft())
-                position.setX(position.getX()-1);
+                    position.setX(position.getX()-1);
 
                 break;
             case ArrowRight:
                 if(this.position.canMoveRight(arena))
-                position.setX(position.getX()+1);
+                    position.setX(position.getX()+1);
 
                 break;
         }
@@ -121,12 +150,21 @@ public class Player {
 
     }
 
-
-    public int hitsword(){
-        // dar um hit vai ter um range de 5
-        // se pos de inimigo <= ao que e retornado pela func change hp para ele
-        return position.getY() + 5;
+    public void noneAttack(BadGuy badGuy){  //Ataque quando o player não tem arma nenhuma
+        if (weapon.getType() == "None"){
+            badGuy.changeHp(10);
+        }
     }
 
+    public void swordAttack(BadGuy badGuy){  //Ataque quando o player tem uma sword
+        if (weapon.getType() == "Sword"){
+            badGuy.changeHp(20);
+        }
+    }
 
+    public void arrowAttack(BadGuy badGuy){ //Ataque quando o player tem um arrow
+        if (weapon.getType() == "Arrow"){
+            badGuy.changeHp(20);
+        }
+    }
 }

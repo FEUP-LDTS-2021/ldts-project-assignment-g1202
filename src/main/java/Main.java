@@ -1,9 +1,9 @@
-import java.awt.*;
+package com.dungeonboy;
+
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 public class Main {
-    public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException {
+    public static void main(String[] args) throws IOException {
 
         Game jogo = new Game();
         jogo.run();

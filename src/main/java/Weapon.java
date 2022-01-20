@@ -1,9 +1,18 @@
+package com.dungeonboy;
+
+import java.util.Objects;
+
 public class Weapon {
 
     int cost;
     int range;
     String type;
 
+    public Weapon(){
+        cost = 0;
+        range = 0;
+        type = "None";
+    }
     public Weapon(int cost, int range, String type){
         this.cost = cost;
         this.range = range;
@@ -34,6 +43,3 @@ public class Weapon {
         this.type = type;
     }
 }
-
-
-

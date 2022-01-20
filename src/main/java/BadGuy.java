@@ -1,3 +1,5 @@
+package com.dungeonboy;
+
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -14,18 +16,21 @@ public class BadGuy {
         hitpoints = new Hp(health);
     }
 
+    public Position getPosition(){
+        return position;
+    }
+
     public void draw(TextGraphics screen) {
         screen.setForegroundColor(TextColor.Factory.fromString("#FF0000")); // vermelho
         screen.putString(new TerminalPosition(position.getX(), position.getY()),"E");
     }
-/*
-    public void drawBoss(TextGraphics screen) {
-        screen.setForegroundColor(TextColor.Factory.fromString("#FF0000")); // vermelho
-        screen.putString(new TerminalPosition(position.getX(), position.getY()),"OOO" + "000");
 
-    }
-*/
-    //movimento do mauzao
+        public void drawBoss(TextGraphics screen) {
+            screen.setForegroundColor(TextColor.Factory.fromString("#FF0000")); // vermelho
+            screen.putString(new TerminalPosition(position.getX(), position.getY()),"O");
+        }
+
+        //movimento do mauzao
     public void running() {
         double rand = Math.random();
         // tem de morrer quando hp = 0
@@ -55,5 +60,9 @@ public class BadGuy {
         if(player.position.getX()+1 == this.position.getX() || player.position.getX()-1 == this.position.getX()){
             player.hitpoints.changeHp();
         }
+    }
+
+    public void changeHp(int damage){
+        hitpoints.setHp(hitpoints.getHp() - damage);
     }
 }

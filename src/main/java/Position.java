@@ -1,5 +1,7 @@
+package com.dungeonboy;
+
 public class Position {
-    //Player 1
+    //com.dungeonboy.Player 1
     private int x;
     private int y;
 
