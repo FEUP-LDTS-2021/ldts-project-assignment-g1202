@@ -25,7 +25,7 @@ public class Game {
     GameState gameState;
     int lvl = 1;
     int p1kills, p2kills, round = 0;
-    Inventory teste = new Inventory(screen, terminal);
+    Inventory inv;
 
 
     public Game() throws IOException { // construtor de Game
@@ -33,6 +33,7 @@ public class Game {
             shop = new Shop(screen, terminal);
             screen.startScreen(); // Iniciar o terminal
             gameState = new InitialGameState(this); // O jogo começa no estado inicial
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -82,16 +83,15 @@ public class Game {
         while (keepRunning) {
             gameState.display();
 
+
             KeyStroke keyPressed = terminal.readInput();
             if (keyPressed.getKeyType() == KeyType.Escape) {
                 keepRunning = false;
                 gameState.goBack(); // Volta ao menu
-            } else if(keyPressed.getKeyType() == KeyType.Character && keyPressed.getCharacter() == 'u'){
-                teste.openInv();
-            }
+            }else if(keyPressed.getKeyType() == KeyType.Character && keyPressed.getCharacter() == 'u'){
+                Invtest();
 
-
-            else if (keyPressed.getKeyType() == KeyType.Character && keyPressed.getCharacter() == ' '){
+            }else if (keyPressed.getKeyType() == KeyType.Character && keyPressed.getCharacter() == ' '){
                 survArena.damageEnemy();
 
                 if (survArena.getBaddies().size() == 0){
@@ -122,6 +122,50 @@ public class Game {
         }
     }
 
+
+    public void Invtest() throws IOException {
+
+        screen.clear();
+        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+        tg.putString(8, 2, "Inventory");
+
+        tg.setForegroundColor(TextColor.ANSI.GREEN);
+        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+        tg.putString(53, 2, "Back to game: (U)");
+
+        tg.setForegroundColor(TextColor.ANSI.GREEN);
+        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+        tg.putString(8, 6, "Items & Quantity");
+
+        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+        tg.putString(8, 8, "Coins: " + getSurvArena().getPlayer().getCredit());
+
+        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+        tg.putString(8, 10, "Bow: 0"  );
+
+        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+        tg.putString(8, 12, "Sword: 0");
+
+        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+        tg.putString(8, 14, "HP Potions:  " + shop.contapots);
+
+        screen.refresh();
+
+        boolean keepRunning = true;
+
+        while (keepRunning) {
+            KeyStroke keyPressed = terminal.readInput();
+            if (keyPressed.getKeyType() == KeyType.Character && keyPressed.getCharacter() == 'u') {
+                survival();
+            }
+
+        }
+    }
 
     // Opção do modo PVP
     public void pvp() throws IOException {

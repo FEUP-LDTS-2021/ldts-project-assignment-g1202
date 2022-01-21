@@ -110,6 +110,7 @@ public class Arena{
         }
     }
 
+
     //Ecrã modo Survival
     public void draw(TextGraphics screen, int level) {
         if (level == 1){

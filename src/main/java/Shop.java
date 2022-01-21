@@ -21,6 +21,8 @@ public class Shop {
     List<Potion> potions;
     List<Boolean> bools;
 
+    int contapots = 0;
+
     public Shop(Screen screen, Terminal terminal) throws IOException {
         this.screen = screen;
         this.terminal = terminal;
@@ -187,6 +189,7 @@ public class Shop {
                         tg.setBackgroundColor(TextColor.ANSI.BLACK);
                         tg.putString(9, 4, "                       ");
                         tg.putString(9, 4, "Adquired: " + potions.get(i - 2).getName());
+                        contapots++;
 
                         player.setCredit(player.getCredit() - potions.get(i - 2).getCost());
                         tg.setForegroundColor(TextColor.ANSI.GREEN);

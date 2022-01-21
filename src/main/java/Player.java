@@ -151,7 +151,7 @@ public class Player {
     }
 
     public void noneAttack(BadGuy badGuy){  //Ataque quando o player não tem arma nenhuma
-        if (weapon.getType() == "None"){
+        if (weapon.getType() == "Fists"){
             badGuy.changeHp(10);
         }
     }
