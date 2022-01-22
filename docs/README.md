@@ -86,15 +86,13 @@ PvP Mode: Play against your friend, best of 5 rounds win! Good luck!
 - **Catching Coins** - If the player goes to the position of a coin, this one is going to be collected, adding some money to our inventory which can be used in the Shop.
 - **Lives** - In the beggining of the game, the player is given 3 lives (displayed in health on the screen).
 - **Dying** - A player dies if his health reaches 0, or less.
-- **Inventory** - Inventory to store our items that we bought from the shop.
-
+- **Inventory** - Inventory to store our items that we bought from the shop or caught on the map
+- **Arena Transition** - Player can pass to another new Arena
 
 ### PLANNED FEATURES - Still being implemented!
 
 - **Diferent enemies** - The player will face different enemies throughout the game.  (still need to be implemented)
 - **Final Boss** - (still need to be implemented)
-- **Inventory** - There will be an inventory to store our items that we bought from the shop.
-- **Arena Transition** - Player can pass to another new Arena
 
 ### DESIGN
 
