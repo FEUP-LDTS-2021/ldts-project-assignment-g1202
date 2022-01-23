@@ -1,9 +1,10 @@
 plugins {
     id 'java'
     id 'application'
+    id 'info.solidsoft.pitest' version '1.7.0'
 }
 
-group 'org.example'
+group 'com.dungeonboy'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -18,9 +19,15 @@ dependencies {
 }
 
 application {
-    mainClass.set("Main")
+    mainClass.set('dungeonboy.Main')
 }
 
 test {
     useJUnitPlatform()
+}
+
+pitest {
+    junit5PluginVersion = '0.12'
+    excludedTestClasses = ['com.dungeonboy.ShopTest']
+    targetClasses = ['com.dungeonboy.*']
 }

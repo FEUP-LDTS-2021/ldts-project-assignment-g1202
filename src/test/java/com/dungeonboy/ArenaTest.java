@@ -30,7 +30,7 @@ class ArenaTest {
         Screen screen = new TerminalScreen(terminal);
         TextGraphics tg = screen.newTextGraphics();
 
-        arena.draw(tg);
+        arena.draw(tg, 1);
 
         assertEquals(TextColor.Factory.fromString("#906846"), tg.getBackgroundColor());
     }
