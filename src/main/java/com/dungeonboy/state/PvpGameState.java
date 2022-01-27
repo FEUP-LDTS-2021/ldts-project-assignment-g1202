@@ -1,6 +1,9 @@
 package com.dungeonboy.state;
 
 import com.dungeonboy.Game;
+import com.dungeonboy.Hp;
+import com.dungeonboy.Position;
+import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
@@ -18,7 +21,7 @@ public class PvpGameState implements GameState{
         tg = screen.newTextGraphics();
     }
 
-    public void display() throws IOException{
+    public void display() throws IOException {
         screen.clear();
 
         game.getPvpArena().draw2(tg);
@@ -53,10 +56,66 @@ public class PvpGameState implements GameState{
     }
 
     public void lose() throws IOException {
+        if (game.getPvpArena().getPlayer2().getHitpoints().getHp() == 0){
+            game.setP1kills(game.getP1kills() + 1);
+        }
 
+        if (game.getPvpArena().getPlayer().getHitpoints().getHp() == 0){
+            game.setP2kills(game.getP2kills() + 1);
+        }
+
+        if (game.getRound() == 5){
+            win();
+        }
+        else {
+            game.setRound(game.getRound() + 1);
+            game.getPvpArena().getPlayer().setHitpoints(new Hp(100));
+            game.getPvpArena().getPlayer().setPosition(new Position(10, 10));
+            game.getPvpArena().getPlayer2().setHitpoints(new Hp(100));
+            game.getPvpArena().getPlayer2().setPosition(new Position(60, 10));
+
+            screen.clear();
+            tg.setForegroundColor(TextColor.ANSI.GREEN);
+            tg.enableModifiers(SGR.BOLD);
+            tg.putString(37,12, "ROUND " + game.getRound());
+            screen.refresh();
+
+            try{
+                Thread.sleep(2000);
+            }catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            display();
+        }
     }
 
-    public void win(){
+    public void win() throws IOException{
+        if (game.getRound() == 5 && game.getP1kills() > game.getP2kills()) {
+            screen.clear();
+            tg.setForegroundColor(TextColor.ANSI.RED);
+            tg.enableModifiers(SGR.BOLD);
+            tg.putString(30, 12, "Player 1 Wins!");
+            screen.refresh();
+            try {
+                Thread.sleep(2500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            screen.clear();
+            tg.setForegroundColor(TextColor.ANSI.RED);
+            tg.enableModifiers(SGR.BOLD);
+            tg.putString(30,12, "Player 2 Wins!");
+            screen.refresh();
+            try {
+                Thread.sleep(2500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
+        }
+        goBack();
     }
 }

@@ -20,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PlayerTest {
 
     Player test = new Player(15,20, 100, 3);
+    Player test2 = new Player(35,20, 100, 3);
     Position testePos = new Position(10,50);
     Hp testHitPoints  = new Hp(50);
 
@@ -60,6 +61,17 @@ class PlayerTest {
         test.draw(tg);
 
         assertEquals("X", tg.getCharacter(15, 20).getCharacterString());
+    }
+
+    @Test
+    void drawPlayer2() throws IOException {
+        Terminal terminal = new DefaultTerminalFactory().createTerminal();
+        Screen screen = new TerminalScreen(terminal);
+        TextGraphics tg = screen.newTextGraphics();
+
+        test2.draw(tg);
+
+        assertEquals("X", tg.getCharacter(35, 20).getCharacterString());
     }
 
     @Test

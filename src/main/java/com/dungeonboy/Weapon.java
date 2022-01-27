@@ -10,8 +10,8 @@ public class Weapon {
 
     public Weapon(){
         cost = 0;
-        range = 0;
-        type = "None";
+        range = 3;
+        type = "Fists";
     }
     public Weapon(int cost, int range, String type){
         this.cost = cost;

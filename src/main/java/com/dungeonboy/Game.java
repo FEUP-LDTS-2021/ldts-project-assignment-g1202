@@ -24,7 +24,7 @@ public class Game {
     Shop shop;
     GameState gameState;
     int lvl = 1;
-    int p1kills, p2kills, round = 0;
+    int p1kills, p2kills, round = 1;
 
 
     public Game() throws IOException { // construtor de Game
@@ -66,12 +66,24 @@ public class Game {
         return round;
     }
 
+    public void setRound(int round){
+        this.round = round;
+    }
+
     public int getP1kills(){
         return p1kills;
     }
 
+    public void setP1kills(int p1kills) {
+        this.p1kills = p1kills;
+    }
+
     public int getP2kills(){
         return p2kills;
+    }
+
+    public void setP2kills(int p2kills){
+        this.p2kills = p2kills;
     }
 
     // Opção do modo survival
@@ -128,7 +140,20 @@ public class Game {
             if (keyPressed.getKeyType() == KeyType.Escape) {
                 keepRunning = false;
                 gameState.goBack();  //Volta ao menu
-            } else { // caso nao fechemos o jogo vamos tentar mover
+            }else if (keyPressed.getKeyType() == KeyType.Character && keyPressed.getCharacter() == ' ') {
+                pvpArena.damagePlayer2();
+
+                if (pvpArena.player2.getHitpoints().getHp() == 0){
+                    gameState.lose();
+                }
+            }else if (keyPressed.getKeyType() == KeyType.Tab){
+                pvpArena.damagePlayer1();
+
+                if (pvpArena.player.getHitpoints().getHp() == 0){
+                    gameState.lose();
+                }
+            }
+            else { // caso nao fechemos o jogo vamos tentar mover
                 pvpArena.player.moving(keyPressed,pvpArena);
                 pvpArena.player2.movingp2(keyPressed,pvpArena);
                 //desenho da nova posicao

@@ -74,6 +74,11 @@ public class Player {
         screen.putString(new TerminalPosition(position.getX(), position.getY()),"X");
     }
 
+    public void drawPlayer2(TextGraphics screen) {
+        screen.setForegroundColor(TextColor.Factory.fromString("#FF0000"));
+        screen.putString(new TerminalPosition(position.getX(), position.getY()),"X");
+    }
+
     public void changeHp(){
         //perder 10 pontos de vida
         hitpoints.setHp(hitpoints.getHp()-10);
@@ -151,7 +156,7 @@ public class Player {
     }
 
     public void noneAttack(BadGuy badGuy){  //Ataque quando o player não tem arma nenhuma
-        if (weapon.getType() == "None"){
+        if (weapon.getType() == "Fists"){
             badGuy.changeHp(10);
         }
     }
@@ -165,6 +170,24 @@ public class Player {
     public void arrowAttack(BadGuy badGuy){ //Ataque quando o player tem um arrow
         if (weapon.getType() == "Arrow"){
             badGuy.changeHp(20);
+        }
+    }
+
+    public void noneAttackPvP(Player player){
+        if (weapon.getType() == "Fists"){
+            player.setHitpoints(new Hp(player.getHitpoints().getHp() - 10));
+        }
+    }
+
+    public void swordAttackPvP(Player player){
+        if (weapon.getType() == "Sword"){
+            player.setHitpoints(new Hp(player.getHitpoints().getHp() - 20));
+        }
+    }
+
+    public void arrowAttackPvP(Player player){
+        if (weapon.getType() == "Arrow"){
+            player.setHitpoints(new Hp(player.getHitpoints().getHp() - 20));
         }
     }
 }

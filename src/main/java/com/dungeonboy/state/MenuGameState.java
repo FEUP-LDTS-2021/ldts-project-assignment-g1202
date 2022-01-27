@@ -66,6 +66,19 @@ public class MenuGameState implements GameState{
         }
         else if (tg.getCharacter(8, 13).getBackgroundColor() == TextColor.ANSI.BLACK_BRIGHT){
             game.changeState(new PvpGameState(game));
+
+            screen.clear();
+            tg.setForegroundColor(TextColor.ANSI.GREEN);
+            tg.enableModifiers(SGR.BOLD);
+            tg.putString(37,12, "ROUND " + game.getRound());
+            screen.refresh();
+
+            try{
+                Thread.sleep(2000);
+            }catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
             game.pvp();
         }
     }
