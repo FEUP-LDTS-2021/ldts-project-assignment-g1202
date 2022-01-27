@@ -34,7 +34,7 @@ public class Arena{
 
     public Arena(int width, int height) {
         player = new Player(10, 10, 100, 3);
-        player2 = new Player(10, 15, 100, 3);
+        player2 = new Player(50, 10, 100, 3);
         this.height = height;
         this.width = width;
         this.walls = createWalls();
@@ -80,7 +80,7 @@ public class Arena{
         return player2;
     }
 
-    public void damageEnemy() { // ataca de lado
+    public void damageEnemy() {
         for (BadGuy bad : baddies) {
             if     (player.position.getX() + 3 >= bad.position.getX() && player.position.getX() < bad.position.getX() && player.position.getY() == bad.position.getY() ||
                     player.position.getX() - 3 <= bad.position.getX() && player.position.getX() > bad.position.getX() && player.position.getY() == bad.position.getY() ||
@@ -141,6 +141,7 @@ public class Arena{
             screen.setBackgroundColor(TextColor.Factory.fromString("#FF7F50"));
             screen.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width, height), ' ');
 
+            System.out.println("Entrei no else if do lv 3");
             finalBoss.drawBoss(screen);
         }
 
@@ -157,7 +158,7 @@ public class Arena{
         screen2.setBackgroundColor(TextColor.Factory.fromString("#465690"));
         screen2.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width, height), ' ');
         player.draw(screen2);
-        player2.draw(screen2);
+        player2.drawPlayer2(screen2);
 
         //implementação das walls
         for (Wall wall : walls)

@@ -12,12 +12,13 @@ import java.util.List;
 public class Player {
 
 
-    Position position;
+    public Position position;
     Hp hitpoints;
     private int life;
     int credit = 0; // coins = 0
     List<Weapon> weapons; //Todas as weapons do player
     Weapon weapon; //A weapon que o player está a usar no momento
+
 
     public int getCredit(){
         return credit;
@@ -71,6 +72,11 @@ public class Player {
 
     public void draw(TextGraphics screen) {
         screen.setForegroundColor(TextColor.Factory.fromString("#FFFF33"));
+        screen.putString(new TerminalPosition(position.getX(), position.getY()),"X");
+    }
+
+    public void drawPlayer2(TextGraphics screen) {
+        screen.setForegroundColor(TextColor.Factory.fromString("#FF0000"));
         screen.putString(new TerminalPosition(position.getX(), position.getY()),"X");
     }
 

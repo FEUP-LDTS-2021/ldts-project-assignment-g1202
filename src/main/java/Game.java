@@ -24,7 +24,7 @@ public class Game {
     Shop shop;
     GameState gameState;
     int lvl = 1;
-    int p1kills, p2kills, round = 0;
+    int p1kills, p2kills, round = 1;
     Inventory inv;
 
 
@@ -149,10 +149,6 @@ public class Game {
         tg.setForegroundColor(TextColor.ANSI.DEFAULT);
         tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
         tg.putString(8, 12, "Sword: 0");
-
-        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
-        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
-        tg.putString(8, 14, "HP Potions:  " + shop.contapots);
 
         screen.refresh();
 
