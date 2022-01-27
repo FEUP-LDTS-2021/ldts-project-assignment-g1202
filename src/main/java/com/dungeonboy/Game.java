@@ -97,7 +97,10 @@ public class Game {
             if (keyPressed.getKeyType() == KeyType.Escape) {
                 keepRunning = false;
                 gameState.goBack(); // Volta ao menu
-            }else if (keyPressed.getKeyType() == KeyType.Character && keyPressed.getCharacter() == ' '){
+            }else if (keyPressed.getKeyType() == KeyType.EOF){
+                break;
+            }
+            else if (keyPressed.getKeyType() == KeyType.Character && keyPressed.getCharacter() == ' '){
                 survArena.damageEnemy();
 
                 if (survArena.getBaddies().size() == 0){
@@ -132,6 +135,8 @@ public class Game {
     // Opção do modo PVP
     public void pvp() throws IOException {
         boolean keepRunning = true;
+        int c = 0;
+        int q = 0;
 
         while(keepRunning){
             gameState.display();
@@ -140,7 +145,10 @@ public class Game {
             if (keyPressed.getKeyType() == KeyType.Escape) {
                 keepRunning = false;
                 gameState.goBack();  //Volta ao menu
-            }else if (keyPressed.getKeyType() == KeyType.Character && keyPressed.getCharacter() == ' ') {
+            } else if (keyPressed.getKeyType() == KeyType.EOF){
+                break;
+            }
+            else if (keyPressed.getKeyType() == KeyType.Character && keyPressed.getCharacter() == ' ') {
                 pvpArena.damagePlayer2();
 
                 if (pvpArena.player2.getHitpoints().getHp() == 0){
@@ -151,6 +159,44 @@ public class Game {
 
                 if (pvpArena.player.getHitpoints().getHp() == 0){
                     gameState.lose();
+                }
+            }else if (keyPressed.getKeyType() == KeyType.Character && keyPressed.getCharacter() == 'c'){
+                if (c == 0) {
+                    if (changeWeaponP1("Sword")) {
+                        c++;
+                    }
+                }
+                else if (c == 1){
+                    if (changeWeaponP1("Arrow")) {
+                        c++;
+                    }
+                    else {
+                        changeWeaponP1("Fists");
+                        c--;
+                    }
+                }
+                else if (c == 2){
+                    changeWeaponP1("Fists");
+                    c = 0;
+                }
+            }else if (keyPressed.getKeyType() == KeyType.Character && keyPressed.getCharacter() == 'q'){
+                if (q == 0) {
+                    if (changeWeaponP2("Sword")) {
+                        q++;
+                    }
+                }
+                else if (q == 1){
+                    if (changeWeaponP2("Arrow")) {
+                        q++;
+                    }
+                    else {
+                        changeWeaponP2("Fists");
+                        q--;
+                    }
+                }
+                else if (q == 2){
+                    changeWeaponP2("Fists");
+                    q = 0;
                 }
             }
             else { // caso nao fechemos o jogo vamos tentar mover
@@ -241,5 +287,25 @@ public class Game {
 
     public void changeState (GameState state){
         this.gameState = state;
+    }
+
+    public boolean changeWeaponP1(String type){  //Mudança de arma do player1
+        for (Weapon weapon : pvpArena.getPlayer().getWeapons()){
+            if (weapon.getType() == type){
+                pvpArena.getPlayer().setWeapon(weapon);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean changeWeaponP2(String type){  //Mudança de arma do player2
+        for (Weapon weapon : pvpArena.getPlayer2().getWeapons()){
+            if (weapon.getType() == type){
+                pvpArena.getPlayer2().setWeapon(weapon);
+                return true;
+            }
+        }
+        return false;
     }
 }

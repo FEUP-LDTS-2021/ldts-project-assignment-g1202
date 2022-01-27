@@ -14,10 +14,6 @@ import java.util.Random;
 public class Arena{
     Player player;
     Player player2;
-    BadGuy eggman;
-    BadGuy eggman2;
-    BadGuy eggman3;
-    BadGuy eggman4;
     //BadGuy finalBoss;
     private int height;
     private int width;
@@ -82,27 +78,27 @@ public class Arena{
 
     public void damageEnemy() {
         for (BadGuy bad : baddies) {
-            if     (player.position.getX() + 3 >= bad.position.getX() && player.position.getX() < bad.position.getX() && player.position.getY() == bad.position.getY() ||
+            if     ((player.position.getX() + 3 >= bad.position.getX() && player.position.getX() < bad.position.getX() && player.position.getY() == bad.position.getY() ||
                     player.position.getX() - 3 <= bad.position.getX() && player.position.getX() > bad.position.getX() && player.position.getY() == bad.position.getY() ||
                     player.position.getY() +  3 >= bad.position.getY() && player.position.getY() < bad.position.getY() && player.position.getX() == bad.position.getX() ||
-                    player.position.getY() -  3 <= bad.position.getY() && player.position.getY() > bad.position.getY() && player.position.getX() == bad.position.getX()){
+                    player.position.getY() -  3 <= bad.position.getY() && player.position.getY() > bad.position.getY() && player.position.getX() == bad.position.getX()) && player.getWeapon() == "Fists"){
                 player.noneAttack(bad);
                 System.out.println(bad.hitpoints.getHp());
                 if(bad.hitpoints.getHp() == 0) baddies.remove(bad);
                 break;
             }
-            else if(player.position.getX() + 5 >= bad.position.getX() && player.position.getX() < bad.position.getX() && player.position.getY() == bad.position.getY() ||
+            else if((player.position.getX() + 5 >= bad.position.getX() && player.position.getX() < bad.position.getX() && player.position.getY() == bad.position.getY() ||
                     player.position.getX() - 5 <= bad.position.getX() && player.position.getX() > bad.position.getX() && player.position.getY() == bad.position.getY() ||
                     player.position.getX() + 5 >= bad.position.getY() && player.position.getY() < bad.position.getY() && player.position.getX() == bad.position.getX() ||
-                    player.position.getX() - 5 <= bad.position.getY() && player.position.getY() > bad.position.getY() && player.position.getX() == bad.position.getX()){
+                    player.position.getX() - 5 <= bad.position.getY() && player.position.getY() > bad.position.getY() && player.position.getX() == bad.position.getX())&& player.getWeapon() == "Sword"){
                 player.swordAttack(bad);
                 if(bad.hitpoints.getHp() == 0) baddies.remove(bad);
                 break;
             }
-            else if(player.position.getX() + 10 >= bad.position.getX() && player.position.getX() < bad.position.getX() && player.position.getY() == bad.position.getY()||
+            else if((player.position.getX() + 10 >= bad.position.getX() && player.position.getX() < bad.position.getX() && player.position.getY() == bad.position.getY()||
                     player.position.getX() - 10 <= bad.position.getX() && player.position.getX() > bad.position.getX() && player.position.getY() == bad.position.getY() ||
                     player.position.getY() + 10 >= bad.position.getY() && player.position.getY() < bad.position.getY() && player.position.getX() == bad.position.getX() ||
-                    player.position.getY() - 10 <= bad.position.getY() && player.position.getY() > bad.position.getY() && player.position.getX() == bad.position.getX()){
+                    player.position.getY() - 10 <= bad.position.getY() && player.position.getY() > bad.position.getY() && player.position.getX() == bad.position.getX())&& player.getWeapon() == "Arrow"){
                 player.arrowAttack(bad);
                 if(bad.hitpoints.getHp() == 0) baddies.remove(bad);
                 break;
@@ -111,43 +107,43 @@ public class Arena{
     }
 
     public void damagePlayer2() {  // player1 ataca player2
-        if     (player.position.getX() + 3 >= player2.position.getX() && player.position.getX() < player2.position.getX() && player.position.getY() == player2.position.getY() ||
+        if     ((player.position.getX() + 3 >= player2.position.getX() && player.position.getX() < player2.position.getX() && player.position.getY() == player2.position.getY() ||
                 player.position.getX() - 3 <= player2.position.getX() && player.position.getX() > player2.position.getX() && player.position.getY() == player2.position.getY() ||
                 player.position.getY() +  3 >= player2.position.getY() && player.position.getY() < player2.position.getY() && player.position.getX() == player2.position.getX() ||
-                player.position.getY() -  3 <= player2.position.getY() && player.position.getY() > player2.position.getY() && player.position.getX() == player2.position.getX()){
+                player.position.getY() -  3 <= player2.position.getY() && player.position.getY() > player2.position.getY() && player.position.getX() == player2.position.getX()) && player.getWeapon() == "Fists"){
             player.noneAttackPvP(player2);
         }
-        else if(player.position.getX() + 5 >= player2.position.getX() && player.position.getX() < player2.position.getX() && player.position.getY() == player2.position.getY() ||
+        else if((player.position.getX() + 5 >= player2.position.getX() && player.position.getX() < player2.position.getX() && player.position.getY() == player2.position.getY() ||
                 player.position.getX() - 5 <= player2.position.getX() && player.position.getX() > player2.position.getX() && player.position.getY() == player2.position.getY() ||
                 player.position.getX() + 5 >= player2.position.getY() && player.position.getY() < player2.position.getY() && player.position.getX() == player2.position.getX() ||
-                player.position.getX() - 5 <= player2.position.getY() && player.position.getY() > player2.position.getY() && player.position.getX() == player2.position.getX()){
+                player.position.getX() - 5 <= player2.position.getY() && player.position.getY() > player2.position.getY() && player.position.getX() == player2.position.getX()) && player.getWeapon() == "Sword"){
             player.swordAttackPvP(player2);
         }
-        else if(player.position.getX() + 10 >= player2.position.getX() && player.position.getX() < player2.position.getX() && player.position.getY() == player2.position.getY()||
+        else if((player.position.getX() + 10 >= player2.position.getX() && player.position.getX() < player2.position.getX() && player.position.getY() == player2.position.getY()||
                 player.position.getX() - 10 <= player2.position.getX() && player.position.getX() > player2.position.getX() && player.position.getY() == player2.position.getY() ||
                 player.position.getY() + 10 >= player2.position.getY() && player.position.getY() < player2.position.getY() && player.position.getX() == player2.position.getX() ||
-                player.position.getY() - 10 <= player2.position.getY() && player.position.getY() > player2.position.getY() && player.position.getX() == player2.position.getX()){
+                player.position.getY() - 10 <= player2.position.getY() && player.position.getY() > player2.position.getY() && player.position.getX() == player2.position.getX()) && player.getWeapon() == "Arrow"){
             player.arrowAttackPvP(player2);
         }
     }
 
     public void damagePlayer1() {  //Player2 ataca player1
-        if     (player2.position.getX() + 3 >= player.position.getX() && player2.position.getX() < player.position.getX() && player2.position.getY() == player.position.getY() ||
+        if     ((player2.position.getX() + 3 >= player.position.getX() && player2.position.getX() < player.position.getX() && player2.position.getY() == player.position.getY() ||
                 player2.position.getX() - 3 <= player.position.getX() && player2.position.getX() > player.position.getX() && player2.position.getY() == player.position.getY() ||
                 player2.position.getY() + 3 >= player.position.getY() && player2.position.getY() < player.position.getY() && player2.position.getX() == player.position.getX() ||
-                player2.position.getY() - 3 <= player.position.getY() && player2.position.getY() > player.position.getY() && player2.position.getX() == player.position.getX()){
+                player2.position.getY() - 3 <= player.position.getY() && player2.position.getY() > player.position.getY() && player2.position.getX() == player.position.getX()) && player2.getWeapon() == "Fists"){
             player2.noneAttackPvP(player);
         }
-        else if(player2.position.getX() + 5 >= player.position.getX() && player2.position.getX() < player.position.getX() && player2.position.getY() == player.position.getY() ||
+        else if((player2.position.getX() + 5 >= player.position.getX() && player2.position.getX() < player.position.getX() && player2.position.getY() == player.position.getY() ||
                 player2.position.getX() - 5 <= player.position.getX() && player2.position.getX() > player.position.getX() && player2.position.getY() == player.position.getY() ||
                 player2.position.getX() + 5 >= player.position.getY() && player2.position.getY() < player.position.getY() && player2.position.getX() == player.position.getX() ||
-                player2.position.getX() - 5 <= player.position.getY() && player2.position.getY() > player.position.getY() && player2.position.getX() == player.position.getX()){
+                player2.position.getX() - 5 <= player.position.getY() && player2.position.getY() > player.position.getY() && player2.position.getX() == player.position.getX()) && player2.getWeapon() == "Sword"){
             player2.swordAttackPvP(player);
         }
-        else if(player2.position.getX() + 10 >= player.position.getX() && player2.position.getX() < player.position.getX() && player2.position.getY() == player.position.getY()||
+        else if((player2.position.getX() + 10 >= player.position.getX() && player2.position.getX() < player.position.getX() && player2.position.getY() == player.position.getY()||
                 player2.position.getX() - 10 <= player.position.getX() && player2.position.getX() > player.position.getX() && player2.position.getY() == player.position.getY() ||
                 player2.position.getY() + 10 >= player.position.getY() && player2.position.getY() < player.position.getY() && player2.position.getX() == player.position.getX() ||
-                player2.position.getY() - 10 <= player.position.getY() && player2.position.getY() > player.position.getY() && player2.position.getX() == player.position.getX()){
+                player2.position.getY() - 10 <= player.position.getY() && player2.position.getY() > player.position.getY() && player2.position.getX() == player.position.getX()) && player2.getWeapon() == "Arrow"){
             player2.arrowAttackPvP(player);
         }
     }

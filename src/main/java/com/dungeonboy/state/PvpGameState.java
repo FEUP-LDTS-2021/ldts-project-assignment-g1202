@@ -3,12 +3,14 @@ package com.dungeonboy.state;
 import com.dungeonboy.Game;
 import com.dungeonboy.Hp;
 import com.dungeonboy.Position;
+import com.dungeonboy.Weapon;
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
 
 import java.io.IOException;
+import java.util.List;
 
 public class PvpGameState implements GameState{
     Game game;
@@ -22,6 +24,16 @@ public class PvpGameState implements GameState{
     }
 
     public void display() throws IOException {
+        List<Weapon> w = game.getPvpArena().getPlayer().getWeapons();
+        w.add(new Weapon(0, 5, "Sword"));
+        w.add(new Weapon(0, 10, "Arrow"));
+        game.getPvpArena().getPlayer().setWeapons(w);
+
+        List<Weapon> w1 = game.getPvpArena().getPlayer2().getWeapons();
+        w1.add(new Weapon(0, 5, "Sword"));
+        w1.add(new Weapon(0, 10, "Arrow"));
+        game.getPvpArena().getPlayer2().setWeapons(w1);
+
         screen.clear();
 
         game.getPvpArena().draw2(tg);
