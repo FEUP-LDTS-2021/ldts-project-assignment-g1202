@@ -1,6 +1,9 @@
 package com.dungeonboy.state;
 
 import com.dungeonboy.Game;
+import com.dungeonboy.Player;
+import com.dungeonboy.Position;
+import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
@@ -11,6 +14,7 @@ public class PvpGameState implements GameState{
     Game game;
     Screen screen;
     TextGraphics tg;
+
 
     public PvpGameState(Game game){
         this.game = game;
@@ -56,7 +60,64 @@ public class PvpGameState implements GameState{
 
     }
 
-    public void win(){
+/*
+    public void kill(Player player, Player player2) throws IOException {
+        for (BadGuy bad : baddies) {
+            if     (player.position.getX() + 3 >= bad.position.getX() && player.position.getX() < bad.position.getX() && player.position.getY() == bad.position.getY() ||
+                    player.position.getX() - 3 <= bad.position.getX() && player.position.getX() > bad.position.getX() && player.position.getY() == bad.position.getY() ||
+                    player.position.getY() +  3 >= bad.position.getY() && player.position.getY() < bad.position.getY() && player.position.getX() == bad.position.getX() ||
+                    player.position.getY() -  3 <= bad.position.getY() && player.position.getY() > bad.position.getY() && player.position.getX() == bad.position.getX()){
+                player.noneAttack(player2);
+                System.out.println(bad.hitpoints.getHp());
+                if(bad.hitpoints.getHp() == 0) baddies.remove(bad);
+                break;
+            }
+            else if(player.position.getX() + 5 >= bad.position.getX() && player.position.getX() < bad.position.getX() && player.position.getY() == bad.position.getY() ||
+                    player.position.getX() - 5 <= bad.position.getX() && player.position.getX() > bad.position.getX() && player.position.getY() == bad.position.getY() ||
+                    player.position.getX() + 5 >= bad.position.getY() && player.position.getY() < bad.position.getY() && player.position.getX() == bad.position.getX() ||
+                    player.position.getX() - 5 <= bad.position.getY() && player.position.getY() > bad.position.getY() && player.position.getX() == bad.position.getX()){
+                player.swordAttack(bad);
+                if(bad.hitpoints.getHp() == 0) baddies.remove(bad);
+                break;
+            }
+            else if(player.position.getX() + 10 >= bad.position.getX() && player.position.getX() < bad.position.getX() && player.position.getY() == bad.position.getY()||
+                    player.position.getX() - 10 <= bad.position.getX() && player.position.getX() > bad.position.getX() && player.position.getY() == bad.position.getY() ||
+                    player.position.getY() + 10 >= bad.position.getY() && player.position.getY() < bad.position.getY() && player.position.getX() == bad.position.getX() ||
+                    player.position.getY() - 10 <= bad.position.getY() && player.position.getY() > bad.position.getY() && player.position.getX() == bad.position.getX()){
+                player.arrowAttack(bad);
+                if(bad.hitpoints.getHp() == 0) player2.remove(bad);
+                break;
+            }
+        }
+    }
+*/
+    public void win() throws IOException {
+        if (game.getRound() == 5 && game.getP1kills() > game.getP2kills()) {
+            screen.clear();
+            tg.setForegroundColor(TextColor.ANSI.RED);
+            tg.enableModifiers(SGR.BOLD);
+            tg.putString(35, 12, "Player 1 Wins!");
+            screen.refresh();
+            try {
+                Thread.sleep(2500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            screen.clear();
+            tg.setForegroundColor(TextColor.ANSI.RED);
+            tg.enableModifiers(SGR.BOLD);
+            tg.putString(35,12, "Player 2 Wins!");
+            screen.refresh();
+            try {
+                Thread.sleep(2500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
+        }
     }
 }
+
+
