@@ -4,6 +4,8 @@ import com.dungeonboy.Arena;
 import com.dungeonboy.Hp;
 import com.dungeonboy.Player;
 import com.dungeonboy.Position;
+import com.googlecode.lanterna.TerminalPosition;
+import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
@@ -12,6 +14,8 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 
 import java.io.IOException;
 
@@ -54,24 +58,22 @@ class PlayerTest {
 
     @Test
     void draw() throws IOException {
-        Terminal terminal = new DefaultTerminalFactory().createTerminal();
-        Screen screen = new TerminalScreen(terminal);
-        TextGraphics tg = screen.newTextGraphics();
+        TextGraphics tg = Mockito.mock(TextGraphics.class);
 
         test.draw(tg);
 
-        assertEquals("X", tg.getCharacter(15, 20).getCharacterString());
+        Mockito.verify(tg, Mockito.times(1)).setForegroundColor(TextColor.Factory.fromString("#FFFF33"));
+        Mockito.verify(tg, Mockito.times(1)).putString(new TerminalPosition(15, 20), "X");
     }
 
     @Test
     void drawPlayer2() throws IOException {
-        Terminal terminal = new DefaultTerminalFactory().createTerminal();
-        Screen screen = new TerminalScreen(terminal);
-        TextGraphics tg = screen.newTextGraphics();
+        TextGraphics tg = Mockito.mock(TextGraphics.class);
 
-        test2.draw(tg);
+        test2.drawPlayer2(tg);
 
-        assertEquals("X", tg.getCharacter(35, 20).getCharacterString());
+        Mockito.verify(tg, Mockito.times(1)).setForegroundColor(TextColor.Factory.fromString("#FF0000"));
+        Mockito.verify(tg, Mockito.times(1)).putString(new TerminalPosition(35, 20), "X");
     }
 
     @Test

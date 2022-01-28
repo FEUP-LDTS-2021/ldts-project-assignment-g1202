@@ -4,6 +4,8 @@ import com.dungeonboy.Arena;
 import com.dungeonboy.BadGuy;
 import com.dungeonboy.Coins;
 import com.dungeonboy.Player;
+import com.googlecode.lanterna.TerminalPosition;
+import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
@@ -11,6 +13,8 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 
@@ -23,27 +27,29 @@ class ArenaTest {
     BadGuy bad = new BadGuy(10,10,100);
     Coins coinTest = new Coins(10,10);
 
-
     @Test
     void draw() throws IOException {
-        Terminal terminal = new DefaultTerminalFactory().createTerminal();
-        Screen screen = new TerminalScreen(terminal);
-        TextGraphics tg = screen.newTextGraphics();
+        TextGraphics tg = Mockito.mock(TextGraphics.class);
 
         arena.draw(tg, 1);
 
-        assertEquals(TextColor.Factory.fromString("#906846"), tg.getBackgroundColor());
+        Mockito.verify(tg, Mockito.atLeast(1)).setBackgroundColor(TextColor.Factory.fromString("#906846"));
+        Mockito.verify(tg, Mockito.atLeast(1)).fillRectangle(new TerminalPosition(0, 0), new TerminalSize(arena.getWidth(), arena.getHeight()), ' ');
+
+        arena.draw(tg, 2);
+
+        Mockito.verify(tg, Mockito.atLeast(1)).setBackgroundColor(TextColor.Factory.fromString("#6495ED"));
+        Mockito.verify(tg, Mockito.atLeast(1)).fillRectangle(new TerminalPosition(0, 0), new TerminalSize(arena.getWidth(), arena.getHeight()), ' ');
     }
 
     @Test
     void draw2() throws IOException {
-        Terminal terminal = new DefaultTerminalFactory().createTerminal();
-        Screen screen = new TerminalScreen(terminal);
-        TextGraphics tg = screen.newTextGraphics();
+        TextGraphics tg = Mockito.mock(TextGraphics.class);
 
         arena.draw2(tg);
 
-        assertEquals(TextColor.Factory.fromString("#465690"), tg.getBackgroundColor());
+        Mockito.verify(tg, Mockito.times(1)).setBackgroundColor(TextColor.Factory.fromString("#465690"));
+        Mockito.verify(tg, Mockito.times(1)).fillRectangle(new TerminalPosition(0, 0), new TerminalSize(arena.getWidth(), arena.getHeight()), ' ');
     }
 
     @Test

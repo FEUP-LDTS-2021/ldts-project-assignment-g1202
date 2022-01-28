@@ -2,12 +2,15 @@ package com.dungeonboy;
 
 import com.dungeonboy.BadGuy;
 import com.dungeonboy.Player;
+import com.googlecode.lanterna.TerminalPosition;
+import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.io.IOException;
 
@@ -22,15 +25,13 @@ class BadGuyTest {
 
     @Test
     void draw() throws IOException {
-        Terminal terminal = new DefaultTerminalFactory().createTerminal();
-        Screen screen = new TerminalScreen(terminal);
-        TextGraphics tg = screen.newTextGraphics();
+        TextGraphics tg = Mockito.mock(TextGraphics.class);
 
         badGuy1.draw(tg);
         badGuy2.draw(tg);
 
-        assertEquals("E", tg.getCharacter(10, 11).getCharacterString());
-        assertEquals("E", tg.getCharacter(10,9).getCharacterString());
+        Mockito.verify(tg, Mockito.atLeast(1)).setForegroundColor(TextColor.Factory.fromString("#FF0000"));
+        Mockito.verify(tg, Mockito.atLeast(1)).putString(new TerminalPosition(badGuy1.getPosition().getX(), badGuy1.getPosition().getY()),"E");
     }
 
     @Test
