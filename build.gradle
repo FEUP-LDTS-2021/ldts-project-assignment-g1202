@@ -28,6 +28,6 @@ test {
 
 pitest {
     junit5PluginVersion = '0.12'
-    excludedTestClasses = ['com.dungeonboy.ShopTest']
     targetClasses = ['com.dungeonboy.*']
+    excludedTestClasses = ['com.dungeonboy.ShopTest']
 }

@@ -83,7 +83,7 @@ public class Arena{
                     player.position.getY() +  3 >= bad.position.getY() && player.position.getY() < bad.position.getY() && player.position.getX() == bad.position.getX() ||
                     player.position.getY() -  3 <= bad.position.getY() && player.position.getY() > bad.position.getY() && player.position.getX() == bad.position.getX()) && player.getWeapon() == "Fists"){
                 player.noneAttack(bad);
-                System.out.println(bad.hitpoints.getHp());
+                //System.out.println(bad.hitpoints.getHp());
                 if(bad.hitpoints.getHp() == 0) baddies.remove(bad);
                 break;
             }

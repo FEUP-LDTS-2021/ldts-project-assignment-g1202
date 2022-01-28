@@ -162,7 +162,6 @@ public class Shop {
                 List<Weapon> pWeapons = player.getWeapons();
                 pWeapons.add(weapons.get(i));
                 player.setWeapons(pWeapons);  //Junta a nova arma às outras já adquiridas pelo player
-                player.setWeapon(weapons.get(i)); //Atribui nova arma ao player
 
                 tg.setBackgroundColor(TextColor.ANSI.BLACK);
                 tg.putString(9, 4, "                       ");  // maneira que eu arranjei para não haver sobreposição de texto

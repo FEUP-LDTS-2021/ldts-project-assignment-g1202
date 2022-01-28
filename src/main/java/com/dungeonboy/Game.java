@@ -89,6 +89,7 @@ public class Game {
     // Opção do modo survival
     public void survival() throws IOException{
         boolean keepRunning = true;
+        int c = 0;
 
         while (keepRunning) {
             gameState.display();
@@ -99,6 +100,22 @@ public class Game {
                 gameState.goBack(); // Volta ao menu
             }else if (keyPressed.getKeyType() == KeyType.EOF){
                 break;
+            }else if (keyPressed.getKeyType() == KeyType.Character && keyPressed.getCharacter() == 'c') {
+                if (c == 0) {
+                    if (changeWeaponSurv("Sword")) {
+                        c++;
+                    }
+                } else if (c == 1) {
+                    if (changeWeaponSurv("Arrow")) {
+                        c++;
+                    } else {
+                        changeWeaponSurv("Fists");
+                        c--;
+                    }
+                } else if (c == 2) {
+                    changeWeaponSurv("Fists");
+                    c = 0;
+                }
             }
             else if (keyPressed.getKeyType() == KeyType.Character && keyPressed.getCharacter() == ' '){
                 survArena.damageEnemy();
@@ -303,6 +320,16 @@ public class Game {
         for (Weapon weapon : pvpArena.getPlayer2().getWeapons()){
             if (weapon.getType() == type){
                 pvpArena.getPlayer2().setWeapon(weapon);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean changeWeaponSurv(String type){
+        for (Weapon weapon : survArena.getPlayer().getWeapons()){
+            if (weapon.getType() == type){
+                survArena.getPlayer().setWeapon(weapon);
                 return true;
             }
         }
