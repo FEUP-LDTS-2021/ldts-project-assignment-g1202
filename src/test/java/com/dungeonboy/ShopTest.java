@@ -7,7 +7,9 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 
 
@@ -19,44 +21,55 @@ class ShopTest {
     Terminal terminal;
     Screen screen;
     TextGraphics tg;
+    Shop shop;
+
+    @BeforeEach
+    void setup() throws IOException{
+        terminal = Mockito.mock(Terminal.class);
+        screen = Mockito.mock(Screen.class);
+        tg = Mockito.mock(TextGraphics.class);
+        shop = new Shop(screen, terminal);
+        shop.tg = tg;
+    }
 
     @Test
     void goDown() throws IOException{
-        terminal = new DefaultTerminalFactory().createTerminal();
-        screen = new TerminalScreen(terminal);
-        Shop shop = new Shop(screen, terminal);
         shop.goDown(0,shop.tg);
-        assertEquals(TextColor.ANSI.BLACK_BRIGHT, shop.tg.getCharacter(9,11).getBackgroundColor());
+        Mockito.verify(tg, Mockito.atLeast(1)).setBackgroundColor(TextColor.ANSI.BLACK_BRIGHT);
+        Mockito.verify(tg, Mockito.atLeast(1)).setForegroundColor(TextColor.ANSI.DEFAULT);
+        Mockito.verify(tg, Mockito.atLeast(1)).putString(9, 11, shop.getWeapons().get(0).getType() + "(" + String.valueOf(shop.getWeapons().get(0).getRange()) + ")");
 
         shop.goDown(1,shop.tg);
-        assertEquals(TextColor.ANSI.BLACK_BRIGHT, shop.tg.getCharacter(9, 13).getBackgroundColor());
+        Mockito.verify(tg, Mockito.atLeast(1)).setBackgroundColor(TextColor.ANSI.BLACK_BRIGHT);
+        Mockito.verify(tg, Mockito.atLeast(1)).setForegroundColor(TextColor.ANSI.DEFAULT);
+        Mockito.verify(tg, Mockito.atLeast(1)).putString(9, 11 + 2, shop.getWeapons().get(1).getType() + "(" + String.valueOf(shop.getWeapons().get(1).getRange()) + ")");
 
         shop.goDown(4, shop.tg);
-        assertEquals(TextColor.ANSI.BLACK_BRIGHT, shop.tg.getCharacter(45, 15).getBackgroundColor());
+        Mockito.verify(tg, Mockito.atLeast(1)).setBackgroundColor(TextColor.ANSI.BLACK_BRIGHT);
+        Mockito.verify(tg, Mockito.atLeast(1)).setForegroundColor(TextColor.ANSI.DEFAULT);
+        Mockito.verify(tg, Mockito.atLeast(1)).putString(45, 11 + (2*(4-2)), shop.getPotions().get(4-2).getName());
     }
 
     @Test
     void goUp() throws IOException{
-        terminal = new DefaultTerminalFactory().createTerminal();
-        screen = new TerminalScreen(terminal);
-        Shop shop = new Shop(screen, terminal);
-
         shop.goUp(0, shop.tg);
-        assertEquals(TextColor.ANSI.BLACK_BRIGHT, shop.tg.getCharacter(9,11).getBackgroundColor());
+        Mockito.verify(tg, Mockito.atLeast(1)).setBackgroundColor(TextColor.ANSI.BLACK_BRIGHT);
+        Mockito.verify(tg, Mockito.atLeast(1)).setForegroundColor(TextColor.ANSI.DEFAULT);
+        Mockito.verify(tg, Mockito.atLeast(1)).putString(9, 11, shop.getWeapons().get(0).getType() + "(" + String.valueOf(shop.getWeapons().get(0).getRange()) + ")");
 
         shop.goUp(1, shop.tg);
-        assertEquals(TextColor.ANSI.BLACK_BRIGHT, shop.tg.getCharacter(9, 13).getBackgroundColor());
+        Mockito.verify(tg, Mockito.atLeast(1)).setBackgroundColor(TextColor.ANSI.BLACK_BRIGHT);
+        Mockito.verify(tg, Mockito.atLeast(1)).setForegroundColor(TextColor.ANSI.DEFAULT);
+        Mockito.verify(tg, Mockito.atLeast(1)).putString(9, 11 + 2, shop.getWeapons().get(1).getType() + "(" + String.valueOf(shop.getWeapons().get(1).getRange()) + ")");
 
         shop.goUp(2, shop.tg);
-        assertEquals(TextColor.ANSI.BLACK_BRIGHT, shop.tg.getCharacter(45,11).getBackgroundColor());
+        Mockito.verify(tg, Mockito.atLeast(1)).setBackgroundColor(TextColor.ANSI.BLACK_BRIGHT);
+        Mockito.verify(tg, Mockito.atLeast(1)).setForegroundColor(TextColor.ANSI.DEFAULT);
+        Mockito.verify(tg, Mockito.atLeast(1)).putString(45, 11, shop.getPotions().get(0).getName());
     }
 
     @Test
     void canBuy() throws IOException {
-        terminal = new DefaultTerminalFactory().createTerminal();
-        screen = new TerminalScreen(terminal);
-        Shop shop = new Shop(screen, terminal);
-
         Weapon w1= new Weapon(2, 5, "Sword");
         Weapon w2= new Weapon(4, 10, "Arrow");
         Potion p1 = new Potion(3, new Hp(10), "10 HP");
@@ -67,45 +80,35 @@ class ShopTest {
         Player p = new Player(10,10,100,3);
         p.setCredit(3);
 
-        assertEquals(true, shop.canBuy(0, p));
-        assertEquals(false, shop.canBuy(1, p));
-        assertEquals(true, shop.canBuy(2, p));
+        assertTrue(shop.canBuy(0, p));
+        assertFalse(shop.canBuy(1, p));
+        assertTrue(shop.canBuy(2, p));
     }
 
     @Test
     void select() throws IOException{
-        terminal = new DefaultTerminalFactory().createTerminal();
-        screen = new TerminalScreen(terminal);
-        Shop shop = new Shop(screen, terminal);
-
         Player player = new Player(10,10,100, 3);
         player.setCredit(4);
 
         shop.select(0, shop.tg, player);
-        assertEquals("A", shop.tg.getCharacter(9,4).getCharacterString());
+        Mockito.verify(tg, Mockito.atLeast(1)).putString(9, 4, "Adquired: " + shop.getWeapons().get(0).getType());
 
         shop.select(6, shop.tg, player);
-        assertEquals("N", shop.tg.getCharacter(9,4).getCharacterString());
+        Mockito.verify(tg, Mockito.atLeast(1)).putString(9, 4, "Not enough coins!");
     }
 
     @Test
-    void show() throws IOException {
-        terminal = new DefaultTerminalFactory().createTerminal();
-        screen = new TerminalScreen(terminal);
-        tg = screen.newTextGraphics();
+    void show() {
 
-        Shop shop = Mockito.mock(Shop.class);
-        shop.screen = screen;
-        shop.terminal = terminal;
-        shop.tg = tg;
+    }
 
-        Game game = new Game();
-        game.shop = shop;
-        game.survArena = new Arena(0,0);
-        game.survArena.player = new Player(10,10, 0, 3);
+    @Test
+    void getWeapons() {
+        assertEquals(shop.weapons, shop.getWeapons());
+    }
 
-        game.shop.show(game.survArena.player);
-
-        Mockito.verify(shop, Mockito.times(1)).show(game.survArena.player);
+    @Test
+    void getPotions() {
+        assertEquals(shop.potions, shop.getPotions());
     }
 }
