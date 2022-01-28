@@ -11,6 +11,7 @@ This project was developed by João Duarte (201707984), Miguel Tavares(202002811
 **NOTE** : This game is still on development and could suffer some changes!
 
 ### GAME SUMMARY
+
 The game starts with a black terminal with the name of the game, and some commands.
 
 <p align="center" justify="center">
@@ -35,11 +36,11 @@ If we press ENTER, we are carried into the main menu, where we can select which 
 <br />
 
 
-Survival Mode: We can now play against 4 different Enemies which will try to kill us!
-
+Survival Mode: We can now play against 6 different Enemies which will try to kill us!
+Quick Reminder! Everytime we die, our health gets a penalty each round! Starting HP's: 100, 75, 50. Be carefull!
 
 <p align="center" justify="center">
-  <img src="https://user-images.githubusercontent.com/52889593/148377444-c903cf90-61a6-4f22-985e-bb82b08d00ab.png"/>
+  <img src="https://user-images.githubusercontent.com/52889593/151533580-d891aa4f-c2ce-495b-8191-e2959bbacfbf.png"/>
 </p>
 <p align="center">
   <b><i>Img 3. Survival Mode!</i></b>
@@ -47,11 +48,10 @@ Survival Mode: We can now play against 4 different Enemies which will try to kil
 <br>
 <br />
 
-
-If we die, we go straight to the shop, where we can gear up with Weapons and Health Potions and try our luck again!
+On this level, we managed to retrieve 3 coins and if we die, we go straight to the shop, where we can gear up with Weapons and Health Potions and try our luck again!
 
 <p align="center" justify="center">
-  <img src="https://user-images.githubusercontent.com/52889593/148377558-fc3af7d6-02b2-4b05-8afd-a58bebee20d7.png"/>
+  <img src="https://user-images.githubusercontent.com/52889593/151533718-1371d29e-1f69-43e6-a97c-596cde03c28a.png"/>
 </p>
 <p align="center">
   <b><i>Img 4. Shop</i></b>
@@ -59,18 +59,76 @@ If we die, we go straight to the shop, where we can gear up with Weapons and Hea
 <br>
 <br />
 
-
-PvP Mode: Play against your friend, best of 5 rounds win! Good luck!
+We just bought a Sword for only 2 coins! That's amazing!
 
 <p align="center" justify="center">
-  <img src="https://user-images.githubusercontent.com/52889593/148138866-38876123-19e6-4a9c-9567-150c9f001c57.png"/>
+  <img src="https://user-images.githubusercontent.com/52889593/151533927-2e64acca-03df-4612-9650-531779b5bd9e.png"/>
 </p>
 <p align="center">
-  <b><i>Img 5. PvP Mode </i></b>
+  <b><i>Img 5. Sword Bought </i></b>
 </p>
 <br>
 <br />
 
+You can check now that we are using a Sword instead of our own Fists!
+Sword will deal more damage, and also has more range!
+
+<p align="center" justify="center">
+  <img src="https://user-images.githubusercontent.com/52889593/151534119-1a0daf4a-5f14-4693-8f9f-f27252da3064.png"/>
+</p>
+<p align="center">
+  <b><i>Img 6. Sword Switch </i></b>
+</p>
+<br>
+<br />
+
+
+Inventory! We created an inventory which will store information about what we are carrying in our bag!
+
+<p align="center" justify="center">
+  <img src="https://user-images.githubusercontent.com/52889593/151536524-73312078-cdc3-4261-b896-2e0d34123127.png"/>
+</p>
+<p align="center">
+  <b><i>Img 7. Sword Switch </i></b>
+</p>
+<br>
+<br />
+
+
+
+PvP Mode: Play against your friend, best of 5 rounds win! Good luck!
+
+<p align="center" justify="center">
+  <img src="https://user-images.githubusercontent.com/52889593/151534363-7594fa9a-c8ec-4dc1-bebb-bb9cc11e2f32.png"/>
+</p>
+<p align="center">
+  <b><i>Img 8. PvP Mode </i></b>
+</p>
+<br>
+<br />
+
+Player 1: Yellow, can change between weapons using the 'c' key, and attack using "Space bar" key
+Player 2: Red, can change between weapons using the 'q' key, and attack using "Tab" key
+
+<p align="center" justify="center">
+  <img src="https://user-images.githubusercontent.com/52889593/151534852-414aa931-5989-4ef1-b4f6-3c5ed27a59e4.png"/>
+</p>
+<p align="center">
+  <b><i>Img 9. PvP Mode </i></b>
+</p>
+<br>
+<br />
+
+In this example, the Player 2 won! Congrats!
+
+<p align="center" justify="center">
+  <img src="https://user-images.githubusercontent.com/52889593/151535021-328beb54-1218-451e-be88-c00ed18118fa.png"/>
+</p>
+<p align="center">
+  <b><i>Img 10. PvP Mode </i></b>
+</p>
+<br>
+<br />
 
 
 ### IMPLEMENTED FEATURES
@@ -86,8 +144,9 @@ PvP Mode: Play against your friend, best of 5 rounds win! Good luck!
 - **Catching Coins** - If the player goes to the position of a coin, this one is going to be collected, adding some money to our inventory which can be used in the Shop.
 - **Lives** - In the beggining of the game, the player is given 3 lives (displayed in health on the screen).
 - **Dying** - A player dies if his health reaches 0, or less.
-- **Inventory** - Inventory to store our items that we bought from the shop or caught on the map
+- **Inventory** - Inventory to store our items that we bought from the shop or picked on the map
 - **Arena Transition** - Player can pass to another new Arena
+- **PvP Mode** - 2 Players can face each other using different weapons
 
 ### PLANNED FEATURES - Still being implemented!
 
@@ -121,47 +180,6 @@ The State pattern has the following consequences:
  - State objects can be shared. If State objects have no instance variables—that is, the state they represent is encoded entirely in their type—then contexts can share a State object.
 
 
-### Observers and listeners
-#### Problem in Context:  
-Our game is controlled by the keyboard, many are the ways to receive input from the keyboard, in this game we used the KeyStroke, and KeyType functions from lanterna, which after defining the key we wanted to use, if a condition was verified it would receive an input from a specific key and use it to a defined action.
-We used it to respond to terminal messages such as "Press Enter to start the game", and after pressing the desired key it would take us for another menu.
-After that we would setup the arrow keys to navigate through the menu, and also the actual gameplay too.
-
-#### The Pattern:
-
-
-#### Implementation:
-
-
-#### Consequences:
-
-
-### Different types of commands
-#### **Problem in Context:** 
-In an initial and more simplified version of the current game, the diversity in between buttons was not significant. However, in the course of the development of the project, the number of buttons increased exponentially and the need to generalise the button element became more evident. That said and knowing that good software design is often based on the principle of separation of concerns, a major refactor had to be done. 
-
-#### The Pattern:
-We have applied the **_Command_** also know as Action pattern. This pattern turns a request into a stand-alone object that contains all information about the request.
-
-#### Implementation:
-Regarding the implemetation process, all the Button classes were deleted and transformed into a single **Button** with a command attribute. These **commands**  implement the same interface having an execution method that takes no parameters. This interface lets you use various commands with the same request sender, without coupling it to concrete classes of commands. As a bonus, now you can switch command objects linked to the sender, effectively changing the sender’s behavior at runtime.
-
-<p align="center" justify="center">
-  <img src="images/UML/ButtonCommand.png"/>
-</p>
-<p align="center">
-  <b><i>Fig 4. Buttons and commands</i></b>
-</p>
-
-
-#### Consequences:
-The Command Pattern allows the following consequences:
-- You can decouple classes that invoke operations from classes that perform these operations (SRP).
-- You can implement undo/redo.
-- You can assemble a set of simple commands into a complex one.
-- The code may become more complicated since you’re introducing a whole new layer between senders and receivers.
-
-
 ### GUI
 #### Problem in Context:
 Initially we were thinking in using java GUI in order to make the game more pleasant, however after discussing with the teachers, even though it would be better visually, it was not the main concern on making this project, and not the main concern on evaluation for the game. 
@@ -192,7 +210,7 @@ We found the following code smells:
 
 ### Screenshot of coverage report
 <p align="center" justify="center">
-  <img src="https://user-images.githubusercontent.com/52889593/149919998-fe23c526-51fb-4647-8f11-8e5801f407c1.png"/>
+  <img src="https://user-images.githubusercontent.com/52889593/151537174-8ce6144e-8ff6-4720-a052-9d20a207e036.png"/>
 </p>
 <p align="center">
   <b><i>Fig 6. Code coverage screenshot</i></b>
