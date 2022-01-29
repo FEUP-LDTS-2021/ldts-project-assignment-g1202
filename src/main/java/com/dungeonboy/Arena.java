@@ -94,8 +94,28 @@ public class Arena{
 
     public void damageEnemy() {
         for (BadGuy bad : baddies) {
-            if (checkDamage(3,bad)){
+            if (checkDamage(3,bad) && player.getWeapon() == "Fists"){
                 player.noneAttack(bad);
+                System.out.println(bad.hitpoints.getHp());
+                if(bad.hitpoints.getHp() == 0) {
+                    baddies.remove(bad);
+                    Coins newcoin = new Coins(bad.getPosition().getX() , bad.getPosition().getY()); // moeda nova apos matar inimigo
+                    coins.add(newcoin);
+                }
+                break;
+            }
+            else if (checkDamage(5,bad)  && player.getWeapon() == "Sword"){
+                player.swordAttack(bad);
+                System.out.println(bad.hitpoints.getHp());
+                if(bad.hitpoints.getHp() == 0) {
+                    baddies.remove(bad);
+                    Coins newcoin = new Coins(bad.getPosition().getX() , bad.getPosition().getY()); // moeda nova apos matar inimigo
+                    coins.add(newcoin);
+                }
+                break;
+            }
+            else if (checkDamage(10,bad) && player.getWeapon() == "Bow"){
+                player.bowAttack(bad);
                 System.out.println(bad.hitpoints.getHp());
                 if(bad.hitpoints.getHp() == 0) {
                     baddies.remove(bad);
