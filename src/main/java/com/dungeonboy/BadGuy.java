@@ -25,10 +25,10 @@ public class BadGuy {
         screen.putString(new TerminalPosition(position.getX(), position.getY()),"E");
     }
 
-        public void drawBoss(TextGraphics screen) {
-            screen.setForegroundColor(TextColor.Factory.fromString("#FF0000")); // vermelho
-            screen.putString(new TerminalPosition(position.getX(), position.getY()),"O");
-        }
+    public void drawBoss(TextGraphics screen) {
+        screen.setForegroundColor(TextColor.Factory.fromString("#FF0000")); // vermelho
+        screen.putString(new TerminalPosition(position.getX(), position.getY()),"O");
+    }
 
         //movimento do mauzao
     public void running() {

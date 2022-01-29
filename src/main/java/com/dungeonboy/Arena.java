@@ -44,6 +44,10 @@ public class Arena{
         this.coins = coins;
     }
 
+    public List<Coins> getCoins(){
+        return coins;
+    }
+
     public void setBaddies(List<BadGuy> baddies){
         this.baddies = baddies;
     }
@@ -98,8 +102,8 @@ public class Arena{
             else if((player.position.getX() + 10 >= bad.position.getX() && player.position.getX() < bad.position.getX() && player.position.getY() == bad.position.getY()||
                     player.position.getX() - 10 <= bad.position.getX() && player.position.getX() > bad.position.getX() && player.position.getY() == bad.position.getY() ||
                     player.position.getY() + 10 >= bad.position.getY() && player.position.getY() < bad.position.getY() && player.position.getX() == bad.position.getX() ||
-                    player.position.getY() - 10 <= bad.position.getY() && player.position.getY() > bad.position.getY() && player.position.getX() == bad.position.getX())&& player.getWeapon() == "Arrow"){
-                player.arrowAttack(bad);
+                    player.position.getY() - 10 <= bad.position.getY() && player.position.getY() > bad.position.getY() && player.position.getX() == bad.position.getX())&& player.getWeapon() == "Bow"){
+                player.bowAttack(bad);
                 if(bad.hitpoints.getHp() == 0) baddies.remove(bad);
                 break;
             }
@@ -122,8 +126,8 @@ public class Arena{
         else if((player.position.getX() + 10 >= player2.position.getX() && player.position.getX() < player2.position.getX() && player.position.getY() == player2.position.getY()||
                 player.position.getX() - 10 <= player2.position.getX() && player.position.getX() > player2.position.getX() && player.position.getY() == player2.position.getY() ||
                 player.position.getY() + 10 >= player2.position.getY() && player.position.getY() < player2.position.getY() && player.position.getX() == player2.position.getX() ||
-                player.position.getY() - 10 <= player2.position.getY() && player.position.getY() > player2.position.getY() && player.position.getX() == player2.position.getX()) && player.getWeapon() == "Arrow"){
-            player.arrowAttackPvP(player2);
+                player.position.getY() - 10 <= player2.position.getY() && player.position.getY() > player2.position.getY() && player.position.getX() == player2.position.getX()) && player.getWeapon() == "Bow"){
+            player.bowAttackPvP(player2);
         }
     }
 
@@ -143,8 +147,8 @@ public class Arena{
         else if((player2.position.getX() + 10 >= player.position.getX() && player2.position.getX() < player.position.getX() && player2.position.getY() == player.position.getY()||
                 player2.position.getX() - 10 <= player.position.getX() && player2.position.getX() > player.position.getX() && player2.position.getY() == player.position.getY() ||
                 player2.position.getY() + 10 >= player.position.getY() && player2.position.getY() < player.position.getY() && player2.position.getX() == player.position.getX() ||
-                player2.position.getY() - 10 <= player.position.getY() && player2.position.getY() > player.position.getY() && player2.position.getX() == player.position.getX()) && player2.getWeapon() == "Arrow"){
-            player2.arrowAttackPvP(player);
+                player2.position.getY() - 10 <= player.position.getY() && player2.position.getY() > player.position.getY() && player2.position.getX() == player.position.getX()) && player2.getWeapon() == "Bow"){
+            player2.bowAttackPvP(player);
         }
     }
 

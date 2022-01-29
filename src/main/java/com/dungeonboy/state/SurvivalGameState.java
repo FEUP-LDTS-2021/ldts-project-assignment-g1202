@@ -19,12 +19,12 @@ public class SurvivalGameState implements GameState{
     public SurvivalGameState(Game game){
         this.game = game;
         screen = game.getScreen();
-        tg = screen.newTextGraphics();
+        tg = game.getTg();
     }
 
     public void display() throws IOException {
         screen.clear();
-        game.getSurvArena().draw(tg, game.getLvl());
+        game.survArena.draw(tg, game.getLvl());
         tg.setBackgroundColor(TextColor.ANSI.BLACK); //texto do canto superior esq que indica o modo selecionado
         tg.setForegroundColor(TextColor.ANSI.DEFAULT);
         tg.putString(3, 1, "Survival");
@@ -33,17 +33,17 @@ public class SurvivalGameState implements GameState{
         tg.putString(65, 1, "Inventory (U)");
 
         //String HP
-        tg.putString(2, 22, "HP: " + game.getSurvArena().getPlayer().getHitpoints().getHp());
+        tg.putString(2, 22, "HP: " + game.survArena.getPlayer().getHitpoints().getHp());
 
         //String Live
-        tg.putString(15, 22, "Lives: " + game.getSurvArena().getPlayer().getLife());
+        tg.putString(15, 22, "Lives: " + game.survArena.getPlayer().getLife());
 
 
         //Strings WEAPON
-        tg.putString(30, 22, "Weapon:  " + game.getSurvArena().getPlayer().getWeapon());
+        tg.putString(30, 22, "Weapon:  " + game.survArena.getPlayer().getWeapon());
 
         //String com numero coins:
-        tg.putString(53, 22, "Coins: " + game.getSurvArena().getPlayer().getCredit());
+        tg.putString(53, 22, "Coins: " + game.survArena.getPlayer().getCredit());
 
         //Strings com LVL
         tg.putString(70, 22, "Lvl: " + game.getLvl());
@@ -51,7 +51,7 @@ public class SurvivalGameState implements GameState{
         screen.refresh();
     }
 
-    public void goForward() throws IOException {}
+    public void goForward() {}
 
     public void goBack() throws IOException {
         game.changeState(new MenuGameState(game));
@@ -59,21 +59,21 @@ public class SurvivalGameState implements GameState{
     }
 
     public void lose() throws IOException{
-        if (game.getSurvArena().getPlayer().getLife() > 0){
-            switch (game.getSurvArena().getPlayer().getLife()) {  //restaura o hp conforme o nr de vidas
+        if (game.survArena.getPlayer().getLife() > 0){
+            switch (game.survArena.getPlayer().getLife()) {  //restaura o hp conforme o nr de vidas
                 case 3:
-                    game.getSurvArena().getPlayer().setHitpoints(new Hp(90));
+                    game.survArena.getPlayer().setHitpoints(new Hp(90));
                     break;
                 case 2:
-                    game.getSurvArena().getPlayer().setHitpoints(new Hp(75));
+                    game.survArena.getPlayer().setHitpoints(new Hp(75));
                     break;
                 case 1:
-                    game.getSurvArena().getPlayer().setHitpoints(new Hp(50));
+                    game.survArena.getPlayer().setHitpoints(new Hp(50));
                     break;
             }
-            game.getSurvArena().getPlayer().lostlife();
-            game.getSurvArena().getPlayer().getPosition().setX(10);   // restaura posicao inicial
-            game.getSurvArena().getPlayer().getPosition().setY(10);
+            game.survArena.getPlayer().lostlife();
+            game.survArena.getPlayer().getPosition().setX(10);   // restaura posicao inicial
+            game.survArena.getPlayer().getPosition().setY(10);
 
             game.changeState(new ShopGameState(game));
         }
@@ -120,8 +120,8 @@ public class SurvivalGameState implements GameState{
         List<BadGuy> baddies = game.getSurvArena().createBaddies();
         List<Coins> coins = game.getSurvArena().createCoins();
 
-        game.getSurvArena().setBaddies(baddies);
-        game.getSurvArena().setCoins(coins);
+        game.survArena.setBaddies(baddies);
+        game.survArena.setCoins(coins);
 
         display();
         game.survival();

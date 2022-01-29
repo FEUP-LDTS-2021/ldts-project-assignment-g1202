@@ -18,7 +18,7 @@ public class ShopGameState implements GameState{
     public ShopGameState(Game game){
         this.game = game;
         screen = game.getScreen();
-        tg = screen.newTextGraphics();
+        tg = game.getTg();
     }
 
     public void display() throws IOException {
@@ -30,14 +30,14 @@ public class ShopGameState implements GameState{
 
         tg.setBackgroundColor(TextColor.ANSI.BLACK);
         tg.setForegroundColor(TextColor.ANSI.GREEN);
-        tg.putString(65, 4, "Coins: " + String.valueOf(game.getSurvArena().getPlayer().getCredit()));
+        tg.putString(65, 4, "Coins: " + String.valueOf(game.survArena.getPlayer().getCredit()));
 
         tg.setBackgroundColor(TextColor.ANSI.BLACK);
         tg.setForegroundColor(TextColor.ANSI.RED);
         tg.putString(9, 8, "Weapons(Range)");
 
         int row = 11;
-        for (Weapon weapon : game.getShop().getWeapons()) {
+        for (Weapon weapon : game.shop.getWeapons()) {
             tg.setBackgroundColor(TextColor.ANSI.BLACK);
             tg.setForegroundColor(TextColor.ANSI.DEFAULT);
             tg.putString(9, row, weapon.getType() + "(" + String.valueOf(weapon.getRange()) + ")");
@@ -50,7 +50,7 @@ public class ShopGameState implements GameState{
         tg.putString(45, 8, "Potions");
 
         row = 11;
-        for (Potion potion : game.getShop().getPotions()) {
+        for (Potion potion : game.shop.getPotions()) {
             tg.setBackgroundColor(TextColor.ANSI.BLACK);
             tg.setForegroundColor(TextColor.ANSI.DEFAULT);
             tg.putString(45, row, potion.getName());
@@ -63,7 +63,7 @@ public class ShopGameState implements GameState{
         tg.putString(5, 20, "Buy (Enter)");
         tg.putString(5, 21, "Back to Game (ESC)");
 
-        game.getShop().show(game.getSurvArena().getPlayer());
+        game.shop.show(game.survArena.getPlayer());
     }
 
     public void goForward(){}

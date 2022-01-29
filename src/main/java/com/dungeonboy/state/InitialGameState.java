@@ -9,17 +9,19 @@ import java.io.IOException;
 
 public class InitialGameState implements GameState{
     Game game;
+    Screen screen;
+    TextGraphics tg;
 
     public InitialGameState(Game game){
         this.game = game;
+        screen = game.getScreen();
+        tg = game.getTg();
     }
 
     public void display() throws IOException{
-        Screen screen = game.getScreen();
-        TextGraphics tg = screen.newTextGraphics();
-
         screen.clear();
         screen.setCursorPosition(null);
+
         tg.setForegroundColor(TextColor.ANSI.RED);
         tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
         tg.putString(30, 20, "Press ENTER to START");
@@ -42,7 +44,7 @@ public class InitialGameState implements GameState{
     }
 
     public void goBack() throws IOException{
-        game.getScreen().stopScreen();
+        screen.stopScreen();
     }
 
     public void lose(){}

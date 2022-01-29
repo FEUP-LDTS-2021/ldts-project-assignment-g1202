@@ -16,19 +16,22 @@ import java.io.IOException;
 
 public class Game {
     //Iniciar variaveis - Terminais e screen
-    Terminal terminal = new DefaultTerminalFactory().createTerminal();
-    Screen screen = new TerminalScreen(terminal);
-    TextGraphics tg = screen.newTextGraphics();
-    Arena survArena = new Arena(80, 24);
-    Arena pvpArena = new Arena(80, 24);
-    Shop shop;
+    Terminal terminal;
+    Screen screen;
+    public TextGraphics tg;
+    public Arena survArena = new Arena(80, 24);
+    public Arena pvpArena = new Arena(80, 24);
+    public Shop shop;
     GameState gameState;
     int lvl = 1;
-    int p1kills, p2kills, round = 1;
+    public int p1kills, p2kills, round = 1;
 
 
     public Game() throws IOException { // construtor de Game
         try {
+            terminal = new DefaultTerminalFactory().createTerminal();
+            screen = new TerminalScreen(terminal);
+            tg = screen.newTextGraphics();
             shop = new Shop(screen, terminal);
             screen.startScreen(); // Iniciar o terminal
             gameState = new InitialGameState(this); // O jogo começa no estado inicial
@@ -40,6 +43,18 @@ public class Game {
 
     public Screen getScreen(){
         return screen;
+    }
+
+    public void setScreen(Screen screen){
+        this.screen = screen;
+    }
+
+    public TextGraphics getTg(){
+        return tg;
+    }
+
+    public void setTg(TextGraphics tg){
+        this.tg = tg;
     }
 
     public int getLvl(){

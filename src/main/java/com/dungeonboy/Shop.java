@@ -15,7 +15,7 @@ public class Shop {
 
     Terminal terminal;
     Screen screen;
-    TextGraphics tg;
+    public TextGraphics tg;
 
     List<Weapon> weapons;
     List<Potion> potions;

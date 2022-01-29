@@ -167,9 +167,9 @@ public class Player {
         }
     }
 
-    public void arrowAttack(BadGuy badGuy){ //Ataque quando o player tem um arrow
-        if (weapon.getType() == "Arrow"){
-            badGuy.changeHp(20);
+    public void bowAttack(BadGuy badGuy){ //Ataque quando o player tem um arrow
+        if (weapon.getType() == "Bow"){
+            badGuy.changeHp(15);
         }
     }
 
@@ -185,9 +185,9 @@ public class Player {
         }
     }
 
-    public void arrowAttackPvP(Player player){
-        if (weapon.getType() == "Arrow"){
-            player.setHitpoints(new Hp(player.getHitpoints().getHp() - 20));
+    public void bowAttackPvP(Player player){
+        if (weapon.getType() == "Bow"){
+            player.setHitpoints(new Hp(player.getHitpoints().getHp() - 15));
         }
     }
 }

@@ -17,7 +17,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
+import java.beans.PropertyChangeListenerProxy;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -115,22 +118,6 @@ class PlayerTest {
 
     @Test
     void moving() {
-        /*//ArrowUp
-        testePos.setY(testePos.getY() -1);
-        assertEquals(49, testePos.getY());
-
-        //ArrowDown
-        testePos.setY(testePos.getY() +1);
-        assertEquals(50, testePos.getY());
-
-        //ArrowLeft
-        testePos.setX(testePos.getX() -1);
-        assertEquals(9, testePos.getX());
-
-        //ArrowRight
-        testePos.setX(testePos.getX() +1);
-        assertEquals(10, testePos.getX());*/
-
         Arena arena = new Arena(20,20);
 
         //ArrowUp
@@ -191,9 +178,89 @@ class PlayerTest {
         assertEquals(15, test.getPosition().getX());
     }
 
+
     @Test
-    void hitsword() {
-        testePos.setY(testePos.getY()+5);
-        assertEquals(55, testePos.getY());
+    void noneAttack() {
+        BadGuy bg = new BadGuy(5, 5, 100);
+        test.setWeapon(new Weapon());
+
+        test.noneAttack(bg);
+
+        assertEquals(90, bg.hitpoints.getHp());
+    }
+
+    @Test
+    void swordAttack() {
+        BadGuy bg = new BadGuy(5, 5, 100);
+        test.setWeapon(new Weapon(0, 5, "Sword"));
+
+        test.swordAttack(bg);
+
+        assertEquals(80, bg.hitpoints.getHp());
+    }
+
+    @Test
+    void bowAttack() {
+        BadGuy bg = new BadGuy(5, 5, 100);
+        test.setWeapon(new Weapon(0, 10, "Bow"));
+
+        test.bowAttack(bg);
+
+        assertEquals(85, bg.hitpoints.getHp());
+    }
+
+    @Test
+    void noneAttackPvP() {
+        test.setWeapon(new Weapon());
+
+        test.noneAttackPvP(test2);
+
+        assertEquals(90, test2.getHitpoints().getHp());
+    }
+
+    @Test
+    void swordAttackPvP() {
+        test.setWeapon(new Weapon(0, 5, "Sword"));
+
+        test.swordAttackPvP(test2);
+
+        assertEquals(80, test2.getHitpoints().getHp());
+    }
+
+    @Test
+    void bowAttackPvP() {
+        test.setWeapon(new Weapon(0, 10, "Bow"));
+
+        test.bowAttackPvP(test2);
+
+        assertEquals(85, test2.getHitpoints().getHp());
+    }
+
+    @Test
+    void setWeapon() {
+        test.setWeapon(new Weapon());
+        assertEquals("Fists", test.getWeapon());
+    }
+
+    @Test
+    void getWeapon() {
+        assertEquals("Fists", test.getWeapon());
+
+        test.setWeapon(new Weapon(0, 5, "Sword"));
+        assertEquals("Sword", test.getWeapon());
+    }
+
+    @Test
+    void setWeapons() {
+        List<Weapon> w = new ArrayList<>();
+        w.add(new Weapon());
+        test.setWeapons(w);
+
+        assertEquals(w, test.getWeapons());
+    }
+
+    @Test
+    void getWeapons() {
+        assertEquals(test.weapons, test.getWeapons());
     }
 }

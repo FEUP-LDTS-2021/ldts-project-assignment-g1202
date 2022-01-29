@@ -17,7 +17,7 @@ public class MenuGameState implements GameState{
     public MenuGameState(Game game){
         this.game = game;
         screen = game.getScreen();
-        tg = screen.newTextGraphics();
+        tg = game.getTg();
     }
 
     public void display() throws IOException{

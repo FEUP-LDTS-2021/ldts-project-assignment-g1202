@@ -2,6 +2,8 @@ package com.dungeonboy;
 
 import com.dungeonboy.Coins;
 import com.dungeonboy.Position;
+import com.googlecode.lanterna.SGR;
+import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
@@ -9,6 +11,7 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.io.IOException;
 
@@ -30,13 +33,12 @@ class CoinsTest {
 
     @Test
     void draw() throws IOException {
-        Terminal terminal = new DefaultTerminalFactory().createTerminal();
-        Screen screen = new TerminalScreen(terminal);
-        TextGraphics tg = screen.newTextGraphics();
+        TextGraphics tg = Mockito.mock(TextGraphics.class);
 
         coin.draw(tg);
-        assertEquals(TextColor.Factory.fromString("#999933"), tg.getForegroundColor());
-        assertTrue(tg.getCharacter(19, 10).isBold());
-        assertEquals("$", tg.getCharacter(19,10).getCharacterString());
+
+        Mockito.verify(tg, Mockito.times(1)).setForegroundColor(TextColor.Factory.fromString("#999933"));
+        Mockito.verify(tg, Mockito.atLeast(1)).enableModifiers(SGR.BOLD);
+        Mockito.verify(tg, Mockito.times(1)).putString(new TerminalPosition(coin.getPosition().getX(), coin.getPosition().getY()), "$");
     }
 }
