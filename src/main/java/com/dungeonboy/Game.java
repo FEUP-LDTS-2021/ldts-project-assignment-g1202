@@ -113,6 +113,8 @@ public class Game {
             if (keyPressed.getKeyType() == KeyType.Escape) {
                 keepRunning = false;
                 gameState.goBack(); // Volta ao menu
+            }else if(keyPressed.getKeyType() == KeyType.Character && keyPressed.getCharacter() == 'u') {
+                Invtest();
             }else if (keyPressed.getKeyType() == KeyType.EOF){
                 break;
             }else if (keyPressed.getKeyType() == KeyType.Character && keyPressed.getCharacter() == 'c') {
@@ -121,7 +123,7 @@ public class Game {
                         c++;
                     }
                 } else if (c == 1) {
-                    if (changeWeaponSurv("Arrow")) {
+                    if (changeWeaponSurv("Bow")) {
                         c++;
                     } else {
                         changeWeaponSurv("Fists");
@@ -163,6 +165,42 @@ public class Game {
         }
     }
 
+    public void Invtest() throws IOException {
+
+        screen.clear();
+        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+        tg.putString(8, 2, "Inventory");
+
+        tg.setForegroundColor(TextColor.ANSI.GREEN);
+        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+        tg.putString(53, 2, "Back to game: (U)");
+
+        tg.setForegroundColor(TextColor.ANSI.GREEN);
+        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+        tg.putString(8, 6, "Items & Quantity");
+
+        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+        tg.putString(8, 10, "Coins: " + getSurvArena().getPlayer().getCredit());
+
+        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+        tg.putString(8, 12, "Weapons Available:  " + getSurvArena().getPlayer().getWeapon());
+
+        screen.refresh();
+
+        boolean keepRunning = true;
+
+        while (keepRunning) {
+            KeyStroke keyPressed = terminal.readInput();
+            if (keyPressed.getKeyType() == KeyType.Character && keyPressed.getCharacter() == 'u') {
+                survival();
+            }
+
+        }
+    }
+
 
     // Opção do modo PVP
     public void pvp() throws IOException {
@@ -183,13 +221,13 @@ public class Game {
             else if (keyPressed.getKeyType() == KeyType.Character && keyPressed.getCharacter() == ' ') {
                 pvpArena.damagePlayer2();
 
-                if (pvpArena.player2.getHitpoints().getHp() == 0){
+                if (pvpArena.player2.getHitpoints().getHp() <= 0){
                     gameState.lose();
                 }
             }else if (keyPressed.getKeyType() == KeyType.Tab){
                 pvpArena.damagePlayer1();
 
-                if (pvpArena.player.getHitpoints().getHp() == 0){
+                if (pvpArena.player.getHitpoints().getHp() <= 0){
                     gameState.lose();
                 }
             }else if (keyPressed.getKeyType() == KeyType.Character && keyPressed.getCharacter() == 'c'){
@@ -199,7 +237,7 @@ public class Game {
                     }
                 }
                 else if (c == 1){
-                    if (changeWeaponP1("Arrow")) {
+                    if (changeWeaponP1("Bow")) {
                         c++;
                     }
                     else {
@@ -218,7 +256,7 @@ public class Game {
                     }
                 }
                 else if (q == 1){
-                    if (changeWeaponP2("Arrow")) {
+                    if (changeWeaponP2("Bow")) {
                         q++;
                     }
                     else {

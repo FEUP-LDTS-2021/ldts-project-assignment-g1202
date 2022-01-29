@@ -80,6 +80,7 @@ public class Arena{
         return player2;
     }
 
+
     public void damageEnemy() {
         for (BadGuy bad : baddies) {
             if     ((player.position.getX() + 3 >= bad.position.getX() && player.position.getX() < bad.position.getX() && player.position.getY() == bad.position.getY() ||
@@ -88,7 +89,7 @@ public class Arena{
                     player.position.getY() -  3 <= bad.position.getY() && player.position.getY() > bad.position.getY() && player.position.getX() == bad.position.getX()) && player.getWeapon() == "Fists"){
                 player.noneAttack(bad);
                 //System.out.println(bad.hitpoints.getHp());
-                if(bad.hitpoints.getHp() == 0) baddies.remove(bad);
+                if(bad.hitpoints.getHp() <= 0) baddies.remove(bad);
                 break;
             }
             else if((player.position.getX() + 5 >= bad.position.getX() && player.position.getX() < bad.position.getX() && player.position.getY() == bad.position.getY() ||
@@ -96,7 +97,7 @@ public class Arena{
                     player.position.getX() + 5 >= bad.position.getY() && player.position.getY() < bad.position.getY() && player.position.getX() == bad.position.getX() ||
                     player.position.getX() - 5 <= bad.position.getY() && player.position.getY() > bad.position.getY() && player.position.getX() == bad.position.getX())&& player.getWeapon() == "Sword"){
                 player.swordAttack(bad);
-                if(bad.hitpoints.getHp() == 0) baddies.remove(bad);
+                if(bad.hitpoints.getHp() <= 0) baddies.remove(bad);
                 break;
             }
             else if((player.position.getX() + 10 >= bad.position.getX() && player.position.getX() < bad.position.getX() && player.position.getY() == bad.position.getY()||
@@ -104,7 +105,7 @@ public class Arena{
                     player.position.getY() + 10 >= bad.position.getY() && player.position.getY() < bad.position.getY() && player.position.getX() == bad.position.getX() ||
                     player.position.getY() - 10 <= bad.position.getY() && player.position.getY() > bad.position.getY() && player.position.getX() == bad.position.getX())&& player.getWeapon() == "Bow"){
                 player.bowAttack(bad);
-                if(bad.hitpoints.getHp() == 0) baddies.remove(bad);
+                if(bad.hitpoints.getHp() <= 0) baddies.remove(bad);
                 break;
             }
         }

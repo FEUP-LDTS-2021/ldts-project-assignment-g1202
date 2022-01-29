@@ -30,28 +30,6 @@ public class BadGuy {
         screen.putString(new TerminalPosition(position.getX(), position.getY()),"O");
     }
 
-        //movimento do mauzao
-    public void running() {
-        double rand = Math.random();
-        // tem de morrer quando hp = 0
-        //while(hp.getHp() != 0) {
-        if (rand > .75) position.setY(position.getY() - 1);
-        else if (rand > .5) position.setY(position.getY() + 1);
-        else if (rand > .25) position.setX(position.getX() - 1);
-        else position.setX(position.getX() + 1);
-        //}
-    }
-
-
-    public void spinning(){
-        int i = 3;
-        while(i > 0) {
-            position.moveRight();
-            position.moveDown();
-            position.moveDown();
-            i--;
-        }
-    }
 
     public void damagePlayer(Player player){
         if(player.position.getY()+1 == this.position.getY() || player.position.getY()-1 == this.position.getY()){

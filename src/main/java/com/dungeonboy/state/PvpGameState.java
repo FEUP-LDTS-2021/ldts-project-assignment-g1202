@@ -26,12 +26,12 @@ public class PvpGameState implements GameState{
     public void display() throws IOException {
         List<Weapon> w = game.pvpArena.getPlayer().getWeapons();
         w.add(new Weapon(0, 5, "Sword"));
-        w.add(new Weapon(0, 10, "Arrow"));
+        w.add(new Weapon(0, 10, "Bow"));
         game.pvpArena.getPlayer().setWeapons(w);
 
         List<Weapon> w1 = game.pvpArena.getPlayer2().getWeapons();
         w1.add(new Weapon(0, 5, "Sword"));
-        w1.add(new Weapon(0, 10, "Arrow"));
+        w1.add(new Weapon(0, 10, "Bow"));
         game.pvpArena.getPlayer2().setWeapons(w1);
 
         screen.clear();
@@ -68,11 +68,11 @@ public class PvpGameState implements GameState{
     }
 
     public void lose() throws IOException {
-        if (game.pvpArena.getPlayer2().getHitpoints().getHp() == 0){
+        if (game.pvpArena.getPlayer2().getHitpoints().getHp() <= 0){
             game.p1kills = game.p1kills + 1;
         }
 
-        if (game.pvpArena.getPlayer().getHitpoints().getHp() == 0){
+        if (game.pvpArena.getPlayer().getHitpoints().getHp() <= 0){
             game.p2kills = game.p2kills + 1;
         }
 
