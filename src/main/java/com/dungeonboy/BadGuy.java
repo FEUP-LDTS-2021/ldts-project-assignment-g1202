@@ -10,10 +10,6 @@ public class BadGuy extends Element {
         super((int)Math.round(x),(int) Math.round(y),health);
     }
 
-    /*public Position getPosition(){
-        return position;
-    }*/
-
     public void draw(TextGraphics screen) {
         screen.setForegroundColor(TextColor.Factory.fromString("#FF0000")); // vermelho
         screen.putString(new TerminalPosition(position.getX(), position.getY()),"E");

@@ -45,8 +45,8 @@ public class PvpGameState implements GameState{
         tg.putString(37, 1, "Round:  " + game.getRound());
 
         //Strings com HP
-        tg.putString(2, 22, "P1 HP: " + game.pvpArena.getPlayer().getHitpoints().getHp());  // falta concatenar com a variavel que recebe os valores corretos
-        tg.putString(2, 23, "P2 HP: " + game.pvpArena.getPlayer2().getHitpoints().getHp());  // falta concatenar com a variavel que recebe os valores corretos
+        tg.putString(2, 22, "P1 HP: " + game.pvpArena.getPlayer().hitpoints.getHp());  // falta concatenar com a variavel que recebe os valores corretos
+        tg.putString(2, 23, "P2 HP: " + game.pvpArena.getPlayer2().hitpoints.getHp());  // falta concatenar com a variavel que recebe os valores corretos
 
         //Strings WEAPON
         tg.putString(30, 22, "P1 Weapon:  " + game.pvpArena.getPlayer().getWeapon());
@@ -68,11 +68,11 @@ public class PvpGameState implements GameState{
     }
 
     public void lose() throws IOException {
-        if (game.pvpArena.getPlayer2().getHitpoints().getHp() <= 0){
+        if (game.pvpArena.getPlayer2().hitpoints.getHp() <= 0){
             game.p1kills = game.p1kills + 1;
         }
 
-        if (game.pvpArena.getPlayer().getHitpoints().getHp() <= 0){
+        if (game.pvpArena.getPlayer().hitpoints.getHp() <= 0){
             game.p2kills = game.p2kills + 1;
         }
 
@@ -81,9 +81,9 @@ public class PvpGameState implements GameState{
         }
         else {
             game.setRound(game.getRound() + 1);
-            game.pvpArena.getPlayer().setHitpoints(new Hp(100));
+            game.pvpArena.getPlayer().hitpoints.setHp(new Hp(100).getHp());
             game.pvpArena.getPlayer().setPosition(new Position(10, 10));
-            game.pvpArena.getPlayer2().setHitpoints(new Hp(100));
+            game.pvpArena.getPlayer2().hitpoints.setHp(new Hp(100).getHp());
             game.pvpArena.getPlayer2().setPosition(new Position(60, 10));
 
             screen.clear();

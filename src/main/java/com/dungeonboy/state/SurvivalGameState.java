@@ -33,7 +33,7 @@ public class SurvivalGameState implements GameState{
         tg.putString(65, 1, "Inventory (U)");
 
         //String HP
-        tg.putString(2, 22, "HP: " + game.survArena.getPlayer().getHitpoints().getHp());
+        tg.putString(2, 22, "HP: " + game.survArena.getPlayer().hitpoints.getHp());
 
         //String Live
         tg.putString(15, 22, "Lives: " + game.survArena.getPlayer().getLife());
@@ -62,13 +62,13 @@ public class SurvivalGameState implements GameState{
         if (game.survArena.getPlayer().getLife() > 0){
             switch (game.survArena.getPlayer().getLife()) {  //restaura o hp conforme o nr de vidas
                 case 3:
-                    game.survArena.getPlayer().setHitpoints(new Hp(90));
+                    game.survArena.getPlayer().hitpoints.setHp(new Hp(90).getHp());
                     break;
                 case 2:
-                    game.survArena.getPlayer().setHitpoints(new Hp(75));
+                    game.survArena.getPlayer().hitpoints.setHp(new Hp(75).getHp());
                     break;
                 case 1:
-                    game.survArena.getPlayer().setHitpoints(new Hp(50));
+                    game.survArena.getPlayer().hitpoints.setHp(new Hp(50).getHp());
                     break;
             }
             game.survArena.getPlayer().lostlife();

@@ -11,8 +11,8 @@ import java.util.List;
 
 public class Player extends Element{
 
-    int life = 3;
-    int credit = 0; // coins = 0
+    private int life = 3;
+    private int credit = 0; // coins = 0
     List<Weapon> weapons; //Todas as weapons do player
     Weapon weapon; //A weapon que o player está a usar no momento
 
@@ -37,14 +37,6 @@ public class Player extends Element{
         weapons.add(weapon);
         this.weapons = weapons;
         this.weapon = weapon;
-    }
-
-    public void setHitpoints(Hp hitpoints) {
-        this.hitpoints = hitpoints;
-    }
-
-    public Hp getHitpoints() {
-        return hitpoints;
     }
 
     public void setWeapon(Weapon weapon){
@@ -88,14 +80,6 @@ public class Player extends Element{
 
     public int getLife(){
         return life;
-    }
-
-    /*public Position getPosition(){
-        return position;
-    }*/
-
-    public void setPosition(Position position){
-        this.position = position;
     }
 
     //Movimento
@@ -169,19 +153,19 @@ public class Player extends Element{
 
     public void noneAttackPvP(Player player){
         if (weapon.getType() == "Fists"){
-            player.setHitpoints(new Hp(player.getHitpoints().getHp() - 10));
+            player.hitpoints.setHp(player.hitpoints.getHp() - 10);
         }
     }
 
     public void swordAttackPvP(Player player){
         if (weapon.getType() == "Sword"){
-            player.setHitpoints(new Hp(player.getHitpoints().getHp() - 20));
+            player.hitpoints.setHp(player.hitpoints.getHp() - 20);
         }
     }
 
     public void bowAttackPvP(Player player){
         if (weapon.getType() == "Bow"){
-            player.setHitpoints(new Hp(player.getHitpoints().getHp() - 15));
+            player.hitpoints.setHp(player.hitpoints.getHp() - 15);
         }
     }
 }

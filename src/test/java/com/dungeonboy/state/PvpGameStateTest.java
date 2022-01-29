@@ -55,7 +55,7 @@ class PvpGameStateTest {
 
     @Test
     void lose() throws IOException{
-        game.pvpArena.getPlayer().setHitpoints(new Hp(0));
+        game.pvpArena.getPlayer().hitpoints.setHp(new Hp(0).getHp());
         pvp.lose();
         assertEquals(1, game.p2kills);
     }

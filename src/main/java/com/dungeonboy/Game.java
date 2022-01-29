@@ -222,13 +222,13 @@ public class Game {
             else if (keyPressed.getKeyType() == KeyType.Character && keyPressed.getCharacter() == ' ') {
                 pvpArena.damagePlayer2();
 
-                if (pvpArena.player2.getHitpoints().getHp() <= 0){
+                if (pvpArena.player2.hitpoints.getHp() <= 0){
                     gameState.lose();
                 }
             }else if (keyPressed.getKeyType() == KeyType.Tab){
                 pvpArena.damagePlayer1();
 
-                if (pvpArena.player.getHitpoints().getHp() <= 0){
+                if (pvpArena.player.hitpoints.getHp() <= 0){
                     gameState.lose();
                 }
             }else if (keyPressed.getKeyType() == KeyType.Character && keyPressed.getCharacter() == 'c'){

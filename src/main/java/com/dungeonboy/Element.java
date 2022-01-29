@@ -1,5 +1,4 @@
 package com.dungeonboy;
-import com.googlecode.lanterna.graphics.TextGraphics;
 
 public abstract class Element {
     public Position position;
@@ -18,5 +17,4 @@ public abstract class Element {
         this.position = position;
     }
 
-    public abstract void draw(TextGraphics screen);
 }

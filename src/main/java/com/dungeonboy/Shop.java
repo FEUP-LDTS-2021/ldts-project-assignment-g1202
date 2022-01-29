@@ -180,9 +180,9 @@ public class Shop {
         } else {
             if (canBuy(i, player)){
                 if (i < 5) {
-                    Hp hp = new Hp(player.getHitpoints().getHp() + potions.get(i - 2).getHp().getHp());
+                    Hp hp = new Hp(player.hitpoints.getHp() + potions.get(i - 2).getHp().getHp());
                     if (hp.getHp() <= 100){
-                        player.setHitpoints(hp);
+                        player.hitpoints.setHp(hp.getHp());
                         tg.setBackgroundColor(TextColor.ANSI.BLACK);
                         tg.putString(9, 4, "                       ");
                         tg.putString(9, 4, "Adquired: " + potions.get(i - 2).getName());

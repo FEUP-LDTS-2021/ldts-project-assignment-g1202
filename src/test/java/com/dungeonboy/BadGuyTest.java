@@ -39,16 +39,16 @@ class BadGuyTest {
         Player player = new Player(10, 10, 100);
 
         badGuy1.damagePlayer(player);
-        assertEquals(90, player.getHitpoints().getHp());
+        assertEquals(90, player.hitpoints.getHp());
 
         badGuy2.damagePlayer(player);
-        assertEquals(80, player.getHitpoints().getHp());
+        assertEquals(80, player.hitpoints.getHp());
 
         badGuy3.damagePlayer(player);
-        assertEquals(70, player.getHitpoints().getHp());
+        assertEquals(70, player.hitpoints.getHp());
 
         badGuy4.damagePlayer(player);
-        assertEquals(60, player.getHitpoints().getHp());
+        assertEquals(60, player.hitpoints.getHp());
     }
 
     @Test

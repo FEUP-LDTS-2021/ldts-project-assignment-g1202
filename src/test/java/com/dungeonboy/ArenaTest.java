@@ -147,15 +147,15 @@ class ArenaTest {
 
         arena.player.setWeapon(new Weapon());
         arena.damagePlayer2();
-        assertEquals(90, arena.player2.getHitpoints().getHp());
+        assertEquals(90, arena.player2.hitpoints.getHp());
 
         arena.player.setWeapon(new Weapon(0, 5, "Sword"));
         arena.damagePlayer2();
-        assertEquals(70, arena.player2.getHitpoints().getHp());
+        assertEquals(70, arena.player2.hitpoints.getHp());
 
         arena.player.setWeapon(new Weapon(0, 10, "Bow"));
         arena.damagePlayer2();
-        assertEquals(55, arena.player2.getHitpoints().getHp());
+        assertEquals(55, arena.player2.hitpoints.getHp());
     }
 
     @Test
@@ -164,15 +164,15 @@ class ArenaTest {
 
         arena.player2.setWeapon(new Weapon());
         arena.damagePlayer1();
-        assertEquals(90, arena.player.getHitpoints().getHp());
+        assertEquals(90, arena.player.hitpoints.getHp());
 
         arena.player2.setWeapon(new Weapon(0, 5, "Sword"));
         arena.damagePlayer1();
-        assertEquals(70, arena.player.getHitpoints().getHp());
+        assertEquals(70, arena.player.hitpoints.getHp());
 
         arena.player2.setWeapon(new Weapon(0, 10, "Bow"));
         arena.damagePlayer1();
-        assertEquals(55, arena.player.getHitpoints().getHp());
+        assertEquals(55, arena.player.hitpoints.getHp());
     }
 
     @Test

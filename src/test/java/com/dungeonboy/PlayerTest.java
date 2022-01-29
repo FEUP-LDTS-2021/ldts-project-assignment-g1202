@@ -215,7 +215,7 @@ class PlayerTest {
 
         test.noneAttackPvP(test2);
 
-        assertEquals(90, test2.getHitpoints().getHp());
+        assertEquals(90, test2.hitpoints.getHp());
     }
 
     @Test
@@ -224,7 +224,7 @@ class PlayerTest {
 
         test.swordAttackPvP(test2);
 
-        assertEquals(80, test2.getHitpoints().getHp());
+        assertEquals(80, test2.hitpoints.getHp());
     }
 
     @Test
@@ -233,7 +233,7 @@ class PlayerTest {
 
         test.bowAttackPvP(test2);
 
-        assertEquals(85, test2.getHitpoints().getHp());
+        assertEquals(85, test2.hitpoints.getHp());
     }
 
     @Test
