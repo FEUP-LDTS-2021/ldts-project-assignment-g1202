@@ -23,7 +23,7 @@ public class Game {
     public Arena pvpArena = new Arena(80, 24);
     public Shop shop;
     GameState gameState;
-    int lvl = 1;
+    public int lvl = 1;
     public int p1kills, p2kills, round = 1;
 
 

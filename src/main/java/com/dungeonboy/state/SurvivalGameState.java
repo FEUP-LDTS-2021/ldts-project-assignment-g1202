@@ -94,21 +94,21 @@ public class SurvivalGameState implements GameState{
     }
 
     public void win() throws IOException{
-        if (game.getLvl() < 3){
+        if (game.lvl < 3){
             levelUp();
         }
-        else if (game.getLvl() == 3){
+        else if (game.lvl == 3){
             finalLevel();
         }
     }
 
     public void levelUp() throws IOException{
-        game.setLvl(game.getLvl() + 1);
+        game.lvl = game.lvl + 1;
 
         screen.clear();
         tg.setForegroundColor(TextColor.ANSI.GREEN);
         tg.enableModifiers(SGR.BOLD);
-        tg.putString(37,12, "LEVEL " + game.getLvl());
+        tg.putString(37,12, "LEVEL " + game.lvl);
         screen.refresh();
 
         try{
@@ -117,8 +117,8 @@ public class SurvivalGameState implements GameState{
             e.printStackTrace();
         }
 
-        List<BadGuy> baddies = game.getSurvArena().createBaddies();
-        List<Coins> coins = game.getSurvArena().createCoins();
+        List<BadGuy> baddies = game.survArena.createBaddies();
+        List<Coins> coins = game.survArena.createCoins();
 
         game.survArena.setBaddies(baddies);
         game.survArena.setCoins(coins);
@@ -128,12 +128,12 @@ public class SurvivalGameState implements GameState{
     }
 
     public void finalLevel() throws IOException{
-        game.setLvl(game.getLvl() + 1);
+        game.lvl =  game.lvl + 1;
 
         screen.clear();
         tg.setForegroundColor(TextColor.ANSI.GREEN);
         tg.enableModifiers(SGR.BOLD);
-        tg.putString(37,12, "LEVEL " + game.getLvl());
+        tg.putString(37,12, "LEVEL " + game.lvl);
         screen.refresh();
 
         try{

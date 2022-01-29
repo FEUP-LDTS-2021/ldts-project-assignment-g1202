@@ -30,7 +30,6 @@ public class BadGuy {
         screen.putString(new TerminalPosition(position.getX(), position.getY()),"O");
     }
 
-
     public void damagePlayer(Player player){
         if(player.position.getY()+1 == this.position.getY() || player.position.getY()-1 == this.position.getY()){
             player.hitpoints.changeHp();

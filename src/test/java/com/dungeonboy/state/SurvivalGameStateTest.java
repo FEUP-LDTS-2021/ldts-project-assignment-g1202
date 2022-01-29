@@ -2,6 +2,7 @@ package com.dungeonboy.state;
 
 import com.dungeonboy.Arena;
 import com.dungeonboy.Game;
+import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
@@ -52,18 +53,51 @@ class SurvivalGameStateTest {
     }
 
     @Test
-    void lose() {
+    void lose() throws IOException{
+        surv.lose();
+
+        Mockito.verify(game, Mockito.atLeast(1)).changeState(new ShopGameState(game));
+
+        game.survArena.getPlayer().lostlife();
+        game.survArena.getPlayer().lostlife();
+
+        Mockito.verify(game, Mockito.atLeast(1)).changeState(new MenuGameState(game));
     }
 
     @Test
-    void win() {
+    void win() throws IOException{
+        game.lvl = 2;
+        surv.win();
+
+        Mockito.verify(tg, Mockito.atLeast(1)).setForegroundColor(TextColor.ANSI.GREEN);
+        Mockito.verify(tg, Mockito.atLeast(1)).enableModifiers(SGR.BOLD);
+        Mockito.verify(tg, Mockito.atLeast(1)).putString(37,12, "LEVEL " + game.lvl);
+
+        game.lvl = 3;
+        surv.win();
+        Mockito.verify(tg, Mockito.atLeast(1)).setForegroundColor(TextColor.ANSI.GREEN);
+        Mockito.verify(tg, Mockito.atLeast(1)).enableModifiers(SGR.BOLD);
+        Mockito.verify(tg, Mockito.atLeast(1)).putString(37,12, "LEVEL " + game.lvl);
+
     }
 
     @Test
-    void levelUp() {
+    void levelUp() throws IOException{
+        game.lvl = 2;
+        surv.levelUp();
+
+        Mockito.verify(tg, Mockito.atLeast(1)).setForegroundColor(TextColor.ANSI.GREEN);
+        Mockito.verify(tg, Mockito.atLeast(1)).enableModifiers(SGR.BOLD);
+        Mockito.verify(tg, Mockito.atLeast(1)).putString(37,12, "LEVEL " + game.lvl);
     }
 
     @Test
-    void finalLevel() {
+    void finalLevel() throws IOException{
+        game.lvl = 3;
+        surv.finalLevel();
+
+        Mockito.verify(tg, Mockito.atLeast(1)).setForegroundColor(TextColor.ANSI.GREEN);
+        Mockito.verify(tg, Mockito.atLeast(1)).enableModifiers(SGR.BOLD);
+        Mockito.verify(tg, Mockito.atLeast(1)).putString(37,12, "LEVEL " + game.lvl);
     }
 }
