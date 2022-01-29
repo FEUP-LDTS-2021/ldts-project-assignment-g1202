@@ -146,11 +146,7 @@ In this example, the Player 2 won! Congrats!
 - **PvP Mode** - 2 Players can face each other using different weapons
 - **Diferent enemies** - The player will face different enemies throughout the game.  (still need to be implemented)
 - **Coin Catch from enemies** - To help the player along the map, we implemented a feature that everytime a enemy dies, it will leave a coin for us to pick
-
-### PLANNED FEATURES - Still being implemented!
-
 - **Final Boss** - (still need to be implemented)
-
 
 
 ### DESIGN
@@ -182,20 +178,24 @@ State objects can be shared. If State objects have no instance variables—that 
 
 #### KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
 
-So far, we found some code smells which after detection we tried to eliminate them.
-However since the game its still not completed we cannot make sure there aren't more of them since we didnt focus on finding them (yet)
+We found some code smells which after detection we tried to eliminate them.
+Since we are still some newbie developers, there might be some code smells that we actually couldn't smell. But we've made a strong effort! 
+
 We found the following code smells: 
 
-**Bloaters - Large Class** - After starting developing the game we found out that we were using too many code inside the Game class, so we divided the game into more classes such as arena, walls, coins etc... 
+**Bloaters - Large Class** - After starting developing the game we found out that we were using too many code inside the Game class, so we divided the game into more classes such as arena, walls, coins, hp and so on.
+We managed to split the program in many separate classes that together make a whole!
 
-**Object-Orientation Abusers - If Statements** - We came to the conclusion that we were using too many if/else if/else conditions in order to get the game terminal running and then getting the menu running as well, so we corrected what we could and replaced them with switch-cases, but tried to reduce the number of times we used them too so we would have a improved code organization.
+**Object-Orientation Abusers - If Statements** - We came to the conclusion that we were using too many if/else if/else conditions in order to get the game terminal running and then getting the menu running as well, so we corrected what we could and replaced them with switch-cases, but tried to reduce the number of times we used them too so we would have a improved code organization. Sometimes we used operators such has && and we really had to keep the if/elses statements.
 
-**Dispensables - Comments** - Yes, of course, comments! We used a lot of comments on the 1st stage of the game so everyone in the project could understand what was going on, and prevent some headaches on the colleagues, we still have some of them at the code, which we will delete later on, but we indeed have deleted already some of them.
+**Dispensables - Comments** - Yes, of course, comments! We used a lot of comments on the 1st stage of the game so everyone in the project could understand what was going on, and prevent some headaches on the colleagues, along the development we went and deleted some more comments so make the code "cleaner". But there are some that we believe that are important to keep.
 
-**Dispensables -  Duplicate Code** - It happened a few times on some implementations, but after a few checks we manage to fix it.
+**Dispensables -  Duplicate Code** - It happened a few times on some implementations, mostly on coin,wall, badguy, player classes since we implemented an Element abstract class. It made us realize that we had a lot of duplicate code.
 
-**Dispensables -  Dead Code** - We came across with some dead code along the way, variables that were never used, functions.. 
+**Dispensables -  Dead Code** - We came across with some dead code along the way, variables that were never used, functions, such has get_wall_width, set_wall_widths basically some getters and setters that we make on default and sometimes they arent even acessed 
 
+**Bloaters - Data Clumps** - On this final delivery we have came across some data clumps, being said, we found many variables that were being used very similarly. Specially on the position class, since we had to implement positions for everyone! 
+Enemys, players, boss, player2 all needed positions.
 
 
 ### TESTING
@@ -203,25 +203,26 @@ We found the following code smells:
 - Screenshot of coverage report.
 
 <p align="center" justify="center">
-  <img src="https://user-images.githubusercontent.com/52889593/151659096-7cda8145-b146-438d-8d3c-04824b75bf59.png"/>
+  <img src="https://user-images.githubusercontent.com/52889593/151680695-ca30be9c-35ba-4025-853f-f05fe85de67b.png"/>
 </p>
 <p align="center">
   <b><i>Img 11. Code coverage report (so far!)</i></b>
 </p>
 
 <p align="center" justify="center">
-  <img src="https://user-images.githubusercontent.com/52889593/151659119-64c7d7f3-7bd5-466a-a9e6-5746943ae5c0.png"/>
+  <img src="https://user-images.githubusercontent.com/52889593/151680687-28ff7e3b-9946-4558-9e66-197a1a6b37e7.png"/>
 </p>
 <p align="center">
   <b><i>Img 12. Code coverage report on state files </i></b>
 </p>
 
 
+<a href="https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1202/blob/58a1887c3f3d7419fff7c83e9eadd64393fd2fc7/index.html"> Link to mutation testing report. </a>
 
-- Link to mutation testing report.
 
 ### SELF-EVALUATION
 
-- João Duarte - %
-- Miguel Tavares - %
-- Inês Garcia - %
+- João Duarte - 33.3%
+- Miguel Tavares - 33.3%
+- Inês Garcia - 33.3%
+
