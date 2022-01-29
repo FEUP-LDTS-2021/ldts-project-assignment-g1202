@@ -147,10 +147,11 @@ In this example, the Player 2 won! Congrats!
 - **Inventory** - Inventory to store our items that we bought from the shop or picked on the map
 - **Arena Transition** - Player can pass to another new Arena
 - **PvP Mode** - 2 Players can face each other using different weapons
+- **Diferent enemies** - The player will face different enemies throughout the game.  (still need to be implemented)
+- **Coin Catch from enemies** - To help the player along the map, we implemented a feature that everytime a enemy dies, it will leave a coin for us to pick
 
 ### PLANNED FEATURES - Still being implemented!
 
-- **Diferent enemies** - The player will face different enemies throughout the game.  (still need to be implemented)
 - **Final Boss** - (still need to be implemented)
 
 ### DESIGN
