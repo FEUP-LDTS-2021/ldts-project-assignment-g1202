@@ -209,12 +209,21 @@ We found the following code smells:
 ## Testing
 
 ### Screenshot of coverage report
+
 <p align="center" justify="center">
-  <img src="https://user-images.githubusercontent.com/52889593/151537174-8ce6144e-8ff6-4720-a052-9d20a207e036.png"/>
+  <img src="https://user-images.githubusercontent.com/52889593/151659096-7cda8145-b146-438d-8d3c-04824b75bf59.png"/>
 </p>
 <p align="center">
-  <b><i>Fig 6. Code coverage screenshot</i></b>
+  <b><i>Img 11. Code coverage report (so far!)</i></b>
 </p>
+
+<p align="center" justify="center">
+  <img src="https://user-images.githubusercontent.com/52889593/151659119-64c7d7f3-7bd5-466a-a9e6-5746943ae5c0.png"/>
+</p>
+<p align="center">
+  <b><i>Img 12. Code coverage report on state files </i></b>
+</p>
+
 
 ### Link to mutation testing report
 [Mutation tests](../build/reports/pitest/202105302045/index.html)
