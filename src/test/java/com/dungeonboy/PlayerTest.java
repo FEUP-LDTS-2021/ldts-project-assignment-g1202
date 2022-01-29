@@ -26,8 +26,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerTest {
 
-    Player test = new Player(15,20, 100, 3);
-    Player test2 = new Player(35,20, 100, 3);
+    Player test = new Player(15,20, 100);
+    Player test2 = new Player(35,20, 100);
     Position testePos = new Position(10,50);
     Hp testHitPoints  = new Hp(50);
 

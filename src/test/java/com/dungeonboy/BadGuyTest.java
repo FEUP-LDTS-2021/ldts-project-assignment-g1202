@@ -36,7 +36,7 @@ class BadGuyTest {
 
     @Test
     void damagePlayer(){
-        Player player = new Player(10, 10, 100, 3);
+        Player player = new Player(10, 10, 100);
 
         badGuy1.damagePlayer(player);
         assertEquals(90, player.getHitpoints().getHp());

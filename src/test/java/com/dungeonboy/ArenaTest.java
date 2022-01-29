@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ArenaTest {
 
     Arena arena = new Arena(40, 40);
-    Player test = new Player (10,10,100,3 );
+    Player test = new Player (10,10,100);
     BadGuy bad = new BadGuy(10,10,100);
     Coins coinTest = new Coins(10,10);
 

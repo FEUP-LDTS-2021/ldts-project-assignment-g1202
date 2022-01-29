@@ -4,21 +4,15 @@ import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 
-public class BadGuy {
-    Position position;
-    Hp hitpoints;
+public class BadGuy extends Element {
 
     public BadGuy(double x, double y,int health){
-        //arredondar x e y porque usamos Math.random() que é double para gerar coordenadas mas position é em int
-        int xi = (int)Math.round(x);
-        int ye = (int)Math.round(y);
-        position = new Position(xi,ye);
-        hitpoints = new Hp(health);
+        super((int)Math.round(x),(int) Math.round(y),health);
     }
 
-    public Position getPosition(){
+    /*public Position getPosition(){
         return position;
-    }
+    }*/
 
     public void draw(TextGraphics screen) {
         screen.setForegroundColor(TextColor.Factory.fromString("#FF0000")); // vermelho
@@ -26,8 +20,8 @@ public class BadGuy {
     }
 
     public void drawBoss(TextGraphics screen) {
-        screen.setForegroundColor(TextColor.Factory.fromString("#FF0000")); // vermelho
-        screen.putString(new TerminalPosition(position.getX(), position.getY()),"O");
+        screen.setForegroundColor(TextColor.Factory.fromString("#000000")); // vermelho
+        screen.putString(new TerminalPosition(position.getX(), position.getY()),"(0.o)");
     }
 
 

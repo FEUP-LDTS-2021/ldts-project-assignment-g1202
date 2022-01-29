@@ -9,12 +9,9 @@ import com.googlecode.lanterna.input.KeyType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player {
+public class Player extends Element{
 
-
-    Position position;
-    Hp hitpoints;
-    private int life;
+    int life = 3;
     int credit = 0; // coins = 0
     List<Weapon> weapons; //Todas as weapons do player
     Weapon weapon; //A weapon que o player está a usar no momento
@@ -33,11 +30,8 @@ public class Player {
     }
 
     //construtor
-    public Player(int x, int y,int health, int life){
-        position = new Position(x,y);
-        hitpoints = new Hp(health);
-        this.life = life;
-
+    public Player(int x, int y,int health){
+        super(x,y,health);
         List<Weapon> weapons = new ArrayList<>();
         Weapon weapon = new Weapon();
         weapons.add(weapon);
@@ -71,7 +65,7 @@ public class Player {
 
     public void draw(TextGraphics screen) {
         screen.setForegroundColor(TextColor.Factory.fromString("#FFFF33"));
-        screen.putString(new TerminalPosition(position.getX(), position.getY()),"X");
+        screen.putString(new TerminalPosition(getPosition().getX(), position.getY()),"X");
     }
 
     public void drawPlayer2(TextGraphics screen) {
@@ -96,9 +90,10 @@ public class Player {
         return life;
     }
 
-    public Position getPosition(){
+    /*public Position getPosition(){
         return position;
-    }
+    }*/
+
     public void setPosition(Position position){
         this.position = position;
     }
@@ -152,7 +147,6 @@ public class Player {
 
             }
         }
-
     }
 
     public void noneAttack(BadGuy badGuy){  //Ataque quando o player não tem arma nenhuma

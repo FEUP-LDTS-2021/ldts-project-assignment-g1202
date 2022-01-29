@@ -29,15 +29,14 @@ public class Arena{
     }
 
     public Arena(int width, int height) {
-        player = new Player(10, 10, 100, 3);
-        player2 = new Player(60, 10, 100, 3);
+        player = new Player(10, 10, 100);
+        player2 = new Player(60, 10, 100);
         this.height = height;
         this.width = width;
         this.walls = createWalls();
         this.baddies = createBaddies();
         coins = createCoins();
         finalBoss = new BadGuy( wall_width - 1, wall_height, 400);
-
     }
 
     public void setCoins(List<Coins> coins){
@@ -151,10 +150,10 @@ public class Arena{
         if (checkDamagePvp(3, player,player2) && player.getWeapon() == "Fists"){
             player.noneAttackPvP(player2);
         }
-        else if (checkDamagePvp(3, player,player2) && player.getWeapon() == "Sword"){
+        else if (checkDamagePvp(5, player,player2) && player.getWeapon() == "Sword"){
             player.swordAttackPvP(player2);
         }
-        else if (checkDamagePvp(3, player,player2) && player.getWeapon() == "Bow"){
+        else if (checkDamagePvp(10, player,player2) && player.getWeapon() == "Bow"){
             player.bowAttackPvP(player2);
         }
     }
@@ -163,10 +162,10 @@ public class Arena{
         if (checkDamagePvp(3, player2,player) && player2.getWeapon() == "Fists"){
             player2.noneAttackPvP(player);
         }
-        else if (checkDamagePvp(3, player2,player) && player2.getWeapon() == "Sword"){
+        else if (checkDamagePvp(5, player2,player) && player2.getWeapon() == "Sword"){
             player2.noneAttackPvP(player);
         }
-        else if (checkDamagePvp(3, player2,player) && player2.getWeapon() == "Bow"){
+        else if (checkDamagePvp(10, player2,player) && player2.getWeapon() == "Bow"){
             player2.noneAttackPvP(player);
         }
     }

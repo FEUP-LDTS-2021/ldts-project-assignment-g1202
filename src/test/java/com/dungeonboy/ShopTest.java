@@ -77,7 +77,7 @@ class ShopTest {
         shop.weapons.set(1, w2);
         shop.potions.set(0, p1);
 
-        Player p = new Player(10,10,100,3);
+        Player p = new Player(10,10,100);
         p.setCredit(3);
 
         assertTrue(shop.canBuy(0, p));
@@ -87,7 +87,7 @@ class ShopTest {
 
     @Test
     void select() throws IOException{
-        Player player = new Player(10,10,100, 3);
+        Player player = new Player(10,10,100);
         player.setCredit(4);
 
         shop.select(0, shop.tg, player);
