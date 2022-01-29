@@ -5,7 +5,7 @@ Dungeon Boy is a game in which the player goes through different levels and maps
 
 This project was developed by João Duarte (201707984), Miguel Tavares(202002811) and Inês Garcia (202004810) for LDTS 2021-22.
 
-**NOTE** : This game is still on development and could suffer some changes!
+**NOTE** : This game is the final version, however it could be implemented other features in the future!
 
 ### GAME SUMMARY
 
