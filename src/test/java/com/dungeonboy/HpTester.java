@@ -24,7 +24,7 @@ public class HpTester {
     @Test
     void changeHp() {
         Player test = new Player (10,10,100);
-        test.changeHp();
+        test.hitpoints.changeHp();
         assertEquals(90, test.hitpoints.getHp());
     }
 }

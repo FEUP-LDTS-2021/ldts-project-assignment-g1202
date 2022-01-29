@@ -69,14 +69,6 @@ public class Game {
         return survArena;
     }
 
-    public Arena getPvpArena(){
-        return pvpArena;
-    }
-
-    public Shop getShop(){
-        return shop;
-    }
-
     public int getRound(){
         return round;
     }
@@ -89,16 +81,8 @@ public class Game {
         return p1kills;
     }
 
-    public void setP1kills(int p1kills) {
-        this.p1kills = p1kills;
-    }
-
     public int getP2kills(){
         return p2kills;
-    }
-
-    public void setP2kills(int p2kills){
-        this.p2kills = p2kills;
     }
 
     // Opção do modo survival
@@ -153,7 +137,7 @@ public class Game {
                 survArena.retrieveCoins();
                 if (survArena.damagePos()) {
 
-                    survArena.player.changeHp(); // perde-se 10 de vida quando embate no inimigo
+                    survArena.player.hitpoints.changeHp(); // perde-se 10 de vida quando embate no inimigo
                     if (survArena.player.hitpoints.getHp() <= 0) {
                         //jogador morreu
                         gameState.lose(); // Se ainda tiver vidas vai à shop, senão volta ao menu
@@ -220,13 +204,13 @@ public class Game {
                 break;
             }
             else if (keyPressed.getKeyType() == KeyType.Character && keyPressed.getCharacter() == ' ') {
-                pvpArena.damagePlayer2();
+                pvpArena.damagePlayer(pvpArena.player,pvpArena.player2);
 
                 if (pvpArena.player2.hitpoints.getHp() <= 0){
                     gameState.lose();
                 }
             }else if (keyPressed.getKeyType() == KeyType.Tab){
-                pvpArena.damagePlayer1();
+                pvpArena.damagePlayer(pvpArena.player2,pvpArena.player);
 
                 if (pvpArena.player.hitpoints.getHp() <= 0){
                     gameState.lose();

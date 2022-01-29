@@ -22,6 +22,7 @@ public class Arena{
     private List<BadGuy> baddies;
     int wall_height;
     int wall_width;
+    int level = 1;
     BadGuy finalBoss;
 
     private int generator(int min,int max){
@@ -34,9 +35,8 @@ public class Arena{
         this.height = height;
         this.width = width;
         this.walls = createWalls();
-        this.baddies = createBaddies();
+        this.baddies = createBaddies(level);
         coins = createCoins();
-        finalBoss = new BadGuy( wall_width - 1, wall_height, 400);
     }
 
     public void setCoins(List<Coins> coins){
@@ -95,7 +95,7 @@ public class Arena{
         for (BadGuy bad : baddies) {
             if (checkDamage(3,bad) && player.getWeapon() == "Fists"){
                 player.noneAttack(bad);
-                System.out.println(bad.hitpoints.getHp());
+                //System.out.println(bad.hitpoints.getHp());
                 if(bad.hitpoints.getHp() == 0) {
                     baddies.remove(bad);
                     Coins newcoin = new Coins(bad.getPosition().getX() , bad.getPosition().getY()); // moeda nova apos matar inimigo
@@ -105,7 +105,7 @@ public class Arena{
             }
             else if (checkDamage(5,bad)  && player.getWeapon() == "Sword"){
                 player.swordAttack(bad);
-                System.out.println(bad.hitpoints.getHp());
+                //System.out.println(bad.hitpoints.getHp());
                 if(bad.hitpoints.getHp() == 0) {
                     baddies.remove(bad);
                     Coins newcoin = new Coins(bad.getPosition().getX() , bad.getPosition().getY()); // moeda nova apos matar inimigo
@@ -115,7 +115,7 @@ public class Arena{
             }
             else if (checkDamage(10,bad) && player.getWeapon() == "Bow"){
                 player.bowAttack(bad);
-                System.out.println(bad.hitpoints.getHp());
+                //System.out.println(bad.hitpoints.getHp());
                 if(bad.hitpoints.getHp() == 0) {
                     baddies.remove(bad);
                     Coins newcoin = new Coins(bad.getPosition().getX() , bad.getPosition().getY()); // moeda nova apos matar inimigo
@@ -146,15 +146,15 @@ public class Arena{
         return false;
     }
 
-    public void damagePlayer2() {  // player1 ataca player2
-        if (checkDamagePvp(3, player,player2) && player.getWeapon() == "Fists"){
-            player.noneAttackPvP(player2);
+    public void damagePlayer(Player player,Player hitten) {  // player1 ataca player2
+        if (checkDamagePvp(3, player,hitten) && player.getWeapon() == "Fists"){
+            player.noneAttackPvP(hitten);
         }
-        else if (checkDamagePvp(5, player,player2) && player.getWeapon() == "Sword"){
-            player.swordAttackPvP(player2);
+        else if (checkDamagePvp(5, player,hitten) && player.getWeapon() == "Sword"){
+            player.swordAttackPvP(hitten);
         }
-        else if (checkDamagePvp(10, player,player2) && player.getWeapon() == "Bow"){
-            player.bowAttackPvP(player2);
+        else if (checkDamagePvp(10, player,hitten) && player.getWeapon() == "Bow"){
+            player.bowAttackPvP(hitten);
         }
     }
 
@@ -163,10 +163,10 @@ public class Arena{
             player2.noneAttackPvP(player);
         }
         else if (checkDamagePvp(5, player2,player) && player2.getWeapon() == "Sword"){
-            player2.noneAttackPvP(player);
+            player2.swordAttackPvP(player);
         }
         else if (checkDamagePvp(10, player2,player) && player2.getWeapon() == "Bow"){
-            player2.noneAttackPvP(player);
+            player2.bowAttackPvP(player);
         }
     }
 
@@ -178,10 +178,10 @@ public class Arena{
 
             //Draw das coins
             for (Coins coin : coins)
-                coin.draw(screen);
+                coin.draw(screen,"#999933","$");
             //Draw inimigos
             for(BadGuy bad : baddies){
-                bad.draw(screen);
+                bad.draw(screen,"#FF0000","E");
             }
         }
         else if (level == 2){
@@ -190,37 +190,37 @@ public class Arena{
 
             //Draw das coins
             for (Coins coin : coins)
-                coin.draw(screen);
+                coin.draw(screen,"#999933","$");
             //Draw inimigos
             for(BadGuy bad : baddies){
-                bad.draw(screen);
+                bad.draw(screen,"#FF0000","E");
             }
         }
         else if (level == 3){
             screen.setBackgroundColor(TextColor.Factory.fromString("#FF7F50"));
             screen.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width, height), ' ');
 
-            finalBoss.drawBoss(screen);
+            finalBoss.draw(screen,"#000000","(0.o)");
         }
 
-        player.draw(screen);
+        player.draw(screen,"#FFFF33","X");
         //finalBoss.drawBoss(screen);
 
         //implementação das walls
         for (Wall wall : walls)
-            wall.draw(screen); //screen é o nosso textgraphics
+            wall.draw(screen,"#000000","@"); //screen é o nosso textgraphics
     }
 
     // Ecrã para o modo PVP
     public void draw2(TextGraphics screen2) {
         screen2.setBackgroundColor(TextColor.Factory.fromString("#465690"));
         screen2.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width, height), ' ');
-        player.draw(screen2);
-        player2.drawPlayer2(screen2);
+        player.draw(screen2,"#FFFF33","X");
+        player2.draw(screen2,"#FF0000","X");
 
         //implementação das walls
         for (Wall wall : walls)
-            wall.draw(screen2);
+            wall.draw(screen2,"#000000","@");
 
     }
 
@@ -274,12 +274,16 @@ public class Arena{
         return coins;
     }
 
-    public List<BadGuy> createBaddies() {
-
+    public List<BadGuy> createBaddies(int level) {
         ArrayList<BadGuy> baddies = new ArrayList<>();
-        for (int i = 0; i < 4; i++) { //max 2 moedas no ecrã
-            BadGuy bad = new BadGuy(generator(1,wall_width-1) , generator(wall_height - (wall_height - 2) + 1, wall_height-1),100);
-            baddies.add(bad);
+        if(level == 3){
+            finalBoss = new BadGuy( 60, 10, 400);
+            baddies.add(finalBoss);
+        }else {
+            for (int i = 0; i < 4; i++) { //max 2 moedas no ecrã
+                BadGuy bad = new BadGuy(generator(1, wall_width - 1), generator(wall_height - (wall_height - 2) + 1, wall_height - 1), 100);
+                baddies.add(bad);
+            }
         }
         return baddies;
     }

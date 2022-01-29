@@ -62,21 +62,25 @@ class PlayerTest {
     @Test
     void draw() throws IOException {
         TextGraphics tg = Mockito.mock(TextGraphics.class);
+        String color = "#FFFF33";
+        String shape = "X";
 
-        test.draw(tg);
+        test.draw(tg,color,shape);
 
-        Mockito.verify(tg, Mockito.times(1)).setForegroundColor(TextColor.Factory.fromString("#FFFF33"));
-        Mockito.verify(tg, Mockito.times(1)).putString(new TerminalPosition(15, 20), "X");
+        Mockito.verify(tg, Mockito.times(1)).setForegroundColor(TextColor.Factory.fromString(color));
+        Mockito.verify(tg, Mockito.times(1)).putString(new TerminalPosition(15, 20), shape);
     }
 
     @Test
     void drawPlayer2() throws IOException {
         TextGraphics tg = Mockito.mock(TextGraphics.class);
+        String color = "#FF0000";
+        String shape = "X";
 
-        test2.drawPlayer2(tg);
+        test2.draw(tg,color,shape);
 
-        Mockito.verify(tg, Mockito.times(1)).setForegroundColor(TextColor.Factory.fromString("#FF0000"));
-        Mockito.verify(tg, Mockito.times(1)).putString(new TerminalPosition(35, 20), "X");
+        Mockito.verify(tg, Mockito.times(1)).setForegroundColor(TextColor.Factory.fromString(color));
+        Mockito.verify(tg, Mockito.times(1)).putString(new TerminalPosition(35, 20), shape);
     }
 
     @Test

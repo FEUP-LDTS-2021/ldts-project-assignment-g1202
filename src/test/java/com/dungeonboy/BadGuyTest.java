@@ -26,12 +26,14 @@ class BadGuyTest {
     @Test
     void draw() throws IOException {
         TextGraphics tg = Mockito.mock(TextGraphics.class);
+        String color = "#FF0000";
+        String shape = "E";
 
-        badGuy1.draw(tg);
-        badGuy2.draw(tg);
+        badGuy1.draw(tg,color,shape);
+        badGuy2.draw(tg,color,shape);
 
-        Mockito.verify(tg, Mockito.atLeast(1)).setForegroundColor(TextColor.Factory.fromString("#FF0000"));
-        Mockito.verify(tg, Mockito.atLeast(1)).putString(new TerminalPosition(badGuy1.getPosition().getX(), badGuy1.getPosition().getY()),"E");
+        Mockito.verify(tg, Mockito.atLeast(1)).setForegroundColor(TextColor.Factory.fromString(color));
+        Mockito.verify(tg, Mockito.atLeast(1)).putString(new TerminalPosition(badGuy1.getPosition().getX(), badGuy1.getPosition().getY()),shape);
     }
 
     @Test

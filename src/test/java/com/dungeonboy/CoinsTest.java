@@ -34,11 +34,13 @@ class CoinsTest {
     @Test
     void draw() throws IOException {
         TextGraphics tg = Mockito.mock(TextGraphics.class);
+        String color = "#999933";
+        String moeda = "$";
 
-        coin.draw(tg);
+        coin.draw(tg,color,moeda);
 
-        Mockito.verify(tg, Mockito.times(1)).setForegroundColor(TextColor.Factory.fromString("#999933"));
+        Mockito.verify(tg, Mockito.times(1)).setForegroundColor(TextColor.Factory.fromString(color));
         Mockito.verify(tg, Mockito.atLeast(1)).enableModifiers(SGR.BOLD);
-        Mockito.verify(tg, Mockito.times(1)).putString(new TerminalPosition(coin.getPosition().getX(), coin.getPosition().getY()), "$");
+        Mockito.verify(tg, Mockito.times(1)).putString(new TerminalPosition(coin.getPosition().getX(), coin.getPosition().getY()), moeda);
     }
 }

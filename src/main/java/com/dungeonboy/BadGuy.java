@@ -10,7 +10,7 @@ public class BadGuy extends Element {
         super((int)Math.round(x),(int) Math.round(y),health);
     }
 
-    public void draw(TextGraphics screen) {
+    /*public void draw(TextGraphics screen) {
         screen.setForegroundColor(TextColor.Factory.fromString("#FF0000")); // vermelho
         screen.putString(new TerminalPosition(position.getX(), position.getY()),"E");
     }
@@ -18,7 +18,7 @@ public class BadGuy extends Element {
     public void drawBoss(TextGraphics screen) {
         screen.setForegroundColor(TextColor.Factory.fromString("#000000")); // vermelho
         screen.putString(new TerminalPosition(position.getX(), position.getY()),"(0.o)");
-    }
+    }*/
 
 
     public void damagePlayer(Player player){

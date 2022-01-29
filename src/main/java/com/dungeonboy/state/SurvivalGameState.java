@@ -117,7 +117,7 @@ public class SurvivalGameState implements GameState{
             e.printStackTrace();
         }
 
-        List<BadGuy> baddies = game.getSurvArena().createBaddies();
+        List<BadGuy> baddies = game.getSurvArena().createBaddies(game.getLvl());
         List<Coins> coins = game.getSurvArena().createCoins();
 
         game.survArena.setBaddies(baddies);

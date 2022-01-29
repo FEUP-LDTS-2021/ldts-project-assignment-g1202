@@ -55,21 +55,6 @@ public class Player extends Element{
         return weapons;
     }
 
-    public void draw(TextGraphics screen) {
-        screen.setForegroundColor(TextColor.Factory.fromString("#FFFF33"));
-        screen.putString(new TerminalPosition(getPosition().getX(), position.getY()),"X");
-    }
-
-    public void drawPlayer2(TextGraphics screen) {
-        screen.setForegroundColor(TextColor.Factory.fromString("#FF0000"));
-        screen.putString(new TerminalPosition(position.getX(), position.getY()),"X");
-    }
-
-    public void changeHp(){
-        //perder 10 pontos de vida
-        hitpoints.setHp(hitpoints.getHp()-10);
-    }
-
     public int lostlife(){
         return life--;
     }

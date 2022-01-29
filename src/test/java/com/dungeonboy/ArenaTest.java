@@ -141,25 +141,9 @@ class ArenaTest {
         assertEquals(55, bg1.hitpoints.getHp());
     }
 
-    @Test
-    void damagePlayer2() {
-        arena.player2.setPosition(new Position(12, 10));
-
-        arena.player.setWeapon(new Weapon());
-        arena.damagePlayer2();
-        assertEquals(90, arena.player2.hitpoints.getHp());
-
-        arena.player.setWeapon(new Weapon(0, 5, "Sword"));
-        arena.damagePlayer2();
-        assertEquals(70, arena.player2.hitpoints.getHp());
-
-        arena.player.setWeapon(new Weapon(0, 10, "Bow"));
-        arena.damagePlayer2();
-        assertEquals(55, arena.player2.hitpoints.getHp());
-    }
 
     @Test
-    void damagePlayer1() {
+    void damagePlayer() {
         arena.player.setPosition(new Position(58, 10));
 
         arena.player2.setWeapon(new Weapon());
@@ -182,7 +166,7 @@ class ArenaTest {
 
     @Test
     void createBaddies() {
-        assertEquals(4, arena.createBaddies().size());
+        assertEquals(4, arena.createBaddies(1).size());
     }
 
     @Test
