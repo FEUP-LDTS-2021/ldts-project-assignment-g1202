@@ -16,19 +16,22 @@ import java.io.IOException;
 
 public class Game {
     //Iniciar variaveis - Terminais e screen
-    Terminal terminal = new DefaultTerminalFactory().createTerminal();
-    Screen screen = new TerminalScreen(terminal);
-    TextGraphics tg = screen.newTextGraphics();
-    Arena survArena = new Arena(80, 24);
-    Arena pvpArena = new Arena(80, 24);
-    Shop shop;
+    Terminal terminal;
+    Screen screen;
+    public TextGraphics tg;
+    public Arena survArena = new Arena(80, 24);
+    public Arena pvpArena = new Arena(80, 24);
+    public Shop shop;
     GameState gameState;
     int lvl = 1;
-    int p1kills, p2kills, round = 1;
+    public int p1kills, p2kills, round = 1;
 
 
     public Game() throws IOException { // construtor de Game
         try {
+            terminal = new DefaultTerminalFactory().createTerminal();
+            screen = new TerminalScreen(terminal);
+            tg = screen.newTextGraphics();
             shop = new Shop(screen, terminal);
             screen.startScreen(); // Iniciar o terminal
             gameState = new InitialGameState(this); // O jogo começa no estado inicial
@@ -40,6 +43,18 @@ public class Game {
 
     public Screen getScreen(){
         return screen;
+    }
+
+    public void setScreen(Screen screen){
+        this.screen = screen;
+    }
+
+    public TextGraphics getTg(){
+        return tg;
+    }
+
+    public void setTg(TextGraphics tg){
+        this.tg = tg;
     }
 
     public int getLvl(){
@@ -93,11 +108,14 @@ public class Game {
 
         while (keepRunning) {
             gameState.display();
+            survArena.moveEnemy();
 
             KeyStroke keyPressed = terminal.readInput();
             if (keyPressed.getKeyType() == KeyType.Escape) {
                 keepRunning = false;
                 gameState.goBack(); // Volta ao menu
+            }else if(keyPressed.getKeyType() == KeyType.Character && keyPressed.getCharacter() == 'u') {
+                Invtest();
             }else if (keyPressed.getKeyType() == KeyType.EOF){
                 break;
             }else if (keyPressed.getKeyType() == KeyType.Character && keyPressed.getCharacter() == 'c') {
@@ -106,7 +124,7 @@ public class Game {
                         c++;
                     }
                 } else if (c == 1) {
-                    if (changeWeaponSurv("Arrow")) {
+                    if (changeWeaponSurv("Bow")) {
                         c++;
                     } else {
                         changeWeaponSurv("Fists");
@@ -148,6 +166,42 @@ public class Game {
         }
     }
 
+    public void Invtest() throws IOException {
+
+        screen.clear();
+        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+        tg.putString(8, 2, "Inventory");
+
+        tg.setForegroundColor(TextColor.ANSI.GREEN);
+        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+        tg.putString(53, 2, "Back to game: (U)");
+
+        tg.setForegroundColor(TextColor.ANSI.GREEN);
+        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+        tg.putString(8, 6, "Items & Quantity");
+
+        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+        tg.putString(8, 10, "Coins: " + getSurvArena().getPlayer().getCredit());
+
+        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+        tg.putString(8, 12, "Weapons Available:  " + getSurvArena().getPlayer().getWeapon());
+
+        screen.refresh();
+
+        boolean keepRunning = true;
+
+        while (keepRunning) {
+            KeyStroke keyPressed = terminal.readInput();
+            if (keyPressed.getKeyType() == KeyType.Character && keyPressed.getCharacter() == 'u') {
+                survival();
+            }
+
+        }
+    }
+
 
     // Opção do modo PVP
     public void pvp() throws IOException {
@@ -168,13 +222,13 @@ public class Game {
             else if (keyPressed.getKeyType() == KeyType.Character && keyPressed.getCharacter() == ' ') {
                 pvpArena.damagePlayer2();
 
-                if (pvpArena.player2.getHitpoints().getHp() == 0){
+                if (pvpArena.player2.getHitpoints().getHp() <= 0){
                     gameState.lose();
                 }
             }else if (keyPressed.getKeyType() == KeyType.Tab){
                 pvpArena.damagePlayer1();
 
-                if (pvpArena.player.getHitpoints().getHp() == 0){
+                if (pvpArena.player.getHitpoints().getHp() <= 0){
                     gameState.lose();
                 }
             }else if (keyPressed.getKeyType() == KeyType.Character && keyPressed.getCharacter() == 'c'){
@@ -184,7 +238,7 @@ public class Game {
                     }
                 }
                 else if (c == 1){
-                    if (changeWeaponP1("Arrow")) {
+                    if (changeWeaponP1("Bow")) {
                         c++;
                     }
                     else {
@@ -203,7 +257,7 @@ public class Game {
                     }
                 }
                 else if (q == 1){
-                    if (changeWeaponP2("Arrow")) {
+                    if (changeWeaponP2("Bow")) {
                         q++;
                     }
                     else {

@@ -61,7 +61,6 @@ public class Position {
         return true;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if(o == null || o.getClass() != this.getClass()) return false;

@@ -25,51 +25,11 @@ public class BadGuy {
         screen.putString(new TerminalPosition(position.getX(), position.getY()),"E");
     }
 
-        public void drawBoss(TextGraphics screen) {
-            screen.setForegroundColor(TextColor.Factory.fromString("#FF0000")); // vermelho
-            screen.putString(new TerminalPosition(position.getX(), position.getY()),"O");
-        }
-
-        //movimento do mauzao
-    /*public void running() {
-        double rand = Math.random();
-        // tem de morrer quando hp = 0
-        //while(hp.getHp() != 0) {
-        if (rand > .75) position.setY(position.getY() - 1);
-        else if (rand > .5) position.setY(position.getY() + 1);
-        else if (rand > .25) position.setX(position.getX() - 1);
-        else position.setX(position.getX() + 1);
-        //}
+    public void drawBoss(TextGraphics screen) {
+        screen.setForegroundColor(TextColor.Factory.fromString("#FF0000")); // vermelho
+        screen.putString(new TerminalPosition(position.getX(), position.getY()),"O");
     }
 
-
-    public void spinning(){
-        int i = 3;
-        while(i > 0) {
-            position.moveRight();
-            position.moveDown();
-            position.moveDown();
-            i--;
-        }
-    }*/
-
-    public void rangeToPlayerT1(Player player){
-        if(player.position.getX() <= this.position.getX() + 5 && player.position.getY() == this.position.getY()){
-            this.position.moveLeft();
-        }
-        else if(player.position.getX() >= this.position.getX() - 5 && player.position.getY() == this.position.getY()){
-            this.position.moveRight();
-        }
-    }
-
-    public void rangeToPlayerT2(Player player){
-        if(player.position.getY() <= this.position.getY() + 5 && player.position.getX() == this.position.getX()){
-            this.position.moveUp();
-        }
-        else if(player.position.getY() >= this.position.getY() - 5 && player.position.getX() == this.position.getX()){
-            this.position.moveDown();
-        }
-    }
 
     public void damagePlayer(Player player){
         if(player.position.getY()+1 == this.position.getY() || player.position.getY()-1 == this.position.getY()){
@@ -77,6 +37,34 @@ public class BadGuy {
         }
         if(player.position.getX()+1 == this.position.getX() || player.position.getX()-1 == this.position.getX()){
             player.hitpoints.changeHp();
+        }
+    }
+
+    //padroes de movimento inimigo
+
+    public void rangeToPlayerT1(Player player,Arena arena){
+        if(player.position.getX() <= this.position.getX() && player.position.getY() == this.position.getY()){
+            if(this.position.canMoveLeft()) {
+                this.position.moveLeft();
+            }
+        }
+        else if(player.position.getX() >= this.position.getX() && player.position.getY() == this.position.getY()){
+            if(this.position.canMoveRight(arena)) {
+                this.position.moveRight();
+            }
+        }
+    }
+
+    public void rangeToPlayerT2(Player player,Arena arena){
+        if(player.position.getY() <= this.position.getY() && player.position.getX() == this.position.getX()){
+            if(this.position.canMoveUp(arena)) {
+                this.position.moveUp();
+            }
+        }
+        else if(player.position.getY() >= this.position.getY() && player.position.getX() == this.position.getX()){
+            if(this.position.canMoveDown(arena)) {
+                this.position.moveDown();
+            }
         }
     }
 

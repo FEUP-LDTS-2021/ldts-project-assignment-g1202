@@ -51,4 +51,22 @@ class BadGuyTest {
         assertEquals(60, player.getHitpoints().getHp());
     }
 
+    @Test
+    void getPosition() {
+        assertEquals(badGuy1.position, badGuy1.getPosition());
+        assertEquals(badGuy2.position, badGuy2.getPosition());
+    }
+
+    @Test
+    void changeHp() {
+        badGuy1.changeHp(10);
+        assertEquals(90, badGuy1.hitpoints.getHp());
+
+        badGuy2.changeHp(20);
+        assertEquals(80, badGuy2.hitpoints.getHp());
+    }
+
+    @Test
+    void drawBoss() {
+    }
 }

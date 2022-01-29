@@ -20,23 +20,23 @@ public class PvpGameState implements GameState{
     public PvpGameState(Game game){
         this.game = game;
         screen = game.getScreen();
-        tg = screen.newTextGraphics();
+        tg = game.getTg();
     }
 
     public void display() throws IOException {
-        List<Weapon> w = game.getPvpArena().getPlayer().getWeapons();
+        List<Weapon> w = game.pvpArena.getPlayer().getWeapons();
         w.add(new Weapon(0, 5, "Sword"));
-        w.add(new Weapon(0, 10, "Arrow"));
-        game.getPvpArena().getPlayer().setWeapons(w);
+        w.add(new Weapon(0, 10, "Bow"));
+        game.pvpArena.getPlayer().setWeapons(w);
 
-        List<Weapon> w1 = game.getPvpArena().getPlayer2().getWeapons();
+        List<Weapon> w1 = game.pvpArena.getPlayer2().getWeapons();
         w1.add(new Weapon(0, 5, "Sword"));
-        w1.add(new Weapon(0, 10, "Arrow"));
-        game.getPvpArena().getPlayer2().setWeapons(w1);
+        w1.add(new Weapon(0, 10, "Bow"));
+        game.pvpArena.getPlayer2().setWeapons(w1);
 
         screen.clear();
 
-        game.getPvpArena().draw2(tg);
+        game.pvpArena.draw2(tg);
         tg.setBackgroundColor(TextColor.ANSI.BLACK); //texto do canto superior esq que indica o modo selecionado
         tg.setForegroundColor(TextColor.ANSI.DEFAULT);
         tg.putString(3, 1, "Player VS Player");
@@ -45,12 +45,12 @@ public class PvpGameState implements GameState{
         tg.putString(37, 1, "Round:  " + game.getRound());
 
         //Strings com HP
-        tg.putString(2, 22, "P1 HP: " + game.getPvpArena().getPlayer().getHitpoints().getHp());  // falta concatenar com a variavel que recebe os valores corretos
-        tg.putString(2, 23, "P2 HP: " + game.getPvpArena().getPlayer2().getHitpoints().getHp());  // falta concatenar com a variavel que recebe os valores corretos
+        tg.putString(2, 22, "P1 HP: " + game.pvpArena.getPlayer().getHitpoints().getHp());  // falta concatenar com a variavel que recebe os valores corretos
+        tg.putString(2, 23, "P2 HP: " + game.pvpArena.getPlayer2().getHitpoints().getHp());  // falta concatenar com a variavel que recebe os valores corretos
 
         //Strings WEAPON
-        tg.putString(30, 22, "P1 Weapon:  " + game.getPvpArena().getPlayer().getWeapon());
-        tg.putString(30, 23, "P2 Weapon:  " + game.getPvpArena().getPlayer2().getWeapon());
+        tg.putString(30, 22, "P1 Weapon:  " + game.pvpArena.getPlayer().getWeapon());
+        tg.putString(30, 23, "P2 Weapon:  " + game.pvpArena.getPlayer2().getWeapon());
 
         //Strings com Kills
         tg.putString(65, 22, "P1 Kills:  " + game.getP1kills());
@@ -68,12 +68,12 @@ public class PvpGameState implements GameState{
     }
 
     public void lose() throws IOException {
-        if (game.getPvpArena().getPlayer2().getHitpoints().getHp() == 0){
-            game.setP1kills(game.getP1kills() + 1);
+        if (game.pvpArena.getPlayer2().getHitpoints().getHp() <= 0){
+            game.p1kills = game.p1kills + 1;
         }
 
-        if (game.getPvpArena().getPlayer().getHitpoints().getHp() == 0){
-            game.setP2kills(game.getP2kills() + 1);
+        if (game.pvpArena.getPlayer().getHitpoints().getHp() <= 0){
+            game.p2kills = game.p2kills + 1;
         }
 
         if (game.getRound() == 5){
@@ -81,10 +81,10 @@ public class PvpGameState implements GameState{
         }
         else {
             game.setRound(game.getRound() + 1);
-            game.getPvpArena().getPlayer().setHitpoints(new Hp(100));
-            game.getPvpArena().getPlayer().setPosition(new Position(10, 10));
-            game.getPvpArena().getPlayer2().setHitpoints(new Hp(100));
-            game.getPvpArena().getPlayer2().setPosition(new Position(60, 10));
+            game.pvpArena.getPlayer().setHitpoints(new Hp(100));
+            game.pvpArena.getPlayer().setPosition(new Position(10, 10));
+            game.pvpArena.getPlayer2().setHitpoints(new Hp(100));
+            game.pvpArena.getPlayer2().setPosition(new Position(60, 10));
 
             screen.clear();
             tg.setForegroundColor(TextColor.ANSI.GREEN);
@@ -103,7 +103,7 @@ public class PvpGameState implements GameState{
     }
 
     public void win() throws IOException{
-        if (game.getRound() == 5 && game.getP1kills() > game.getP2kills()) {
+        if (game.round == 5 && game.p1kills > game.p2kills) {
             screen.clear();
             tg.setForegroundColor(TextColor.ANSI.RED);
             tg.enableModifiers(SGR.BOLD);
