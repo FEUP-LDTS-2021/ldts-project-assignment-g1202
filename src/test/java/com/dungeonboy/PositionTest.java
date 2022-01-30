@@ -87,6 +87,6 @@ class PositionTest {
 
     @Test
     void testEquals() {
-
+        assertTrue(test.equals(new Position(20,10)));
     }
 }
