@@ -119,37 +119,37 @@ public class Player extends Element{
     }
 
     public void noneAttack(BadGuy badGuy){  //Ataque quando o player não tem arma nenhuma
-        if (weapon.getType() == "Fists"){
+        if (weapon.getType().equals("Fists")){
             badGuy.changeHp(10);
         }
     }
 
     public void swordAttack(BadGuy badGuy){  //Ataque quando o player tem uma sword
-        if (weapon.getType() == "Sword"){
+        if (weapon.getType().equals("Sword")){
             badGuy.changeHp(20);
         }
     }
 
     public void bowAttack(BadGuy badGuy){ //Ataque quando o player tem um arrow
-        if (weapon.getType() == "Bow"){
+        if (weapon.getType().equals("Bow")){
             badGuy.changeHp(15);
         }
     }
 
     public void noneAttackPvP(Player player){
-        if (weapon.getType() == "Fists"){
+        if (weapon.getType().equals("Fists")){
             player.hitpoints.setHp(player.hitpoints.getHp() - 10);
         }
     }
 
     public void swordAttackPvP(Player player){
-        if (weapon.getType() == "Sword"){
+        if (weapon.getType().equals("Sword")){
             player.hitpoints.setHp(player.hitpoints.getHp() - 20);
         }
     }
 
     public void bowAttackPvP(Player player){
-        if (weapon.getType() == "Bow"){
+        if (weapon.getType().equals("Bow")){
             player.hitpoints.setHp(player.hitpoints.getHp() - 15);
         }
     }
