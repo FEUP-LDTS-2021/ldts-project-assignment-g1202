@@ -1,5 +1,6 @@
 package com.dungeonboy;
 
+import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
@@ -67,6 +68,7 @@ public class Shop {
     }
 
     public void goDown(int i, TextGraphics tg){  // assinala o item da loja imediatamente depois do atualmente assinalado
+        tg.enableModifiers(SGR.BOLD);
         if (i == 0){
             tg.setBackgroundColor(TextColor.ANSI.BLACK_BRIGHT);
             tg.setForegroundColor(TextColor.ANSI.DEFAULT);

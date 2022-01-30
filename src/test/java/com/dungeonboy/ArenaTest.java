@@ -177,4 +177,12 @@ class ArenaTest {
 
         assertEquals(c, arena.getCoins());
     }
+
+    @Test
+    void changeWeapon() {
+        assertFalse(arena.changeWeapon("Sword", test));
+
+        test.getWeapons().add(new Weapon(0, 5, "Sword"));
+        assertTrue(arena.changeWeapon("Sword", test));
+    }
 }

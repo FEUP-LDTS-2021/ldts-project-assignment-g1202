@@ -3,6 +3,7 @@ package com.dungeonboy.state;
 import com.dungeonboy.Game;
 import com.dungeonboy.Potion;
 import com.dungeonboy.Weapon;
+import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;

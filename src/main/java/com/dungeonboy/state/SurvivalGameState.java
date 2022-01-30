@@ -131,12 +131,11 @@ public class SurvivalGameState implements GameState{
     }
 
     public void finalLevel() throws IOException{
-        game.setLvl(game.getLvl() + 1);
-
         screen.clear();
         tg.setForegroundColor(TextColor.ANSI.GREEN);
         tg.enableModifiers(SGR.BOLD);
-        tg.putString(37,12, "LEVEL " + game.getLvl());
+        tg.putString(35,12, "VICTORY!!!");
+        tg.putString(28, 13, "You're a real DUNGEON BOY!");
         screen.refresh();
 
         try{
@@ -145,7 +144,9 @@ public class SurvivalGameState implements GameState{
             e.printStackTrace();
         }
 
-        display();
-        game.survival();
+        //O jogo acaba e abre um novo
+        screen.close();
+        game = new Game();
+        game.run();
     }
 }

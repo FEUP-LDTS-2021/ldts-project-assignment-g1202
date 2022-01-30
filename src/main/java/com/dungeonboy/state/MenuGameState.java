@@ -68,6 +68,7 @@ public class MenuGameState implements GameState{
             game.changeState(new PvpGameState(game));
 
             screen.clear();
+            tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
             tg.setForegroundColor(TextColor.ANSI.GREEN);
             tg.enableModifiers(SGR.BOLD);
             tg.putString(37,12, "ROUND " + game.getRound());
