@@ -343,4 +343,5 @@ public class Game {
     public void changeState (GameState state){
         this.gameState = state;
     }
+}
 
