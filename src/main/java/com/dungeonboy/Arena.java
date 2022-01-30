@@ -168,18 +168,6 @@ public class Arena{
         }
     }
 
-    public void damagePlayer1() {  //Player2 ataca player1
-        if (checkDamagePvp(3, player2,player) && player2.getWeapon() == "Fists"){
-            player2.noneAttackPvP(player);
-        }
-        else if (checkDamagePvp(5, player2,player) && player2.getWeapon() == "Sword"){
-            player2.swordAttackPvP(player);
-        }
-        else if (checkDamagePvp(10, player2,player) && player2.getWeapon() == "Bow"){
-            player2.bowAttackPvP(player);
-        }
-    }
-
     //Ecrã modo Survival
     public void draw(TextGraphics screen, int level) {
         if (level == 1){
