@@ -344,33 +344,3 @@ public class Game {
         this.gameState = state;
     }
 
-    public boolean changeWeaponP1(String type){  //Mudança de arma do player1
-        for (Weapon weapon : pvpArena.getPlayer().getWeapons()){
-            if (weapon.getType() == type){
-                pvpArena.getPlayer().setWeapon(weapon);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean changeWeaponP2(String type){  //Mudança de arma do player2
-        for (Weapon weapon : pvpArena.getPlayer2().getWeapons()){
-            if (weapon.getType() == type){
-                pvpArena.getPlayer2().setWeapon(weapon);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean changeWeaponSurv(String type){
-        for (Weapon weapon : survArena.getPlayer().getWeapons()){
-            if (weapon.getType() == type){
-                survArena.getPlayer().setWeapon(weapon);
-                return true;
-            }
-        }
-        return false;
-    }
-}
