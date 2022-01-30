@@ -100,6 +100,9 @@ public class SurvivalGameState implements GameState{
         else if (game.getLvl() == 3){
             finalLevel();
         }
+        else if(game.getLvl() == 4){
+            goBack();
+        }
     }
 
     public void levelUp() throws IOException{
