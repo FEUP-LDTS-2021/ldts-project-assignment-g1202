@@ -147,15 +147,15 @@ class ArenaTest {
         arena.player.setPosition(new Position(58, 10));
 
         arena.player2.setWeapon(new Weapon());
-        arena.damagePlayer1();
+        arena.damagePlayer(arena.player2,arena.player);
         assertEquals(90, arena.player.hitpoints.getHp());
 
         arena.player2.setWeapon(new Weapon(0, 5, "Sword"));
-        arena.damagePlayer1();
+        arena.damagePlayer(arena.player2,arena.player);
         assertEquals(70, arena.player.hitpoints.getHp());
 
         arena.player2.setWeapon(new Weapon(0, 10, "Bow"));
-        arena.damagePlayer1();
+        arena.damagePlayer(arena.player2,arena.player);
         assertEquals(55, arena.player.hitpoints.getHp());
     }
 
