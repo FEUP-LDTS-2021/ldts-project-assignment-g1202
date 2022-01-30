@@ -79,6 +79,16 @@ public class Arena{
         return player2;
     }
 
+    public boolean changeWeapon(String type,Player p){  //Mudança de arma do player1
+        for (Weapon weapon : p.getWeapons()){
+            if (weapon.getType().equals(type)){
+                p.setWeapon(weapon);
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public boolean checkDamage(int i, BadGuy bad){
         if (player.position.getX() + i >= bad.position.getX() && player.position.getX() < bad.position.getX() && player.position.getY() == bad.position.getY() ||

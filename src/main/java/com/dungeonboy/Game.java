@@ -104,18 +104,18 @@ public class Game {
                 break;
             }else if (keyPressed.getKeyType() == KeyType.Character && keyPressed.getCharacter() == 'c') {
                 if (c == 0) {
-                    if (changeWeaponSurv("Sword")) {
+                    if (survArena.changeWeapon("Sword",survArena.player)) {
                         c++;
                     }
                 } else if (c == 1) {
-                    if (changeWeaponSurv("Bow")) {
+                    if (survArena.changeWeapon("Bow",survArena.player)) {
                         c++;
                     } else {
-                        changeWeaponSurv("Fists");
+                        survArena.changeWeapon("Fists",survArena.player);
                         c--;
                     }
                 } else if (c == 2) {
-                    changeWeaponSurv("Fists");
+                    survArena.changeWeapon("Fists",survArena.player);
                     c = 0;
                 }
             }
@@ -217,40 +217,40 @@ public class Game {
                 }
             }else if (keyPressed.getKeyType() == KeyType.Character && keyPressed.getCharacter() == 'c'){
                 if (c == 0) {
-                    if (changeWeaponP1("Sword")) {
+                    if (pvpArena.changeWeapon("Sword",pvpArena.player)) {
                         c++;
                     }
                 }
                 else if (c == 1){
-                    if (changeWeaponP1("Bow")) {
+                    if (pvpArena.changeWeapon("Bow",pvpArena.player)) {
                         c++;
                     }
                     else {
-                        changeWeaponP1("Fists");
+                        pvpArena.changeWeapon("Fists",pvpArena.player);
                         c--;
                     }
                 }
                 else if (c == 2){
-                    changeWeaponP1("Fists");
+                    pvpArena.changeWeapon("Fists",pvpArena.player);
                     c = 0;
                 }
             }else if (keyPressed.getKeyType() == KeyType.Character && keyPressed.getCharacter() == 'q'){
                 if (q == 0) {
-                    if (changeWeaponP2("Sword")) {
+                    if (pvpArena.changeWeapon("Sword",pvpArena.player2)) {
                         q++;
                     }
                 }
                 else if (q == 1){
-                    if (changeWeaponP2("Bow")) {
+                    if (pvpArena.changeWeapon("Bow",pvpArena.player2)) {
                         q++;
                     }
                     else {
-                        changeWeaponP2("Fists");
+                        pvpArena.changeWeapon("Fists",pvpArena.player2);
                         q--;
                     }
                 }
                 else if (q == 2){
-                    changeWeaponP2("Fists");
+                    pvpArena.changeWeapon("Fists",pvpArena.player2);
                     q = 0;
                 }
             }
